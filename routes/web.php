@@ -19,9 +19,10 @@ Route::get('', function () {
     return view('frontend.index');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+// Route::get('/dashboard', function () {
+//     return view('dashboard');
+// })->middleware(['auth'])->name('dashboard');
+
 Route::middleware(['auth'])->group(function() {
 
 Route::get('/dashboard', [UserController::class, 'UserDashboard'])->name('dashboard');

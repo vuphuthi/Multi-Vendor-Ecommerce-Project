@@ -4,8 +4,8 @@
 <div class="page-header breadcrumb-wrap">
     <div class="container">
         <div class="breadcrumb">
-            <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-            <span></span> Pages <span></span> My Account
+            <a href="" rel="nofollow"><i class="fi-rs-home mr-5"></i>Trang chủ</a>
+            <span></span> Trang <span></span> Tài khoản của tôi
         </div>
     </div>
 </div>
@@ -43,7 +43,7 @@
                             <div class="tab-pane fade active show" id="dashboard" role="tabpanel" aria-labelledby="dashboard-tab">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h3 class="mb-0">Hello Rosie!</h3>
+                                        <h3 class="mb-0">Xin chào {{Auth::user()->name}}</h3>
                                     </div>
                                     <div class="card-body">
                                         <p>
