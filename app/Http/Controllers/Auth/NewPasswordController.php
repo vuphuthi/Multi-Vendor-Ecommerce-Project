@@ -36,7 +36,16 @@ class NewPasswordController extends Controller
         $request->validate([
             'token' => ['required'],
             'email' => ['required', 'email'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'password' => ['required', 'confirmed','min:8'],
+            "password_confirmation" => ['required']
+        ], [
+            'token.required' => 'Trường mã thông báo là bắt buộc.',
+            'email.required' => 'Trường email là bắt buộc.',
+            'email.email' => 'Địa chỉ email không hợp lệ.',
+            'password.required' => 'Trường mật khẩu là bắt buộc.',
+            'password.confirmed' => 'Xác nhận mật khẩu không khớp.',
+            'password.min' => "Mật khẩu phải có ít nhất 8 ký tự.",
+            'password_confirmation.required' => 'Trường xác nhận mật khẩu là bắt buộc.'
         ]);
 
         // Here we will attempt to reset the user's password. If it is successful we

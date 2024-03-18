@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\VendorController;
+use App\Http\Controllers\UserController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -21,7 +22,12 @@ Route::get('', function () {
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
+Route::middleware(['auth'])->group(function() {
 
+Route::get('/dashboard', [UserController::class, 'UserDashboard'])->name('dashboard');
+
+
+}); // Gorup Milldeware End
 // Admin DashBoard
 require __DIR__.'/auth.php';
 Route::middleware(['auth','role:admin'])->group(function(){
