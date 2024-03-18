@@ -22,13 +22,6 @@
         <!--End Best Sales-->
 
 
-
-
-
-
-
-
-
         <!-- TV Category -->
 
     <section class="product-tabs section-padding position-relative">
