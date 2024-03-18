@@ -14,7 +14,7 @@ use App\Http\Controllers\VendorController;
 |
 */
 
-Route::get('/', function () {
+Route::get('', function () {
     return view('frontend.index');
 });
 
