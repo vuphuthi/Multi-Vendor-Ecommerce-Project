@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Models\User;
+use Illuminate\Support\Facades\Hash;
 class AdminController extends Controller
 {
     public function AdminDashboard(){
@@ -49,5 +50,31 @@ class AdminController extends Controller
             'alert-type' => 'success'
         );
         return redirect()->back()->with($notification);
+    }
+    public function AdminChangePassword(){
+        return view('admin.admin_change_password');
+    }
+    public function AdminUpdatePassword(Request $request){
+        // validate
+        $request->validate([
+            'old_password' => 'required',
+            'new_password' => 'required|confirmed',
+            'new_password_confirmation' => 'required',
+        ], [
+            'old_password.required' => 'Vui lòng nhập mật khẩu cũ.',
+            'new_password.required' => 'Vui lòng nhập mật khẩu mới.',
+            'new_password.confirmed' => 'Mật khẩu mới không khớp với xác nhận mật khẩu.',
+            'new_password_confirmation.required' => 'Vui lòng xác nhận lại mật khẩu mới.',
+
+        ]);
+        // Khớp với mật khẩu cũ
+        if(!Hash::check($request->old_password,auth::user()->password)){
+            return back()->with('error','Mật khẩu cũ không khớp!');
+        }
+        // cập nhật password
+        User::whereId(auth()->user()->id)->update([
+            'password' => Hash::make($request->new_password)
+        ]);
+        return back()->with('status',"Thay đổi mật khẩu thành công");
     }
 }
