@@ -44,6 +44,10 @@ class AdminController extends Controller
             $data['photo'] = $filename;
         }
         $data->save();
-        return redirect()->back();
+        $notification = array(
+            'message' => 'Hồ sơ quản trị viên được cập nhật thành công',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
     }
 }
