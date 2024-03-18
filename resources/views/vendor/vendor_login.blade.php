@@ -35,7 +35,7 @@
 							<div class="card-body">
 								<div class="border p-4 rounded">
 									<div class="text-center">
-										<h3 class="">Đăng nhập</h3>
+										<h3 class="">Người bán Đăng nhập</h3>
 										<p>Bạn chưa có tài khoản? <a href="authentication-signup.html">Đăng ký tại đây</a>
 										</p>
 									</div>
