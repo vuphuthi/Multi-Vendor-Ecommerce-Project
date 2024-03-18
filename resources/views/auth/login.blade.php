@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="utf-8" />
-    <title>Nest - Multipurpose eCommerce HTML Template</title>
+    <title>Shop</title>
     <meta http-equiv="x-ua-compatible" content="ie=edge" />
     <meta name="description" content="" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -36,8 +36,8 @@
         <div class="page-header breadcrumb-wrap">
             <div class="container">
                 <div class="breadcrumb">
-                    <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-                    <span></span> Pages <span></span> My Account
+                    <a href="" rel="nofollow"><i class="fi-rs-home mr-5"></i>Trang chủ</a>
+                    <span></span> Trang <span></span> Tài khoản của tôi
                 </div>
             </div>
         </div>
@@ -54,14 +54,15 @@
                                     <div class="padding_eight_all bg-white">
                                         <div class="heading_s1">
                                             <h1 class="mb-5">Đăng nhập</h1>
-                                            <p class="mb-30">Bạn chưa có tài khoản? <a href="page-register.html">Tạo ở đây</a></p>
+                                            <p class="mb-30">Bạn chưa có tài khoản? <a href="{{ route('register') }}">Tạo ở đây</a></p>
                                         </div>
-                                        <form method="post">
+                                        <form method="POST" action="{{ route('login') }}">
+                                            @csrf
                                             <div class="form-group">
-                                                <input type="text" required="" name="email" placeholder="Tên người dùng hoặc email *" />
+                                                <input type="email" required="" type="email" name="email" placeholder="Tên người dùng hoặc email *" />
                                             </div>
                                             <div class="form-group">
-                                                <input required="" type="password" name="password" placeholder="Mật khẩu của bạn*" />
+                                                <input required="" type="password" id="password" name="password" placeholder="Mật khẩu của bạn*" />
                                             </div>
                                             <div class="login_footer form-group mb-50">
                                                 <div class="chek-form">
@@ -70,7 +71,7 @@
                                                         <label class="form-check-label" for="exampleCheckbox1"><span>Nhớ mật khẩu</span></label>
                                                     </div>
                                                 </div>
-                                                <a class="text-muted" href="#">Quên mật khẩu?</a>
+                                                <a class="text-muted" href="{{ route('password.request') }}">Quên mật khẩu?</a>
                                             </div>
                                             <div class="form-group">
                                                 <button type="submit" class="btn btn-heading btn-block hover-up" name="login">Đăng nhập</button>
