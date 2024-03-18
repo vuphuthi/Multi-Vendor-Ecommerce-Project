@@ -24,7 +24,7 @@
 	<link rel="stylesheet" href="{{asset('adminbackend/assets/css/semi-dark.css')}}" />
 	<link rel="stylesheet" href="{{asset('adminbackend/assets/css/header-colors.css')}}" />
 	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
-	<title>Admin Dashboard</title>
+	<title>Trang tổng quan dành cho quản trị viên</title>
 </head>
 {{-- {{asset('adminbackend/')}} --}}
 <body>
