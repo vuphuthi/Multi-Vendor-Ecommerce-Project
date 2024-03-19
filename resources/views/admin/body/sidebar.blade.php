@@ -27,7 +27,7 @@
             <ul>
                 <li> <a href="{{route('all.brand')}}"><i class="bx bx-right-arrow-alt"></i>Tất cả thương hiệu</a>
                 </li>
-                <li> <a href="dashboard-eCommerce.html"><i class="bx bx-right-arrow-alt"></i>Thêm thương hiệu</a>
+                <li> <a href="{{route('add.brand')}}"><i class="bx bx-right-arrow-alt"></i>Thêm thương hiệu</a>
                 </li>
                 <li> <a href="dashboard-analytics.html"><i class="bx bx-right-arrow-alt"></i>Analytics</a>
                 </li>
