@@ -43,7 +43,7 @@
                             <td><img src="{{asset($item->brand_image)}}" style="width:70px;height:40px" alt=""></td>
                             <td>
                                 <a href="{{route('edit.brand',$item->id)}}" class="btn btn-info">Sửa</a>
-                                <a href="" class="btn btn-danger">Xóa</a>
+                                <a href="{{route('delete.brand',$item->id)}}" class="btn btn-danger" id="delete">Xóa</a>
                             </td>
 
                         </tr>
