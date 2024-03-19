@@ -16,7 +16,7 @@
         </div>
         <div class="ms-auto">
             <div class="btn-group">
-                <a class="btn btn-primary" href="{{route('add.brand')}}">Thêm danh mục</a>
+                <a class="btn btn-primary" href="{{route('add.category')}}">Thêm danh mục</a>
             </div>
         </div>
     </div>
@@ -42,8 +42,8 @@
                             <td>{{$item->category_name}}</td>
                             <td><img src="{{asset($item->category_image)}}" style="width:70px;height:40px" alt=""></td>
                             <td>
-                                <a href="{{route('edit.brand',$item->id)}}" class="btn btn-info">Sửa</a>
-                                <a href="{{route('delete.brand',$item->id)}}" class="btn btn-danger" id="delete">Xóa</a>
+                                <a href="{{route('edit.category',$item->id)}}" class="btn btn-info">Sửa</a>
+                                <a href="{{route('delete.category',$item->id)}}" class="btn btn-danger" id="delete">Xóa</a>
                             </td>
 
                         </tr>

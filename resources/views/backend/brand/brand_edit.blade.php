@@ -34,7 +34,7 @@
                                     <h6 class="mb-0">Tên thương hiệu</h6>
                                 </div>
                                 <div class="form-group col-sm-9 text-secondary">
-                                    <input type="text" value="{{$brand->brand_name}}" name="brand_name" class="form-control" />
+                                    <input type="text" placeholder="Sửa thương hiệu" value="{{$brand->brand_name}}" name="brand_name" class="form-control" />
                                 </div>
                             </div>
                            

@@ -32,7 +32,7 @@
                                     <h6 class="mb-0">Tên thương hiệu</h6>
                                 </div>
                                 <div class="form-group col-sm-9 text-secondary">
-                                    <input type="text" name="brand_name" class="form-control" />
+                                    <input type="text" placeholder="Thêm thương hiệu" name="brand_name" class="form-control" />
                                 </div>
                             </div>
                            

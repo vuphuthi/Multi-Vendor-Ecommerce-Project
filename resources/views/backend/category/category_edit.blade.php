@@ -25,14 +25,16 @@
                 <div class="col-lg-8">
                     <div class="card">
                         <div class="card-body">
-                            <form id="myForm" method="post" action="{{ route('store.category') }}" enctype="multipart/form-data" >
+                            <form id="myForm" method="post" action="{{ route('update.category') }}" enctype="multipart/form-data" >
                                 @csrf
+                                <input type="hidden" name="id" id="id" value="{{$category->id}}">
+                                <input type="hidden" name="old_image" id="" value="{{$category->category_image}}">
                             <div class="row mb-3">
                                 <div class="foe col-sm-3">
                                     <h6 class="mb-0">Tên danh mục</h6>
                                 </div>
                                 <div class="form-group col-sm-9 text-secondary">
-                                    <input type="text" placeholder="Thêm danh mục" name="category_name" class="form-control" />
+                                    <input type="text" placeholder="Sửa danh mục" value="{{$category->category_name}}" name="category_name" class="form-control" />
                                 </div>
                             </div>
                            
@@ -49,7 +51,7 @@
                                     <h6 class="mb-0"></h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <img id="showImage" src="{{url('upload/no_image.jpg') }}" alt="Admin" style="width:100px;height:100px">
+                                    <img id="showImage" src="{{asset($category->category_image)}}" alt="Admin" style="width:100px;height:100px">
                                 </div>
                             </div>
                             <div class="row">
@@ -70,26 +72,22 @@
     $(document).ready(function (){
         $('#myForm').validate({
             rules: {
-                brand_name: {
+                category_name: {
                     required : true,
-                },
-                brand_image: {
-                    required: true,
-                    extension: "jpg|jpeg|png|gif", // Kiểm tra phần mở rộng của file ảnh
-                }, 
+                }
             },
             messages :{
-                brand_name: {
-                    required : 'Vui lòng nhập tên danh mục',
+                category_name: {
+                    required : 'Vui lòng nhập tên thương hiệu',
                 },
-                brand_image: {
+                category_image: {
                     required: 'Vui lòng chọn một ảnh',
                     extension: 'Vui lòng chỉ chọn file ảnh có định dạng JPG, JPEG, PNG hoặc GIF',
                 },
             },
             errorElement : 'span', 
             errorPlacement: function (error,element) {
-                if (element.attr("name") == "brand_image") {
+                if (element.attr("name") == "category_image") {
                     error.addClass('text-danger'); // Sử dụng lớp CSS của Bootstrap để thêm màu đỏ
                     error.insertAfter("#showImage"); // Hiển thị thông báo lỗi sau ảnh
                 } else {
