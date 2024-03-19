@@ -4,13 +4,13 @@
 <div class="page-content"> 
     <!--breadcrumb-->
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title pe-3">Thương hiệu</div>
+        <div class="breadcrumb-title pe-3">Danh mục</div>
         <div class="ps-3">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Thêm thương hiệu</li>
+                    <li class="breadcrumb-item active" aria-current="page">Thêm danh mục</li>
                 </ol>
             </nav>
         </div>
@@ -25,14 +25,14 @@
                 <div class="col-lg-8">
                     <div class="card">
                         <div class="card-body">
-                            <form id="myForm" method="post" action="{{ route('store.brand') }}" enctype="multipart/form-data" >
+                            <form id="myForm" method="post" action="{{ route('store.category') }}" enctype="multipart/form-data" >
                                 @csrf
                             <div class="row mb-3">
                                 <div class="foe col-sm-3">
-                                    <h6 class="mb-0">Tên thương hiệu</h6>
+                                    <h6 class="mb-0">Tên danh mục</h6>
                                 </div>
                                 <div class="form-group col-sm-9 text-secondary">
-                                    <input type="text" name="brand_name" class="form-control" />
+                                    <input type="text" name="category_name" class="form-control" />
                                 </div>
                             </div>
                            
@@ -41,7 +41,7 @@
                                     <h6 class="mb-0">Ảnh</h6>
                                 </div>
                                 <div class="form-group col-sm-9 text-secondary">
-                                    <input type="file" name="brand_image" class="form-control" id="image"/>
+                                    <input type="file" name="category_image" class="form-control" id="image"/>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -80,7 +80,7 @@
             },
             messages :{
                 brand_name: {
-                    required : 'Vui lòng nhập tên thương hiệu',
+                    required : 'Vui lòng nhập tên danh mục',
                 },
                 brand_image: {
                     required: 'Vui lòng chọn một ảnh',
