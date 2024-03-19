@@ -20,6 +20,9 @@
 	<link href="{{asset('adminbackend/assets/css/app.css')}}" rel="stylesheet">
 	<link href="{{asset('adminbackend/assets/css/icons.css')}}" rel="stylesheet">
 	<!-- Theme Style CSS -->
+
+	<link href="{{asset('adminbackend/assets/plugins/datatable/css/dataTables.bootstrap5.min.css')}}" rel="stylesheet" />
+
 	<link rel="stylesheet" href="{{asset('adminbackend/assets/css/dark-theme.css')}}" />
 	<link rel="stylesheet" href="{{asset('adminbackend/assets/css/semi-dark.css')}}" />
 	<link rel="stylesheet" href="{{asset('adminbackend/assets/css/header-colors.css')}}" />
@@ -65,6 +68,17 @@
 	<script src="{{asset('adminbackend/assets/plugins/sparkline-charts/jquery.sparkline.min.js')}}"></script>
 	<script src="{{asset('adminbackend/assets/plugins/jquery-knob/excanvas.js')}}"></script>
 	<script src="{{asset('adminbackend/assets/plugins/jquery-knob/jquery.knob.js')}}"></script>
+
+	<!--app JS-->
+
+	<script src="{{asset('adminbackend/assets/plugins/datatable/js/jquery.dataTables.min.js')}}"></script>
+	<script src="{{asset('adminbackend/assets/plugins/datatable/js/dataTables.bootstrap5.min.js')}}"></script>
+	<script>
+		$(document).ready(function() {
+			$('#example').DataTable();
+		  } );
+	</script>
+
 	  <script>
 		  $(function() {
 			  $(".knob").knob();
