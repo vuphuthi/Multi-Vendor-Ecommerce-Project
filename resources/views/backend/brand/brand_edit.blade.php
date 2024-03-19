@@ -25,14 +25,16 @@
                 <div class="col-lg-8">
                     <div class="card">
                         <div class="card-body">
-                            <form id="myForm" method="post" action="{{ route('store.brand') }}" enctype="multipart/form-data" >
+                            <form id="myForm" method="post" action="{{ route('update.brand') }}" enctype="multipart/form-data" >
                                 @csrf
+                                <input type="hidden" name="id" id="id" value="{{$brand->id}}">
+                                <input type="hidden" name="old_image" id="" value="{{$brand->brand_image}}">
                             <div class="row mb-3">
                                 <div class="foe col-sm-3">
                                     <h6 class="mb-0">Tên thương hiệu</h6>
                                 </div>
                                 <div class="form-group col-sm-9 text-secondary">
-                                    <input type="text" name="brand_name" class="form-control" />
+                                    <input type="text" value="{{$brand->brand_name}}" name="brand_name" class="form-control" />
                                 </div>
                             </div>
                            
@@ -49,7 +51,7 @@
                                     <h6 class="mb-0"></h6>
                                 </div>
                                 <div class="col-sm-9 text-secondary">
-                                    <img id="showImage" src="{{url('upload/no_image.jpg') }}" alt="Admin" style="width:100px;height:100px">
+                                    <img id="showImage" src="{{asset($brand->brand_image)}}" alt="Admin" style="width:100px;height:100px">
                                 </div>
                             </div>
                             <div class="row">
@@ -72,11 +74,7 @@
             rules: {
                 brand_name: {
                     required : true,
-                },
-                brand_image: {
-                    required: true,
-                    extension: "jpg|jpeg|png|gif", // Kiểm tra phần mở rộng của file ảnh
-                }, 
+                }
             },
             messages :{
                 brand_name: {
