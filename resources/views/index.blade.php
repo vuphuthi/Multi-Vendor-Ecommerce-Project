@@ -33,6 +33,9 @@
                                     <a class="nav-link" id="account-detail-tab" data-bs-toggle="tab" href="#account-detail" role="tab" aria-controls="account-detail" aria-selected="true"><i class="fi-rs-user mr-10"></i>Chi tiết tài khoản</a>
                                 </li>
                                 <li class="nav-item">
+                                    <a class="nav-link" id="changer-detail-tab" data-bs-toggle="tab" href="#changer-detail" role="tab" aria-controls="changer-detail" aria-selected="true"><i class="fi-rs-user mr-10"></i>Đổi mật khẩu</a>
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link" href="{{route('user.logout')}}"><i class="fi-rs-sign-out mr-10"></i>Đăng xuất</a>
                                 </li>
                             </ul>
@@ -159,6 +162,7 @@
                                     </div>
                                 </div>
                             </div>
+                            {{-- Chi tiết tài khoản --}}
                             <div class="tab-pane fade" id="account-detail" role="tabpanel" aria-labelledby="account-detail-tab">
                                 <div class="card">
                                     <div class="card-header">
@@ -197,6 +201,59 @@
                                                     <label><span class="required">*</span></label>
                                                     <img id="showImage" src="{{(!empty($userData->photo)) ? url('upload/user_images/'.$userData->photo):url('upload/no_image.jpg') }}" alt="User" style="width:100px;height:100px">
                                                 </div>
+                                                <div class="col-md-12">
+                                                    <button type="submit" class="btn btn-fill-out submit font-weight-bold" name="submit" value="Submit">Lưu thay đổi</button>
+                                                </div>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                            {{-- đổi mật khẩu --}}
+                            <div class="tab-pane fade" id="changer-detail" role="tabpanel" aria-labelledby="changer-detail-tab">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h5>Đổi mật khẩu</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        {{-- <p>Already have an account? <a href="page-login.html">Log in instead!</a></p> --}}
+                                        <form method="post" action="{{route('user.update.password')}}" enctype="multipart/form-data">
+                                            @csrf
+                                            @if(session('status'))
+                                            <div class="alert alert-success" role='alert'>
+                                                {{session('status')}}
+                                            </div>
+                                            @elseif(session('error'))
+                                            <div class="alert alert-danger" role='alert'>
+                                                {{session('error')}}
+                                            </div>
+                                            @endif
+                                            <div class="row">
+                                                <div class="form-group col-md-12">
+                                                    <label>Mật khẩu cũ <span class="required">*</span></label>
+                                                    <input required=""  @error('old_password') is-invalid @enderror placeholder="Mật khẩu cũ"
+                                                    id="current_password" class="form-control" name="old_password" id="old_password" type="password" />
+                                                    @error('old_password')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <label>Mật khẩu Mới <span class="required">*</span></label>
+                                                    <input required=""  @error('new_password') is-invalid @enderror placeholder="Mật khẩu mới"
+                                                    id="current_password" class="form-control" name="new_password" id="new_password" type="password" />
+                                                    @error('new_password')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
+                                                </div>
+                                                <div class="form-group col-md-12">
+                                                    <label>Xác nhận mật khẩu <span class="required">*</span></label>
+                                                    <input required=""  @error('new_password_confirmation') is-invalid @enderror placeholder="Xác nhận mật khẩu"
+                                                    id="new_password_confirmation" class="form-control" name="new_password_confirmation" id="new_password_confirmation" type="password" />
+                                                    @error('new_password_confirmation')
+                                                    <span class="text-danger">{{$message}}</span>
+                                                    @enderror
+                                                </div>
+                                            
                                                 <div class="col-md-12">
                                                     <button type="submit" class="btn btn-fill-out submit font-weight-bold" name="submit" value="Submit">Lưu thay đổi</button>
                                                 </div>

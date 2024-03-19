@@ -32,6 +32,10 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
         $url= '';
+        $notification = array(
+            'message' => 'Đăng nhập thành công',
+            'alert-type' => 'success'
+        );
         if($request->user()->role === 'admin'){
             $url= 'admin/dashboard';
         } elseif($request->user()->role === 'vendor'){
@@ -39,7 +43,7 @@ class AuthenticatedSessionController extends Controller
         }elseif($request->user()->role === 'user'){
             $url= 'dashboard';
         }
-        return redirect()->intended($url);
+        return redirect()->intended($url)->with($notification);
     }
 
     /**
