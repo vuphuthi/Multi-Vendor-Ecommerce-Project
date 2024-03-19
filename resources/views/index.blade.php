@@ -21,19 +21,19 @@
                                     <a class="nav-link active" id="dashboard-tab" data-bs-toggle="tab" href="#dashboard" role="tab" aria-controls="dashboard" aria-selected="false"><i class="fi-rs-settings-sliders mr-10"></i>Dashboard</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="orders-tab" data-bs-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="false"><i class="fi-rs-shopping-bag mr-10"></i>Orders</a>
+                                    <a class="nav-link" id="orders-tab" data-bs-toggle="tab" href="#orders" role="tab" aria-controls="orders" aria-selected="false"><i class="fi-rs-shopping-bag mr-10"></i>Đơn đặt hàng</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="track-orders-tab" data-bs-toggle="tab" href="#track-orders" role="tab" aria-controls="track-orders" aria-selected="false"><i class="fi-rs-shopping-cart-check mr-10"></i>Track Your Order</a>
+                                    <a class="nav-link" id="track-orders-tab" data-bs-toggle="tab" href="#track-orders" role="tab" aria-controls="track-orders" aria-selected="false"><i class="fi-rs-shopping-cart-check mr-10"></i>Theo dõi đơn hàng của bạn</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="address-tab" data-bs-toggle="tab" href="#address" role="tab" aria-controls="address" aria-selected="true"><i class="fi-rs-marker mr-10"></i>My Address</a>
+                                    <a class="nav-link" id="address-tab" data-bs-toggle="tab" href="#address" role="tab" aria-controls="address" aria-selected="true"><i class="fi-rs-marker mr-10"></i>Địa chỉ của tôi</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" id="account-detail-tab" data-bs-toggle="tab" href="#account-detail" role="tab" aria-controls="account-detail" aria-selected="true"><i class="fi-rs-user mr-10"></i>Account details</a>
+                                    <a class="nav-link" id="account-detail-tab" data-bs-toggle="tab" href="#account-detail" role="tab" aria-controls="account-detail" aria-selected="true"><i class="fi-rs-user mr-10"></i>Chi tiết tài khoản</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="page-login.html"><i class="fi-rs-sign-out mr-10"></i>Logout</a>
+                                    <a class="nav-link" href="{{route('user.logout')}}"><i class="fi-rs-sign-out mr-10"></i>Đăng xuất</a>
                                 </li>
                             </ul>
                         </div>
@@ -45,10 +45,11 @@
                                     <div class="card-header">
                                         <h3 class="mb-0">Xin chào {{Auth::user()->name}}</h3>
                                     </div>
+                                    <img src="{{(!empty($userData->photo)) ? url('upload/user_images/'.$userData->photo):url('upload/no_image.jpg') }}" alt="user" class="rounded-circle p-1 bg-primary" width="110">
                                     <div class="card-body">
                                         <p>
-                                            From your account dashboard. you can easily check &amp; view your <a href="#">recent orders</a>,<br />
-                                            manage your <a href="#">shipping and billing addresses</a> and <a href="#">edit your password and account details.</a>
+                                            Từ bảng điều khiển tài khoản của bạn. bạn có thể dễ dàng kiểm tra &amp; xem của bạn <a href="#">những đơn đặt hàng gần đây</a>,<br />
+                                            quản lý của bạn <a href="#">địa chỉ giao hàng và thanh toán</a> Và <a href="#">chỉnh sửa mật khẩu và chi tiết tài khoản của bạn.</a>
                                         </p>
                                     </div>
                                 </div>
@@ -56,7 +57,7 @@
                             <div class="tab-pane fade" id="orders" role="tabpanel" aria-labelledby="orders-tab">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h3 class="mb-0">Your Orders</h3>
+                                        <h3 class="mb-0">Đơn đặt hàng của bạn</h3>
                                     </div>
                                     <div class="card-body">
                                         <div class="table-responsive">
@@ -101,7 +102,7 @@
                             <div class="tab-pane fade" id="track-orders" role="tabpanel" aria-labelledby="track-orders-tab">
                                 <div class="card">
                                     <div class="card-header">
-                                        <h3 class="mb-0">Orders tracking</h3>
+                                        <h3 class="mb-0">Theo dõi đơn hàng</h3>
                                     </div>
                                     <div class="card-body contact-from-area">
                                         <p>To track your order please enter your OrderID in the box below and press "Track" button. This was given to you on your receipt and in the confirmation email you should have received.</p>
@@ -128,7 +129,7 @@
                                     <div class="col-lg-6">
                                         <div class="card mb-3 mb-lg-0">
                                             <div class="card-header">
-                                                <h3 class="mb-0">Billing Address</h3>
+                                                <h3 class="mb-0">Địa chỉ thanh toán</h3>
                                             </div>
                                             <div class="card-body">
                                                 <address>
@@ -144,7 +145,7 @@
                                     <div class="col-lg-6">
                                         <div class="card">
                                             <div class="card-header">
-                                                <h5 class="mb-0">Shipping Address</h5>
+                                                <h5 class="mb-0">Địa chỉ giao hàng</h5>
                                             </div>
                                             <div class="card-body">
                                                 <address>
@@ -165,7 +166,8 @@
                                     </div>
                                     <div class="card-body">
                                         {{-- <p>Already have an account? <a href="page-login.html">Log in instead!</a></p> --}}
-                                        <form method="post" name="enq">
+                                        <form method="post" action="{{route('user.profile.store')}}" enctype="multipart/form-data">
+                                            @csrf
                                             <div class="row">
                                                 <div class="form-group col-md-6">
                                                     <label>Tên tài khoản <span class="required">*</span></label>
@@ -173,19 +175,19 @@
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label>Họ và tên <span class="required">*</span></label>
-                                                    <input required="" value="{{$userData->name}}" class="form-control" name="phone" />
+                                                    <input required="" value="{{$userData->name}}" id="name" class="form-control" name="name" />
                                                 </div>
                                                 <div class="form-group col-md-12">
                                                     <label>Email <span class="required">*</span></label>
-                                                    <input required="" value="{{$userData->email}}" class="form-control" name="dname" type="email" />
+                                                    <input required="" value="{{$userData->email}}" class="form-control" id="email" name="email" type="email" />
                                                 </div>
                                                 <div class="form-group col-md-12">
                                                     <label>Số điện thoại <span class="required">*</span></label>
-                                                    <input required="" value="{{$userData->phone}}" class="form-control" name="email" type="text" />
+                                                    <input required="" value="{{$userData->phone}}" class="form-control" name="phone" id="phone" type="text" />
                                                 </div>
                                                 <div class="form-group col-md-12">
                                                     <label>Địa chỉ <span class="required">*</span></label>
-                                                    <input required="" value="{{$userData->address}}" class="form-control" name="password" type="password" />
+                                                    <input required="" value="{{$userData->address}}" class="form-control" id="address" name="address" type="text" />
                                                 </div>
                                                 <div class="form-group col-md-12">
                                                     <label>Ảnh <span class="required">*</span></label>
@@ -196,7 +198,7 @@
                                                     <img id="showImage" src="{{(!empty($userData->photo)) ? url('upload/user_images/'.$userData->photo):url('upload/no_image.jpg') }}" alt="User" style="width:100px;height:100px">
                                                 </div>
                                                 <div class="col-md-12">
-                                                    <button type="submit" class="btn btn-fill-out submit font-weight-bold" name="submit" value="Submit">Save Change</button>
+                                                    <button type="submit" class="btn btn-fill-out submit font-weight-bold" name="submit" value="Submit">Lưu thay đổi</button>
                                                 </div>
                                             </div>
                                         </form>
