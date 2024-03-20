@@ -77,8 +77,42 @@ class AdminController extends Controller
         ]);
         return back()->with('status',"Thay đổi mật khẩu thành công");
     }
+    public function InactiveVendor(){
+        $inActiveVendor = User::where('status','inactive')->where('role','vendor')->latest()->get();
+        return view('backend.vendor.inactive_vendor',compact('inActiveVendor'));
+    }
     public function ActiveVendor(){
         $ActiveVendor = User::where('status','active')->where('role','vendor')->latest()->get();
         return view('backend.vendor.active_vendor',compact('ActiveVendor'));
+    }
+    public function InactiveVendorDetails($id){
+        $inActiveVendorDetails = User::findOrFail($id);
+        return view('backend.vendor.inactive_vendor_details',compact('inActiveVendorDetails'));
+    }
+    public function ActiveVendorApprove(Request $request){
+        $vendor_id = $request->id;
+        $user = User::findOrFail($vendor_id)->update([
+            'status' => 'active',
+        ]);
+        $notification = array(
+            'message' => 'Active thành công',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('active.vendor')->with($notification);
+    }
+    public function ActiveVendorDetails($id){
+        $ActiveVendorDetails = User::findOrFail($id);
+        return view('backend.vendor.active_vendor_details',compact('ActiveVendorDetails'));
+    }
+    public function InactiveVendorApprove(Request $request){
+        $vendor_id = $request->id;
+        $user = User::findOrFail($vendor_id)->update([
+            'status' => 'inactive',
+        ]);
+        $notification = array(
+            'message' => 'Active thành công',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('inactive.vendor')->with($notification);
     }
 }
