@@ -4,13 +4,13 @@
 <div class="page-content"> 
     <!--breadcrumb-->
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title pe-3">Danh mục</div>
+        <div class="breadcrumb-title pe-3">Danh mục con</div>
         <div class="ps-3">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">sửa danh mục</li>
+                    <li class="breadcrumb-item active" aria-current="page">Thêm danh mục con</li>
                 </ol>
             </nav>
         </div>
@@ -25,35 +25,33 @@
                 <div class="col-lg-8">
                     <div class="card">
                         <div class="card-body">
-                            <form id="myForm" method="post" action="{{ route('update.category') }}" enctype="multipart/form-data" >
+                            <form id="myForm" method="post" action="{{ route('store.subcategory') }}" >
                                 @csrf
-                                <input type="hidden" name="id" id="id" value="{{$category->id}}">
-                                <input type="hidden" name="old_image" id="" value="{{$category->category_image}}">
                             <div class="row mb-3">
                                 <div class="foe col-sm-3">
                                     <h6 class="mb-0">Tên danh mục</h6>
                                 </div>
                                 <div class="form-group col-sm-9 text-secondary">
-                                    <input type="text" placeholder="Sửa danh mục" value="{{$category->category_name}}" name="category_name" class="form-control" />
+                                    <select name="category_id" class="form-select mb-3" aria-label="Default select example">
+                                        <option selected="">Vui lòng chọn danh mục</option>
+                           
+                                        @foreach($categories as $category)
+                                        <option value="{{ $category->id }}">{{ $category->category_name }}</option>
+                                        @endforeach
+                           
+                                                           </select>
                                 </div>
                             </div>
-                           
+
                             <div class="row mb-3">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0">Ảnh</h6>
+                                <div class="foe col-sm-3">
+                                    <h6 class="mb-0">Tên danh mục con</h6>
                                 </div>
                                 <div class="form-group col-sm-9 text-secondary">
-                                    <input type="file" name="category_image" class="form-control" id="image"/>
+                                    <input type="text" placeholder="Thêm danh mục" name="subcategory_name" class="form-control" />
                                 </div>
                             </div>
-                            <div class="row mb-3">
-                                <div class="col-sm-3">
-                                    <h6 class="mb-0"></h6>
-                                </div>
-                                <div class="col-sm-9 text-secondary">
-                                    <img id="showImage" src="{{asset($category->category_image)}}" alt="Admin" style="width:100px;height:100px">
-                                </div>
-                            </div>
+
                             <div class="row">
                                 <div class="col-sm-3"></div>
                                 <div class="col-sm-9 text-secondary">
@@ -72,24 +70,19 @@
     $(document).ready(function (){
         $('#myForm').validate({
             rules: {
-                category_name: {
+                subcategory_name: {
                     required : true,
                 }
             },
             messages :{
-                category_name: {
-                    required : 'Vui lòng nhập tên thương hiệu',
-                },
-                category_image: {
-                    required: 'Vui lòng chọn một ảnh',
-                    extension: 'Vui lòng chỉ chọn file ảnh có định dạng JPG, JPEG, PNG hoặc GIF',
-                },
+                subcategory_name: {
+                    required : 'Vui lòng nhập tên danh mục',
+                }
             },
             errorElement : 'span', 
             errorPlacement: function (error,element) {
                 if (element.attr("name") == "category_image") {
                     error.addClass('text-danger'); // Sử dụng lớp CSS của Bootstrap để thêm màu đỏ
-                    error.insertAfter("#showImage"); // Hiển thị thông báo lỗi sau ảnh
                 } else {
                     error.addClass('invalid-feedback');
                     element.closest('.form-group').append(error);
@@ -103,17 +96,5 @@
             },
         });
     });
-</script>
-
-<script type="text/javascript">
-    $(document).ready(function(){
-        $('#image').change(function(e){
-            var reader = new FileReader();
-            reader.onload = function(e){
-                $('#showImage').attr('src',e.target.result);
-            }
-            reader.readAsDataURL(e.target.files['0']);
-        })
-    })
 </script>
 @endsection

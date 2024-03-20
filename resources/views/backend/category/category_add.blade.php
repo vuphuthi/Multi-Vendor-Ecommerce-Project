@@ -70,26 +70,26 @@
     $(document).ready(function (){
         $('#myForm').validate({
             rules: {
-                brand_name: {
+                category_name: {
                     required : true,
                 },
-                brand_image: {
+                category_image: {
                     required: true,
                     extension: "jpg|jpeg|png|gif", // Kiểm tra phần mở rộng của file ảnh
                 }, 
             },
             messages :{
-                brand_name: {
+                category_name: {
                     required : 'Vui lòng nhập tên danh mục',
                 },
-                brand_image: {
+                category_image: {
                     required: 'Vui lòng chọn một ảnh',
                     extension: 'Vui lòng chỉ chọn file ảnh có định dạng JPG, JPEG, PNG hoặc GIF',
                 },
             },
             errorElement : 'span', 
             errorPlacement: function (error,element) {
-                if (element.attr("name") == "brand_image") {
+                if (element.attr("name") == "category_image") {
                     error.addClass('text-danger'); // Sử dụng lớp CSS của Bootstrap để thêm màu đỏ
                     error.insertAfter("#showImage"); // Hiển thị thông báo lỗi sau ảnh
                 } else {
