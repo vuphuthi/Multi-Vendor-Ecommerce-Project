@@ -77,4 +77,8 @@ class AdminController extends Controller
         ]);
         return back()->with('status',"Thay đổi mật khẩu thành công");
     }
+    public function ActiveVendor(){
+        $ActiveVendor = User::where('status','active')->where('role','vendor')->latest()->get();
+        return view('backend.vendor.active_vendor',compact('ActiveVendor'));
+    }
 }

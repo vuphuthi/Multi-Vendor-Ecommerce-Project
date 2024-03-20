@@ -18,6 +18,9 @@
 	<link href="{{asset('adminbackend/assets/css/bootstrap.min.css')}}" rel="stylesheet">
 	<link href="{{asset('adminbackend/assets/css/app.css')}}" rel="stylesheet">
 	<link href="{{asset('adminbackend/assets/css/icons.css')}}" rel="stylesheet">
+
+	<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css" >
+
 	<title>Đăng nhập</title>
 </head>
 
@@ -35,8 +38,8 @@
 							<div class="card-body">
 								<div class="border p-4 rounded">
 									<div class="text-center">
-										<h3 class="">Người bán Đăng nhập</h3>
-										<p>Bạn chưa có tài khoản? <a href="authentication-signup.html">Đăng ký tại đây</a>
+										<h3 class="">Nhà cung cấp đăng nhập</h3>
+										<p>Bạn chưa có tài khoản? <a href="{{route('becom.vendor')}}">Đăng ký tại đây</a>
 										</p>
 									</div>
 									{{-- <div class="d-grid">
@@ -112,6 +115,31 @@
 		});
 	</script>
 	<!--app JS-->
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+<script>
+ @if(Session::has('message'))
+ var type = "{{ Session::get('alert-type','info') }}"
+ switch(type){
+    case 'info':
+    toastr.info(" {{ Session::get('message') }} ");
+    break;
+
+    case 'success':
+    toastr.success(" {{ Session::get('message') }} ");
+    break;
+
+    case 'warning':
+    toastr.warning(" {{ Session::get('message') }} ");
+    break;
+
+    case 'error':
+    toastr.error(" {{ Session::get('message') }} ");
+    break; 
+ }
+ @endif 
+</script>
+
 	<script src="{{asset('adminbackend/assets/js/app.js')}}"></script>
 </body>
 

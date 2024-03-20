@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Validation\Rules;
 class VendorController extends Controller
 {
     public function VendorDashboard(){
@@ -48,7 +49,7 @@ class VendorController extends Controller
         }
         $data->save();
         $notification = array(
-            'message' => 'Hồ sơ người bán được cập nhật thành công',
+            'message' => 'Hồ sơ nhà cung cấp được cập nhật thành công',
             'alert-type' => 'success'
         );
         return redirect()->back()->with($notification);
@@ -78,5 +79,33 @@ class VendorController extends Controller
             'password' => Hash::make($request->new_password)
         ]);
         return back()->with('status',"Thay đổi mật khẩu thành công");
+    }
+    public function BecomeVendor(){
+        return view('auth.become_register');
+    }
+    public function VendorRegister(Request $request)
+    {
+        $request->validate([
+            'name' => ['required', 'string', 'max:255'],
+            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        ]);
+
+        $user = User::insert([
+            'name' => $request->name,
+            'username' => $request->username,
+            'email' => $request->email,
+            'phone' => $request->phone,
+            'address' => $request->address,
+            'vendor_join' => $request->vendor_join,
+            'password' => Hash::make($request->password),
+            'role' => 'vendor',
+            'status' => 'inactive',
+        ]);
+        $notification = array(
+            'message' => 'Đăng ký nhà cung cấp thành công',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('vendor.login')->with($notification);
     }
 }
