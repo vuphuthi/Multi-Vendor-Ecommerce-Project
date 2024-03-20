@@ -25,7 +25,7 @@
                 <div class="col-lg-8">
                     <div class="card">
                         <div class="card-body">
-                            <form id="myForm" method="post" action="{{ route('update.category') }}" enctype="multipart/form-data" >
+                            <form id="myForm" method="post" action="{{ route('update.subcategory') }}" enctype="multipart/form-data" >
                                 @csrf
                                 <input type="hidden" name="id" id="id" value="{{$subcategory->id}}">
                                 
@@ -34,7 +34,7 @@
                                     <h6 class="mb-0">Tên danh mục</h6>
                                 </div>
                                 <div class="form-group col-sm-9 text-secondary">
-                                    <select name="category_id" class="form-select mb-3" aria-label="Default select example">
+                                    <select name="category_id" id="category_id" class="form-select mb-3" aria-label="Default select example">
                                         <option selected="">Chọn danh mục</option>
                                         @foreach($categories as $category)
                                         <option value="{{ $category->id }}" {{ $category->id == $subcategory->category_id ? 'selected' : '' }} >{{ $category->category_name }}</option>
@@ -69,19 +69,28 @@
     $(document).ready(function (){
         $('#myForm').validate({
             rules: {
+                category_id: {
+                    required : true,
+                    min: 1 
+                },
                 subcategory_name: {
                     required : true,
                 }
             },
             messages :{
+                category_id: {
+                    required : 'Vui lòng chọn danh mục',
+                    min: 'Vui lòng chọn danh mục'
+                },
                 subcategory_name: {
-                    required : 'Vui lòng nhập danh mục con',
+                    required : 'Vui lòng nhập tên danh mục con',
                 }
             },
             errorElement : 'span', 
             errorPlacement: function (error,element) {
-                if (element.attr("name") == "category_image") {
+                if (element.attr("name") == "category_id") {
                     error.addClass('text-danger'); // Sử dụng lớp CSS của Bootstrap để thêm màu đỏ
+                    error.insertAfter("#category_id"); // Hiển thị thông báo lỗi sau trường select
                 } else {
                     error.addClass('invalid-feedback');
                     element.closest('.form-group').append(error);

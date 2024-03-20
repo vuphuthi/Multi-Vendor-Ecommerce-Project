@@ -27,7 +27,7 @@ class SubCategoryController extends Controller
         ]);
 
        $notification = array(
-            'message' => 'SubCategory Inserted Successfully',
+            'message' => 'Danh mục con thêm thành công',
             'alert-type' => 'success'
         );
 
@@ -38,5 +38,26 @@ class SubCategoryController extends Controller
         $categories = Category::orderBy('category_name','ASC')->get();
         $subcategory = Subcategory::findOrFail($id);
         return view('backend.subcategory.subcategory_edit',compact('subcategory','categories'));
+    }
+    public function UpdateSubCategory(Request $request){
+        $subcat_id = $request->id;
+        Subcategory::findOrFail($subcat_id)->update([
+            'category_id' => $request->category_id,
+            'subcategory_name' => $request->subcategory_name,
+            'subcategory_slug' => Str::slug($request->subcategory_slug)
+        ]);
+        $notification =  array(
+            'message' => 'Danh mục con cập nhật thành công',
+            'alert-type' => 'success'
+        );
+        return redirect()->route('all.subcategory')->with($notification); 
+    }
+    public function DeleteSubCategory($id){
+        Subcategory::findOrFail($id)->delete();
+        $notification = array(
+            'message' => 'Xóa danh mục thành công',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification); 
     }
 }

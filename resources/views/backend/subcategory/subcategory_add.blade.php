@@ -32,14 +32,14 @@
                                     <h6 class="mb-0">Tên danh mục</h6>
                                 </div>
                                 <div class="form-group col-sm-9 text-secondary">
-                                    <select name="category_id" class="form-select mb-3" aria-label="Default select example">
-                                        <option selected="">Vui lòng chọn danh mục</option>
+                                    <select name="category_id" id="category_id" class="form-select mb-3" aria-label="Default select example">
+                                        <option disabled selected="">Vui lòng chọn danh mục</option>
                            
                                         @foreach($categories as $category)
                                         <option value="{{ $category->id }}">{{ $category->category_name }}</option>
                                         @endforeach
                            
-                                                           </select>
+                                        </select>
                                 </div>
                             </div>
 
@@ -70,19 +70,28 @@
     $(document).ready(function (){
         $('#myForm').validate({
             rules: {
+                category_id: {
+                    required : true,
+                    min: 1 
+                },
                 subcategory_name: {
                     required : true,
                 }
             },
             messages :{
+                category_id: {
+                    required : 'Vui lòng chọn danh mục',
+                    min: 'Vui lòng chọn danh mục'
+                },
                 subcategory_name: {
-                    required : 'Vui lòng nhập tên danh mục',
+                    required : 'Vui lòng nhập tên danh mục con',
                 }
             },
             errorElement : 'span', 
             errorPlacement: function (error,element) {
-                if (element.attr("name") == "category_image") {
+                if (element.attr("name") == "category_id") {
                     error.addClass('text-danger'); // Sử dụng lớp CSS của Bootstrap để thêm màu đỏ
+                    error.insertAfter("#category_id"); // Hiển thị thông báo lỗi sau trường select
                 } else {
                     error.addClass('invalid-feedback');
                     element.closest('.form-group').append(error);
@@ -97,4 +106,5 @@
         });
     });
 </script>
+
 @endsection
