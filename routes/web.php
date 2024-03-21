@@ -7,6 +7,7 @@ use App\Http\Controllers\UserController;
 use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
+use App\Http\Controllers\Backend\ProductController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -61,8 +62,9 @@ Route::get('/admin/login',[AdminController::class,'AdminLogin']);
 Route::get('/vendor/login',[VendorController::class,'VendorLogin'])->name('vendor.login');
 Route::get('/becom/vendor',[VendorController::class,'BecomeVendor'])->name('becom.vendor');
 Route::post('/becom/register',[VendorController::class,'VendorRegister'])->name('becom.register');
-Route::middleware(['auth','role:admin'])->group(function(){
 
+
+Route::middleware(['auth','role:admin'])->group(function(){
 // Brand route 
 route::controller(BrandController::class)->group(function(){
     Route::get('/all/brand','AllBrand')->name('all.brand');
@@ -103,6 +105,10 @@ route::controller(AdminController::class)->group(function(){
     Route::get('/active/vendor/details/{id}','ActiveVendorDetails')->name('active.vendor.details');
     Route::post('/inactive/vendor/approve','InactiveVendorApprove')->name('inactive.vendor.approve');
 
+});
+// Product
+route::controller(ProductController::class)->group(function(){
+    Route::get('/all/product','AllProduct')->name('all.product');
 
 });
 });     

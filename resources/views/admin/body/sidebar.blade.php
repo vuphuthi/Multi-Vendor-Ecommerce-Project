@@ -57,9 +57,22 @@
                 <div class="menu-title">Danh mục con</div>
             </a>
             <ul>
-                <li> <a href="{{route('all.subcategory')}}"><i class="bx bx-right-arrow-alt"></i>Tất cả danh mục con</a>
+                <li> <a href="{{route('all.subcategory')}}"><i class="bx bx-right-arrow-alt"></i>Danh sách danh mục con</a>
                 </li>
                 <li> <a href="{{route('add.subcategory')}}"><i class="bx bx-right-arrow-alt"></i>Thêm danh mục con</a>
+                </li>
+            </ul>
+        </li>
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class="bx bx-category"></i>
+                </div>
+                <div class="menu-title">Quản lý sản phẩm</div>
+            </a>
+            <ul>
+                <li> <a href="{{route('all.product')}}"><i class="bx bx-right-arrow-alt"></i>Danh sách sản phẩm</a>
+                </li>
+                <li> <a href="{{route('add.subcategory')}}"><i class="bx bx-right-arrow-alt"></i>Thêm sản phẩm</a>
                 </li>
             </ul>
         </li>
