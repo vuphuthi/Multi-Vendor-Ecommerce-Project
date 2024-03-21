@@ -1,7 +1,20 @@
 @extends('vendor.vendor_dashboard')
 @section('vendor')
-<div class="page-content">
+@php
+    $id = Auth::user()->id;
+    $vendor_id = App\Models\User::find($id);
+    $status = $vendor_id->status;
+@endphp
 
+<div class="page-content">
+    @if ($status === 'active')
+    <h4 class="text-success">Tài khoản đã hoạt động</h4>
+    @else
+    {{-- <h4 class="text-danger">Tài khoản chưa được hoạt động</h4> --}}
+    <h4>Tài khoản của bạn <span class="text-danger">Chưa kích hoạt</span> </h4>
+    <p class="text-danger"><b> Vui lòng đợi quản trị viên sẽ kiểm tra và phê duyệt tài khoản của bạn</b></p>
+
+    @endif
     <div class="row row-cols-1 row-cols-md-2 row-cols-xl-4">
         <div class="col">
             <div class="card radius-10 bg-gradient-deepblue">
