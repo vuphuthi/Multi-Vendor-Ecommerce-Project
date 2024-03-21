@@ -72,7 +72,7 @@
             <ul>
                 <li> <a href="{{route('all.product')}}"><i class="bx bx-right-arrow-alt"></i>Danh sách sản phẩm</a>
                 </li>
-                <li> <a href="{{route('add.subcategory')}}"><i class="bx bx-right-arrow-alt"></i>Thêm sản phẩm</a>
+                <li> <a href="{{route('add.product')}}"><i class="bx bx-right-arrow-alt"></i>Thêm sản phẩm</a>
                 </li>
             </ul>
         </li>
