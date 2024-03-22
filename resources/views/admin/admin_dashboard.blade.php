@@ -117,12 +117,14 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
 <script src="{{ asset('adminbackend/assets/plugins/input-tags/js/tagsinput.js') }}"></script>
  <script src="{{ asset('adminbackend/assets/js/code.js') }}"></script>
-<script src="https://cdn.tiny.cloud/1/blt11yfb5wrc1ttcoyqh8fc4qj7f1mz2krocye4qmaewht66/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
-    <script>
-      tinymce.init({
-        selector: '#mytextarea'
-      });
-    </script>
+ <script src="https://cdn.tiny.cloud/1/blt11yfb5wrc1ttcoyqh8fc4qj7f1mz2krocye4qmaewht66/tinymce/7/tinymce.min.js" referrerpolicy="origin"></script>
+ <script>
+	 tinymce.init({
+		 selector: '#mytextarea'
+	 });
+
+ </script>
+	
 </body>
 
 </html>

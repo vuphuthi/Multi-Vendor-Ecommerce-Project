@@ -10,7 +10,7 @@
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Danh sách sản phẩm</li>
+                    <li class="breadcrumb-item active" aria-current="page">Danh sách sản phẩm:  <span class="badge rounded-pill bg-danger"> {{ count($products) }} </span></li>
                 </ol>
             </nav>
         </div>
@@ -21,7 +21,6 @@
         </div>
     </div>
     <!--end breadcrumb-->
-    <h6 class="mb-0 text-uppercase">Danh sách sản phẩm</h6>
     <hr/>
     <div class="card">
         <div class="card-body">
@@ -67,7 +66,7 @@
                                 @endif
                                </td>
                                <td>
-                                <a href="{{ route('edit.category',$item->id) }}" class="btn btn-info" title="Edit Data"> <i class="fa fa-pencil"></i> </a>
+                                <a href="{{ route('edit.product',$item->id) }}" class="btn btn-info" title="Edit Data"> <i class="fa fa-pencil"></i> </a>
                                 <a href="{{ route('delete.category',$item->id) }}" class="btn btn-danger" id="delete" title="Delete Data" ><i class="fa fa-trash"></i></a>
                                 
                                 <a href="{{ route('edit.category',$item->id) }}" class="btn btn-warning" title="Details Page"> <i class="fa fa-eye"></i> </a>
