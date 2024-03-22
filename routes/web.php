@@ -111,5 +111,6 @@ route::controller(AdminController::class)->group(function(){
 route::controller(ProductController::class)->group(function(){
     Route::get('/all/product','AllProduct')->name('all.product');
     Route::get('/add/product','AddProduct')->name('add.product');
+    Route::post('/store/product','StoreProduct')->name('store.product');
 });
 });     

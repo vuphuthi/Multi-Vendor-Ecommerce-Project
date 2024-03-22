@@ -2,7 +2,6 @@
 @section('admin')
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <div class="page-content">
-
         <!--breadcrumb-->
         <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
             <div class="breadcrumb-title pe-3">Thương mại điện tử</div>
@@ -17,12 +16,11 @@
             </div>
         </div>
         <!--end breadcrumb-->
-
         <div class="card">
             <div class="card-body p-4">
                 <h5 class="card-title">Thêm sản phẩm mới</h5>
                 <hr />
-                <form id="myForm" method="post" action="{{ route('store.category') }}" enctype="multipart/form-data" >
+                <form id="myForm" method="post" action="{{ route('store.product') }}" enctype="multipart/form-data" >
                     @csrf
                     
                 <div class="form-body mt-4">
@@ -69,9 +67,10 @@
                                     <input name="product_thambnail" class="form-control" type="file" id="formFile" onChange="mainThamUrl(this)" >
 				                    <img src="" id="mainThmb" />
                                 </div>
+                                
 
                                 <div class="mb-3 form-group">
-                                    <label for="inputProductTitle" class="form-label">Nhiều hình ảnh</label>
+                                    <label for="inputProductTitle" class="form-label ">Nhiều hình ảnh</label>
                                     <input class="form-control" name="multi_img[]" type="file" id="multiImg" multiple="">
 			                        <div class="row" id="preview_img"></div>
                                 </div>
@@ -220,13 +219,13 @@
               var data = $(this)[0].files; //this file data
                
               $.each(data, function(index, file){ //loop though each file
-                  if(/(\.|\/)(gif|jpe?g|png)$/i.test(file.type)){ //check supported file type
+                  if(/(\.|\/)(gif|jpe?g|png|webp)$/i.test(file.type)){ //check supported file type
                       var fRead = new FileReader(); //new filereader
                       fRead.onload = (function(file){ //trigger function on successful read
                       return function(e) {
                           var img = $('<img/>').addClass('thumb').attr('src', e.target.result) .width(100)
                       .height(80); //create image element 
-                          $('#preview_img').append(img); //append image to output element
+                          $('#preview_img').append(img); //append image to output vendor_id
                       };
                       })(file);
                       fRead.readAsDataURL(file); //URL representing the file's data.
@@ -276,10 +275,14 @@
                 }, 
                  product_thambnail: {
                     required : true,
-                }, 
-                 multi_img: {
+                },
+                vendor_id: {
                     required : true,
-                }, 
+                },
+                'multi_img[]': {
+                    required: true,
+                    accept: 'image/*', // Chỉ chấp nhận các tệp hình ảnh
+                },  
                  selling_price: {
                     required : true,
                 },                   
@@ -309,7 +312,7 @@
                 product_thambnail: {
                     required : 'Vui Lòng Chọn Sản Phẩm Hình Ảnh Thambnail',
                 },
-                multi_img: {
+               'multi_img[]': {
                     required : 'Vui Lòng Chọn Sản Phẩm Nhiều Hình Ảnh',
                 },
                 selling_price: {
@@ -317,6 +320,9 @@
                 }, 
                 product_code: {
                     required : 'Vui Lòng Nhập Mã Sản Phẩm',
+                },
+                vendor_id:{
+                    required : 'Vui chọn nhà cung cấp',
                 },
                  product_qty: {
                     required : 'Vui lòng nhập số lượng sản phẩm',
@@ -344,6 +350,5 @@
             },
         });
     });
-    
 </script>
 @endsection
