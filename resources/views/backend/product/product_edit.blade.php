@@ -185,6 +185,67 @@
                     </div><!--end row-->
                 </div>
             </div>
+            
+            <form id="myForm" method="post" action="{{ route('update.product.thambnail')}}" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="id" value="{{$products->id}}" id="">
+                <input type="hidden" name="old_img" value="{{$products->product_thambnail}}" id="">
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="mb-0 text-uppercase">Sửa hình ảnh</h6>
+                    <hr>
+
+                    <div class="mb-3 form-group">
+                        <label for="formFile" class="form-label">Hình ảnh</label>
+                        <input class="form-control" name="product_thambnail" type="file" id="formFile">
+                    </div>
+
+                    <div class="mb-3 form-group">
+                        <label for="formFileMultiple" class="form-label"></label>
+                        <img src="{{asset($products->product_thambnail)}}" alt="anh" width="100px" height="100px">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Lưu hình ảnh</button>
+        
+                </div>
+            </div>
+            </form>
+            <div class="card">
+                <div class="card-body">
+                    <h6 class="mb-0 text-uppercase">Cập nhật nhiều hình ảnh</h6>
+                    <hr>
+                    <table class="table mb-0 table-hover">
+                        <thead>
+                            <tr>
+                                <th scope="col">#</th>
+                                <th scope="col">Ảnh</th>
+                                <th scope="col">Thay đổi ảnh</th>
+                                <th scope="col">Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <form id="myForm" method="post" action="{{ route('update.product.multiimage')}}" enctype="multipart/form-data">
+                                @csrf
+
+                                @foreach ($multiImgs as $key => $img)
+
+                                <tr>
+                                    <th scope="row">{{$key+1}}</th>
+                                    <td> <img src="{{asset($img->photo_name)}}" style="width:70; height: 40px;" alt=""> </td>
+                                    <td><input type="file" name="multi_img[{{$img->id}}]" id=""></td>
+                                    <td> 
+                                        <input type="submit" class="btn btn-primary px-4" value="Cập nhật " />		
+                                        <a href="" class="btn btn-danger"> Xóa </a>		
+                                    </td>
+                                </tr>
+
+                                @endforeach
+                                
+
+                            </form>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
 
     </div>

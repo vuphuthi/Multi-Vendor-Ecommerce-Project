@@ -85,12 +85,13 @@ class ProductController extends Controller
         return redirect()->route('all.product')->with($notification); 
     }
     public function EditProduct($id){
+        $multiImgs = MultiImg::where('product_id',$id)->get();
         $activeVendor = User::where('status','active')->where('role','vendor')->get();
         $brands = Brand::latest()->get();
         $Subcategory = Subcategory::latest()->get();
         $categories = Category::latest()->get();
         $products = Product::findOrFail($id);
-        return view('backend.product.product_edit',compact('brands','categories','activeVendor','products','Subcategory'));
+        return view('backend.product.product_edit',compact('brands','categories','activeVendor','products','Subcategory','multiImgs'));
     }
     public function UpdateProduct(Request $request){
         $product_id = $request->id;
@@ -127,5 +128,53 @@ class ProductController extends Controller
             'alert-type' => 'success'
         );
         return redirect()->route('all.product')->with($notification); 
+    }
+    public function UpdateProductThambnail(Request $request){
+        $product_id = $request->id;
+        $Image_Old = $request->old_img;
+        $image = $request->file('product_thambnail');
+        $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+        Image::make($image)->resize(800,800)->save('upload/products/thambnail/'.$name_gen);
+        $save_url = 'upload/products/thambnail/'.$name_gen;
+
+        if (file_exists($Image_Old)) {
+            unlink($Image_Old);
+         }
+         Product::findOrFail($product_id)->update([
+            'product_thambnail' => $save_url,
+            // 'updated_at'         => Carbon::now(),
+         ]);
+         $notification = array(
+            'message' => 'Sửa ảnh thành công',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification); 
+    }
+    public function UpdateProductMultiimage(Request $request){
+
+        $imgs = $request->multi_img;
+
+        foreach($imgs as $id => $img ){
+            $imgDel = MultiImg::findOrFail($id);
+            unlink($imgDel->photo_name);
+
+   $make_name = hexdec(uniqid()).'.'.$img->getClientOriginalExtension();
+        Image::make($img)->resize(800,800)->save('upload/products/multi-image/'.$make_name);
+        $uploadPath = 'upload/products/multi-image/'.$make_name;
+
+        MultiImg::where('id',$id)->update([
+            'photo_name' => $uploadPath,
+            'updated_at' => Carbon::now(),
+
+        ]); 
+        } // end foreach
+
+         $notification = array(
+            'message' => 'Đã cập nhật nhiều hình ảnh sản phẩm thành công',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification); 
+
     }
 }
