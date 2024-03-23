@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Middleware\RedirectIfAuthenticated;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -58,8 +59,8 @@ Route::middleware(['auth','role:vendor'])->group(function(){
     // vendor.profile
 
 });
-Route::get('/admin/login',[AdminController::class,'AdminLogin']);
-Route::get('/vendor/login',[VendorController::class,'VendorLogin'])->name('vendor.login');
+Route::get('/admin/login',[AdminController::class,'AdminLogin'])->middleware(RedirectIfAuthenticated::class);;;
+Route::get('/vendor/login',[VendorController::class,'VendorLogin'])->name('vendor.login')->middleware(RedirectIfAuthenticated::class);;;
 Route::get('/becom/vendor',[VendorController::class,'BecomeVendor'])->name('becom.vendor');
 Route::post('/becom/register',[VendorController::class,'VendorRegister'])->name('becom.register');
 
@@ -116,6 +117,10 @@ route::controller(ProductController::class)->group(function(){
     Route::post('/update/product','UpdateProduct')->name('update.product');
     Route::post('/update/product/thambnail','UpdateProductThambnail')->name('update.product.thambnail');
     Route::post('/update/product/multiimage' , 'UpdateProductMultiimage')->name('update.product.multiimage');
+    Route::get('/product/multiimg/delete/{id}' , 'MulitImageDelelte')->name('product.multiimg.delete');
+    Route::get('/inactive/product/{id}', 'InactiveProduct')->name('inactive.product');
+    Route::get('/active/product/{id}', 'ActiveProduct')->name('active.product');
+    Route::get('/product/delete/{id}', 'ProductDelete')->name('product.delete');
     
 });
 });     

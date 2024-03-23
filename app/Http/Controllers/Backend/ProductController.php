@@ -177,4 +177,60 @@ class ProductController extends Controller
         return redirect()->back()->with($notification); 
 
     }
+    public function MulitImageDelelte($id){
+        $oldImg = MultiImg::findOrFail($id);
+        unlink($oldImg->photo_name);
+
+        MultiImg::findOrFail($id)->delete();
+
+        $notification = array(
+            'message' => 'Đã xóa nhiều hình ảnh sản phẩm thành công',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
+
+    }
+    public function InactiveProduct($id){
+        $inactive = Product::findOrFail($id)->update([
+            'status' => 0
+        ]);
+        $notification = array(
+            'message' => 'Inactive thành công',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
+    }
+    public function ActiveProduct($id){
+        $inactive = Product::findOrFail($id)->update([
+            'status' => 1
+        ]);
+        $notification = array(
+            'message' => 'Inactive thành công',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
+    }
+    public function ProductDelete($id){
+
+        $product = Product::findOrFail($id);
+        unlink($product->product_thambnail);
+        Product::findOrFail($id)->delete();
+
+        $imges = MultiImg::where('product_id',$id)->get();
+        foreach($imges as $img){
+            unlink($img->photo_name);
+            MultiImg::where('product_id',$id)->delete();
+        }
+
+        $notification = array(
+            'message' => 'Xóa sản phẩm thành công',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
+
+    }
 }

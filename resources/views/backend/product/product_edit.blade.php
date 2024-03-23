@@ -234,7 +234,7 @@
                                     <td><input type="file" name="multi_img[{{$img->id}}]" id=""></td>
                                     <td> 
                                         <input type="submit" class="btn btn-primary px-4" value="Cập nhật " />		
-                                        <a href="" class="btn btn-danger"> Xóa </a>		
+                                        <a href="{{ route('product.multiimg.delete',$img->id) }}" class="btn btn-danger" id="delete" > Delete </a>		
                                     </td>
                                 </tr>
 
@@ -242,6 +242,8 @@
                                 
 
                             </form>
+                            
+
                         </tbody>
                     </table>
                 </div>
