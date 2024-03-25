@@ -66,18 +66,18 @@
                                 @endif
                                </td>
                                <td>
-                                <a href="{{ route('vendor.edit.product',$item->id) }}" class="btn btn-info" title="Edit Data"> <i class="fa fa-pencil"></i> </a>
-                                <a href="{{ route('product.delete',$item->id) }}" class="btn btn-danger" id="delete" title="Delete Data" ><i class="fa fa-trash"></i></a>
+                                <a href="{{ route('vendor.edit.product',$item->id) }}" class="btn btn-info" title="Chỉnh sửa"> <i class="fa fa-pencil"></i> </a>
+                                <a href="{{ route('vendor.product.delete',$item->id) }}" class="btn btn-danger" id="delete" title="Xóa" ><i class="fa fa-trash"></i></a>
                                 
-                                <a href="{{ route('edit.category',$item->id) }}" class="btn btn-warning" title="Details Page"> <i class="fa fa-eye"></i> </a>
+                                <a href="{{ route('edit.category',$item->id) }}" class="btn btn-warning" title="Chi tiết"> <i class="fa fa-eye"></i> </a>
                                 
                                 @if($item->status == 1)
-                                <a href="{{ route('inactive.product',$item->id) }}" class="btn btn-primary" title="Inactive"> <i class="fa-solid fa-thumbs-up"></i> </a>
+                                <a href="{{ route('inactive.vendor.product',$item->id) }}" class="btn btn-primary" title="Không hoạt động"> <i class="fa-solid fa-thumbs-up"></i> </a>
                                 @else
-                                <a href="{{ route('active.product',$item->id) }}" class="btn btn-primary" title="Active"> <i class="fa-solid fa-thumbs-down"></i> </a>
+                                <a href="{{ route('active.vendor.product',$item->id) }}" class="btn btn-primary" title="Hoạt động"> <i class="fa-solid fa-thumbs-down"></i> </a>
                                 @endif
                                 
-                                                </td>
+                                </td>
 
                         </tr>
                         @endforeach

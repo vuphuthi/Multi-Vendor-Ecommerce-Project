@@ -195,4 +195,46 @@ class VendorProductController extends Controller
         return redirect()->back()->with($notification);
 
     }
+    public function InactiveVendorProduct($id){
+        $inactive = Product::findOrFail($id)->update([
+            'status' => 0
+        ]);
+        $notification = array(
+            'message' => 'Inactive thành công',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
+    }
+    public function ActiveVendorProduct($id){
+        $inactive = Product::findOrFail($id)->update([
+            'status' => 1
+        ]);
+        $notification = array(
+            'message' => 'Inactive thành công',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
+    }
+    public function VendorProductDelete($id){
+
+        $product = Product::findOrFail($id);
+        unlink($product->product_thambnail);
+        Product::findOrFail($id)->delete();
+
+        $imges = MultiImg::where('product_id',$id)->get();
+        foreach($imges as $img){
+            unlink($img->photo_name);
+            MultiImg::where('product_id',$id)->delete();
+        }
+
+        $notification = array(
+            'message' => 'Xóa sản phẩm thành công',
+            'alert-type' => 'success'
+        );
+
+        return redirect()->back()->with($notification);
+
+    }
 }

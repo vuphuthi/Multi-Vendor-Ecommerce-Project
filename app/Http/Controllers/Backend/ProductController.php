@@ -17,7 +17,7 @@ class ProductController extends Controller
 {
     public function AllProduct(){
         $products = Product::latest()->get();
-        return view('backend.product.product_all_vendor',compact('products'));
+        return view('backend.product.product_all',compact('products'));
     }
     public function AddProduct(){
         $activeVendor = User::where('status','active')->where('role','vendor')->get();

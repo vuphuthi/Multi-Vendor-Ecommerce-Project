@@ -70,9 +70,9 @@ Route::middleware(['auth','role:vendor'])->group(function(){
         Route::post('/vendor/update/product/thambnail','VendorUpdateProductThambnail')->name('vendor.update.product.thambnail');
         Route::post('/vendor/update/product/multiimage' , 'VendorUpdateProductMultiimage')->name('vendor.update.product.multiimage');
         Route::get('/vendor/product/multiimg/delete/{id}' , 'VendorMulitImageDelelte')->name('vendor.product.multiimg.delete');
-        // Route::get('/inactive/product/{id}', 'InactiveProduct')->name('inactive.product');
-        // Route::get('/active/product/{id}', 'ActiveProduct')->name('active.product');
-        // Route::get('/product/delete/{id}', 'ProductDelete')->name('product.delete');
+        Route::get('/inactive/vendor/product/{id}', 'InactiveVendorProduct')->name('inactive.vendor.product');
+        Route::get('/active/vendor/product/{id}', 'ActiveVendorProduct')->name('active.vendor.product');
+        Route::get('/vendor/product/delete/{id}', 'VendorProductDelete')->name('vendor.product.delete');
     
     });
 
