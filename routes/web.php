@@ -8,6 +8,7 @@ use App\Http\Controllers\Backend\BrandController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\ProductController;
+use App\Http\Controllers\Backend\VendorProductController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 /*
 |--------------------------------------------------------------------------
@@ -58,6 +59,13 @@ Route::middleware(['auth','role:vendor'])->group(function(){
     Route::post('/vendor/update/password',[VendorController::class,'VendorUpdatePassword'])->name('vendor.update.password');
     // vendor.profile
 
+    // vendor.product
+    route::controller(VendorProductController::class)->group(function(){
+        Route::get('/vendor/all/product','VendorAllProduct')->name('vendor.all.product');
+        Route::get('/vendor/add/product','VendorAddProduct')->name('vendor.add.product');
+    
+    });
+
 });
 Route::get('/admin/login',[AdminController::class,'AdminLogin'])->middleware(RedirectIfAuthenticated::class);;;
 Route::get('/vendor/login',[VendorController::class,'VendorLogin'])->name('vendor.login')->middleware(RedirectIfAuthenticated::class);;;
@@ -107,6 +115,8 @@ route::controller(AdminController::class)->group(function(){
     Route::get('/active/vendor/details/{id}','ActiveVendorDetails')->name('active.vendor.details');
     Route::post('/inactive/vendor/approve','InactiveVendorApprove')->name('inactive.vendor.approve');
 
+
+
 });
 // Product
 route::controller(ProductController::class)->group(function(){
@@ -123,4 +133,7 @@ route::controller(ProductController::class)->group(function(){
     Route::get('/product/delete/{id}', 'ProductDelete')->name('product.delete');
     
 });
+// Vendor Product
+
+
 });     

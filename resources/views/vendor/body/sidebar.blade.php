@@ -32,9 +32,9 @@
                 <div class="menu-title">Quản lý sản phẩm</div>
             </a>
             <ul>
-                <li> <a href="index.html"><i class="bx bx-right-arrow-alt"></i>Danh sách sản phẩm</a>
+                <li> <a href="{{route('vendor.all.product')}}"><i class="bx bx-right-arrow-alt"></i>Danh sách sản phẩm</a>
                 </li>
-                <li> <a href="dashboard-eCommerce.html"><i class="bx bx-right-arrow-alt"></i>Thêm sản phẩm</a>
+                <li> <a href="{{route('vendor.add.product')}}"><i class="bx bx-right-arrow-alt"></i>Thêm sản phẩm</a>
                 </li>
             </ul>
         </li>
