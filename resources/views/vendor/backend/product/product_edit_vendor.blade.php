@@ -176,7 +176,7 @@
                 </div>
             </div>
             
-            <form id="myForm" method="post" action="{{ route('update.product.thambnail')}}" enctype="multipart/form-data">
+            <form id="myForm" method="post" action="{{ route('vendor.update.product.thambnail')}}" enctype="multipart/form-data">
                 @csrf
                 <input type="hidden" name="id" value="{{$products->id}}" id="">
                 <input type="hidden" name="old_img" value="{{$products->product_thambnail}}" id="">
@@ -213,7 +213,7 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <form id="myForm" method="post" action="{{ route('update.product.multiimage')}}" enctype="multipart/form-data">
+                            <form id="myForm" method="post" action="{{ route('vendor.update.product.multiimage')}}" enctype="multipart/form-data">
                                 @csrf
 
                                 @foreach ($multiImgs as $key => $img)
@@ -224,7 +224,7 @@
                                     <td><input type="file" name="multi_img[{{$img->id}}]" id=""></td>
                                     <td> 
                                         <input type="submit" class="btn btn-primary px-4" value="Cập nhật " />		
-                                        <a href="{{ route('product.multiimg.delete',$img->id) }}" class="btn btn-danger" id="delete" > Delete </a>		
+                                        <a href="{{ route('vendor.product.multiimg.delete',$img->id) }}" class="btn btn-danger" id="delete" >Xóa</a>		
                                     </td>
                                 </tr>
 
