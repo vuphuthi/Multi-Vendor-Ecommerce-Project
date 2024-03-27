@@ -120,8 +120,8 @@
                                     <div class="col-12 form-group">
                                         <label for="inputVendor" class="form-label">danh mục sản phẩm</label>
                                         <select name="category_id" class="form-select" id="inputVendor">
-                                            @foreach ($categories as $category)
                                             <option value="">Chọn danh mục sản phẩm</option>
+                                            @foreach ($categories as $category)
                                             <option value="{{$category->id}}">{{$category->category_name}}</option>
                                             @endforeach
                                         </select>

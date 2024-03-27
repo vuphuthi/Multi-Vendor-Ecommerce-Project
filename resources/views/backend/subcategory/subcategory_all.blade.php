@@ -39,13 +39,16 @@
                         @foreach($subcategories as $key => $item )
                         <tr>
                             <td>{{$key+1}}</td>
-                            <td> {{ $item['category']['category_name'] }}</td>
+                            <td>
+                                @if ($item['category'] != null && $item['category']['category_name'] != null)
+                                    {{ $item['category']['category_name'] }}
+                                @endif
+                            </td>
                             <td>{{$item->subcategory_name}}</td>
                             <td>
                                 <a href="{{route('edit.subcategory',$item->id)}}" class="btn btn-info">Sửa</a>
                                 <a href="{{route('delete.subcategory',$item->id)}}" class="btn btn-danger" id="delete">Xóa</a>
                             </td>
-
                         </tr>
                         @endforeach
                     </tbody>
