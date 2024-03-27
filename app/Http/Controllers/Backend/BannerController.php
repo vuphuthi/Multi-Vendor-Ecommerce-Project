@@ -21,8 +21,8 @@ class BannerController extends Controller
 
         $image = $request->file('banner_image');
         $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
-        Image::make($image)->resize(2376,807)->save('upload/slider/'.$name_gen);
-        $save_url = 'upload/slider/'.$name_gen;
+        Image::make($image)->resize(2376,807)->save('upload/banner/'.$name_gen);
+        $save_url = 'upload/banner/'.$name_gen;
 
         Banner::insert([
             'banner_title' => $request->banner_title,
@@ -37,5 +37,52 @@ class BannerController extends Controller
         );
 
         return redirect()->route('all.banner')->with($notification); 
+    }
+    public function EditBanner($id){
+        $banner = Banner::findOrFail($id);
+        return view('backend.banner.banner_edit',compact('banner'));
+    }
+    public function UpdateBanner(Request $request){
+        $banner_id = $request->id;
+        $old_img = $request->olg_img;
+
+        if($request->file('banner_image')){
+
+        $image = $request->file('banner_image');
+        $name_gen = hexdec(uniqid()).'.'.$image->getClientOriginalExtension();
+        Image::make($image)->resize(2376,807)->save('upload/banner/'.$name_gen);
+        $save_url = 'upload/banner/'.$name_gen;
+
+        if(file_exists($old_img)){
+            unlink($old_img);
+        }
+        Banner::findOrFail($banner_id)->update([
+            'banner_title' => $request->banner_title,
+            'banner_url' => $request->banner_url,
+            'banner_image' => $save_url, 
+            'updated_at' => Carbon::now(), 
+        ]);
+        
+        $notification = array(
+            'message' => 'Banner sửa có ảnh thành công',
+            'alert-type' => 'info'
+        );
+
+        return redirect()->route('all.banner')->with($notification); 
+
+        }else{
+            Banner::findOrFail($banner_id)->update([
+                'banner_title' => $request->banner_title,
+                'banner_url' => $request->banner_url,
+                'updated_at' => Carbon::now(), 
+            ]);
+            $notification = array(
+                'message' => 'Banner sửa không có ảnh thành công',
+                'alert-type' => 'info'
+            );
+    
+            return redirect()->route('all.banner')->with($notification); 
+        }
+
     }
 }

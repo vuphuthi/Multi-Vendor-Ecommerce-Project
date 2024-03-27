@@ -160,8 +160,8 @@ route::controller(BannerController::class)->group(function(){
     Route::get('/all/banner','AllBanner')->name('all.banner');
     Route::get('/add/banner','AddBanner')->name('add.banner');
     Route::post('/store/banner','StoreBanner')->name('store.banner');
-    // Route::get('/edit/slider/{id}','EditSlider')->name('edit.slider');
-    // Route::post('/update/slider','UpdateSlider')->name('update.slider');
+    Route::get('/edit/banner/{id}','EditBanner')->name('edit.banner');
+    Route::post('/update/banner','UpdateBanner')->name('update.banner');
     // Route::get('/slider/delete/{id}', 'SliderDelete')->name('slider.delete');
     
 });
