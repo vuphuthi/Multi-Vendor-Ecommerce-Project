@@ -83,6 +83,18 @@ class BannerController extends Controller
     
             return redirect()->route('all.banner')->with($notification); 
         }
-
     }
+    public function BannerDelete($id){
+        $banners = Banner::findOrFail($id);
+        $img = $banners->banner_image;
+        unlink($img);
+        Banner::findOrFail($id)->delete();
+
+        $notification = array(
+            'message' => 'Banner xóa thành công',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification);
+    }
+
 }

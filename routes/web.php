@@ -162,7 +162,7 @@ route::controller(BannerController::class)->group(function(){
     Route::post('/store/banner','StoreBanner')->name('store.banner');
     Route::get('/edit/banner/{id}','EditBanner')->name('edit.banner');
     Route::post('/update/banner','UpdateBanner')->name('update.banner');
-    // Route::get('/slider/delete/{id}', 'SliderDelete')->name('slider.delete');
+    Route::get('/banner/delete/{id}', 'BannerDelete')->name('delete.banner');
     
 });
 });     

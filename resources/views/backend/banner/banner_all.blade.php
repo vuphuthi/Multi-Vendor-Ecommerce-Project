@@ -45,7 +45,7 @@
                             <td><img src="{{asset($banner->banner_image)}}" style="width:70px;height:40px" alt=""></td>
                             <td>
                                 <a href="{{route('edit.banner',$banner->id)}}" class="btn btn-info">Sửa</a>
-                                <a href="{{route('slider.delete',$banner->id)}}" class="btn btn-danger" id="delete">Xóa</a>
+                                <a href="{{route('delete.banner',$banner->id)}}" class="btn btn-danger" id="delete">Xóa</a>
                             </td>
 
                         </tr>

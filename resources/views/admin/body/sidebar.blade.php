@@ -100,7 +100,7 @@
             <ul>
                 <li> <a href="{{route('all.banner')}}"><i class="bx bx-right-arrow-alt"></i>Danh sách banner</a>
                 </li>
-                <li> <a href="{{route('add.slider')}}"><i class="bx bx-right-arrow-alt"></i>Thêm banner</a>
+                <li> <a href="{{route('add.banner')}}"><i class="bx bx-right-arrow-alt"></i>Thêm banner</a>
                 </li>
             </ul>
         </li>
