@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Brand;
 use Image;
 use Illuminate\Support\Str;
+use Carbon\Carbon;
 class BrandController extends Controller
 {
     public function AllBrand(){
@@ -28,6 +29,7 @@ class BrandController extends Controller
             'brand_name' => $request->brand_name,
             'brand_slug' => Str::slug($request->brand_name), // Sử dụng hàm Str::slug để tạo slug từ tên thương hiệu
             'brand_image' => $save_url, 
+            'created_at' => Carbon::now(), 
         ]);
     
        $notification = array(
@@ -58,6 +60,7 @@ class BrandController extends Controller
             'brand_name' => $request->brand_name,
             'brand_slug' => Str::slug($request->brand_name), // Sử dụng hàm Str::slug để tạo slug từ tên thương hiệu
             'brand_image' => $save_url, 
+            'updated_at' => Carbon::now(), 
         ]);
     
        $notification = array(
@@ -71,6 +74,7 @@ class BrandController extends Controller
             Brand::findOrFail($brand_id)->update([
                 'brand_name' => $request->brand_name,
                 'brand_slug' => Str::slug($request->brand_name), // Sử dụng hàm Str::slug để tạo slug từ tên thương hiệu
+                'updated_at' => Carbon::now(),
             ]);
         
            $notification = array(

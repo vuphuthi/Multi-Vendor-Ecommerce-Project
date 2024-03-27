@@ -90,6 +90,21 @@
                 </li>
             </ul>
         </li>
+
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class="bx bx-category"></i>
+                </div>
+                <div class="menu-title">Quản lý banner</div>
+            </a>
+            <ul>
+                <li> <a href="{{route('all.banner')}}"><i class="bx bx-right-arrow-alt"></i>Danh sách banner</a>
+                </li>
+                <li> <a href="{{route('add.slider')}}"><i class="bx bx-right-arrow-alt"></i>Thêm banner</a>
+                </li>
+            </ul>
+        </li>
+
         <li class="menu-label">UI Elements</li>
         <li>
             <a href="javascript:;" class="has-arrow">

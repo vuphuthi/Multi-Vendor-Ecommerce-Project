@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Slider;
 use Image;
+use Carbon\Carbon;
 class SliderController extends Controller
 {
     public function AllSlider(){
@@ -25,6 +26,7 @@ class SliderController extends Controller
             'slider_title' => $request->slider_title,
             'short_title' => $request->short_title,
             'slider_image' => $save_url,
+            'created_at' => Carbon::now(), 
         ]);
         $notification = array(
             'message' => 'Slider thêm thành công',
@@ -56,6 +58,7 @@ class SliderController extends Controller
             'slider_title' => $request->slider_title,
             'short_title' => $request->short_title,
             'slider_image' => $save_url, 
+            'updated_at' => Carbon::now(),
         ]);
 
         $notification = array(
@@ -70,6 +73,7 @@ class SliderController extends Controller
             Slider::findOrFail($slider_id)->update([
                 'slider_title' => $request->slider_title,
                 'short_title' => $request->short_title, 
+                'updated_at' => Carbon::now(),
             ]);
     
            $notification = array(

@@ -4,13 +4,13 @@
 <div class="page-content"> 
     <!--breadcrumb-->
     <div class="page-breadcrumb d-none d-sm-flex align-items-center mb-3">
-        <div class="breadcrumb-title pe-3">Slider</div>
+        <div class="breadcrumb-title pe-3">Banner</div>
         <div class="ps-3">
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Thêm slider</li>
+                    <li class="breadcrumb-item active" aria-current="page">Thêm banner</li>
                 </ol>
             </nav>
         </div>
@@ -25,23 +25,23 @@
                 <div class="col-lg-8">
                     <div class="card">
                         <div class="card-body">
-                            <form id="myForm" method="post" action="{{ route('store.slider') }}" enctype="multipart/form-data" >
+                            <form id="myForm" method="post" action="{{ route('store.banner') }}" enctype="multipart/form-data" >
                                 @csrf
                             <div class="row mb-3">
                                 <div class="foe col-sm-3">
                                     <h6 class="mb-0">Tiêu đề</h6>
                                 </div>
                                 <div class="form-group col-sm-9 text-secondary">
-                                    <input type="text" placeholder="Nhập tiêu đề" name="slider_title" class="form-control" />
+                                    <input type="text" placeholder="Nhập tiêu đề" name="banner_title" class="form-control" />
                                 </div>
                             </div>
                            
                             <div class="row mb-3">
                                 <div class="foe col-sm-3">
-                                    <h6 class="mb-0">Tiêu đề ngắn</h6>
+                                    <h6 class="mb-0">Đường dẫn</h6>
                                 </div>
                                 <div class="form-group col-sm-9 text-secondary">
-                                    <input type="text" placeholder="Nhập tiêu đề ngắn" name="short_title" class="form-control" />
+                                    <input type="text" placeholder="Nhập đường dẫn" name="banner_url" class="form-control" />
                                 </div>
                             </div>
 
@@ -50,7 +50,7 @@
                                     <h6 class="mb-0">Hình ảnh</h6>
                                 </div>
                                 <div class="form-group col-sm-9 text-secondary">
-                                    <input type="file" name="slider_image" class="form-control" id="image"/>
+                                    <input type="file" name="banner_image" class="form-control" id="image"/>
                                 </div>
                             </div>
                             <div class="row mb-3">
@@ -79,25 +79,25 @@
     $(document).ready(function (){
         $('#myForm').validate({
             rules: {
-                slider_title: {
+                banner_title: {
                     required : true,
                 },
-                short_title: {
+                banner_url: {
                     required : true,
                 },
-                slider_image: {
+                banner_image: {
                     required: true,
                     extension: "jpg|jpeg|png|gif", // Kiểm tra phần mở rộng của file ảnh
                 }, 
             },
             messages :{
-                slider_title: {
+                banner_title: {
                     required : 'Vui lòng nhập tiêu đề',
                 },
-                short_title: {
-                    required : 'Vui lòng nhập tiêu đề ngắn',
+                banner_url: {
+                    required : 'Vui lòng nhập đường dẫn',
                 },
-                slider_image: {
+                banner_image: {
                     required: 'Vui lòng chọn một ảnh',
                     extension: 'Vui lòng chỉ chọn file ảnh có định dạng JPG, JPEG, PNG hoặc GIF',
                 }
