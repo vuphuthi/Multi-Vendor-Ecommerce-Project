@@ -19,10 +19,11 @@
                     <h6><a href="shop-grid-right.html">{{$item->category_name}}</a></h6>
 
                     @php
-                    $products = App\Models\Product::where("category_id","ASC")->get();
+                    $products = App\Models\Product::where("category_id",$item->id)->get();
+
                     @endphp
                         
-                    <span>{{count($products)}}</span>
+                    <span>{{count($products) }} Mặt hàng</span>
 
                 </div>
                 @endforeach
