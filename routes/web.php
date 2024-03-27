@@ -9,6 +9,7 @@ use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\VendorProductController;
+use App\Http\Controllers\Backend\SliderController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 /*
 |--------------------------------------------------------------------------
@@ -143,7 +144,15 @@ route::controller(ProductController::class)->group(function(){
     Route::get('/product/delete/{id}', 'ProductDelete')->name('product.delete');
     
 });
-// Vendor Product
 
-
+// Slider
+route::controller(SliderController::class)->group(function(){
+    Route::get('/all/slider','AllSlider')->name('all.slider');
+    Route::get('/add/slider','AddSlider')->name('add.slider');
+    Route::post('/store/slider','StoreSlider')->name('store.slider');
+    Route::get('/edit/slider/{id}','EditSlider')->name('edit.slider');
+    Route::post('/update/slider','UpdateSlider')->name('update.slider');
+    Route::get('/slider/delete/{id}', 'SliderDelete')->name('slider.delete');
+    
+});
 });     
