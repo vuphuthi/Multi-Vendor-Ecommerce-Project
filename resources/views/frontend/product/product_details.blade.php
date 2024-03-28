@@ -19,74 +19,91 @@
                             <!-- MAIN SLIDES -->
                             <div class="product-image-slider">
                                 <figure class="border-radius-10">
-                                    <img src="assets/imgs/shop/product-16-2.jpg" alt="product image" />
+                                    <img src="{{asset('frontend/assets/imgs/shop/product-16-2.jpg')}}" alt="product image" />
                                 </figure>
                                 <figure class="border-radius-10">
-                                    <img src="assets/imgs/shop/product-16-1.jpg" alt="product image" />
+                                    <img src="{{asset('frontend/assets/imgs/shop/product-16-1.jpg')}}" alt="product image" />
                                 </figure>
-                                <figure class="border-radius-10">
-                                    <img src="assets/imgs/shop/product-16-3.jpg" alt="product image" />
-                                </figure>
-                                <figure class="border-radius-10">
-                                    <img src="assets/imgs/shop/product-16-4.jpg" alt="product image" />
-                                </figure>
-                                <figure class="border-radius-10">
-                                    <img src="assets/imgs/shop/product-16-5.jpg" alt="product image" />
-                                </figure>
-                                <figure class="border-radius-10">
-                                    <img src="assets/imgs/shop/product-16-6.jpg" alt="product image" />
-                                </figure>
-                                <figure class="border-radius-10">
-                                    <img src="assets/imgs/shop/product-16-7.jpg" alt="product image" />
-                                </figure>
+
                             </div>
                             <!-- THUMBNAILS -->
                             <div class="slider-nav-thumbnails">
-                                <div><img src="assets/imgs/shop/thumbnail-3.jpg" alt="product image" /></div>
-                                <div><img src="assets/imgs/shop/thumbnail-4.jpg" alt="product image" /></div>
-                                <div><img src="assets/imgs/shop/thumbnail-5.jpg" alt="product image" /></div>
-                                <div><img src="assets/imgs/shop/thumbnail-6.jpg" alt="product image" /></div>
-                                <div><img src="assets/imgs/shop/thumbnail-7.jpg" alt="product image" /></div>
-                                <div><img src="assets/imgs/shop/thumbnail-8.jpg" alt="product image" /></div>
-                                <div><img src="assets/imgs/shop/thumbnail-9.jpg" alt="product image" /></div>
+                                <div><img src="{{asset('frontend/assets/imgs/shop/product-16-2.jpg')}}" alt="product image" /></div>
+                                <div><img src="{{asset('frontend/assets/imgs/shop/product-16-1.jpg')}}" alt="product image" /></div>
                             </div>
                         </div>
                         <!-- End Gallery -->
                     </div>
                     <div class="col-md-6 col-sm-12 col-xs-12">
                         <div class="detail-info pr-30 pl-30">
-                            <span class="stock-status out-stock"> Sale Off </span>
-                            <h2 class="title-detail">Seeds of Change Organic Quinoa, Brown</h2>
+                            @if($product->product_qty > 0)
+                            <span class="stock-status in-stock"> Còn hàng </span>
+                            @else
+                            <span class="stock-status out-stock"> Hết hàng </span>
+                            @endif
+                            <h2 class="title-detail">{{$product->product_name}}</h2>
                             <div class="product-detail-rating">
                                 <div class="product-rate-cover text-end">
                                     <div class="product-rate d-inline-block">
                                         <div class="product-rating" style="width: 90%"></div>
                                     </div>
-                                    <span class="font-small ml-5 text-muted"> (32 reviews)</span>
+                                    <span class="font-small ml-5 text-muted"> (32 Đánh giá)</span>
                                 </div>
                             </div>
+                            @php
+                                $amount = $product->selling_price - $product->discount_price;
+                                $discount = ($amount / $product->selling_price) * 100
+                            @endphp
                             <div class="clearfix product-price-cover">
-                                <div class="product-price primary-color float-left">
-                                    <span class="current-price text-brand">$38</span>
-                                    <span>
-                                        <span class="save-price font-md color3 ml-15">26% Off</span>
-                                        <span class="old-price font-md ml-15">$52</span>
-                                    </span>
-                                </div>
+                                @if ($product->discount_price == NULL)
+                                    <span class="current-price text-brand">{{ number_format($product->selling_price, 0, ',', '.') }}&#8363;</span>
+                                @else
+                                    <div class="product-price primary-color float-left">
+                                        <span class="current-price text-brand">{{ number_format($product->selling_price, 0, ',', '.') }}&#8363;</span>
+                                        <span>
+                                            <span class="save-price font-md color3 ml-15">{{ round($discount) }}%</span>
+                                            <span class="old-price font-md ml-15">{{ number_format($product->discount_price, 0, ',', '.') }}&#8363;</span>
+                                        </span>
+                                    </div>
+                                @endif
                             </div>
                             <div class="short-desc mb-30">
-                                <p class="font-lg">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Aliquam rem officia, corrupti reiciendis minima nisi modi, quasi, odio minus dolore impedit fuga eum eligendi.</p>
+                                <p class="font-lg">{{$product->short_descp}}</p>
                             </div>
+                            @if($product->product_size == NULL)
+
+                            @else
                             <div class="attr-detail attr-size mb-30">
-                                <strong class="mr-10">Size / Weight: </strong>
-                                <ul class="list-filter size-filter font-small">
-                                    <li><a href="#">50g</a></li>
-                                    <li class="active"><a href="#">60g</a></li>
-                                    <li><a href="#">80g</a></li>
-                                    <li><a href="#">100g</a></li>
-                                    <li><a href="#">150g</a></li>
-                                </ul>
+                                <strong class="mr-10">Size: </strong>
+                                <select name="" id="">
+                                    <option selected="" value="" disabled="">Chọn Size</option>
+
+                                    @foreach ($product_size as $size)
+
+                                    <option value="{{ $size }}">{{ ucwords($size)  }}</option>        
+
+                                    @endforeach
+
+                                </select>
                             </div>
+                            @endif
+                            @if($product->product_color == NULL)
+
+                            @else
+                            <div class="attr-detail attr-size mb-30">
+                                <strong class="mr-10">Màu: </strong>
+                                <select name="" id="">
+                                    <option selected="" value="" disabled="">Chọn Màu</option>
+
+                                    @foreach ($product_color as $color)
+
+                                    <option value="{{ $color }}">{{ $color  }}</option>        
+
+                                    @endforeach
+
+                                </select>
+                            </div>
+                            @endif
                             <div class="detail-extralink mb-50">
                                 <div class="detail-qty border radius">
                                     <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
