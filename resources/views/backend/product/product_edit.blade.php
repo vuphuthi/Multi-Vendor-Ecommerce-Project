@@ -333,9 +333,6 @@
             product_thambnail: {
                 required: true,
             },
-            vendor_id: {
-                required: true,
-            },
             'multi_img[]': {
                 required: true,
                 accept: 'image/*', // Chỉ chấp nhận các tệp hình ảnh
@@ -380,9 +377,6 @@
             }, 
             product_code: {
                 required: 'Vui lòng nhập Mã Sản Phẩm',
-            },
-            vendor_id: {
-                required: 'Vui lòng chọn nhà cung cấp',
             },
             product_qty: {
                 required: 'Vui lòng nhập số lượng sản phẩm',

@@ -159,6 +159,7 @@
                         <div class="tab-content shop_info_tab entry-main-content">
                             <div class="tab-pane fade show active" id="Description">
                                 <div class="">
+                                    
                                     <p>{!! $product->long_descp !!}</p>
                                     
                                 </div>
@@ -268,15 +269,26 @@
                                             <div class="product-rate d-inline-block">
                                                 <div class="product-rating" style="width: 90%"></div>
                                             </div>
-                                            <span class="font-small ml-5 text-muted"> (32 reviews)</span>
+                                            <span class="font-small ml-5 text-muted"> (32 Đánh giá)</span>
                                         </div>
                                     </div>
                                 </div>
+                                @if($product->vendor_id == NULL)
+                                <ul class="contact-infor mb-50">
+                                    <li><img src="{{ asset('frontend/assets/imgs/theme/icons/icon-location.svg') }}" alt="" /><strong>Địa chỉ: </strong> <span>Chủ sở hữu</span></li>
+                                    <li><img src="{{ asset('frontend/assets/imgs/theme/icons/icon-contact.svg') }}" alt="" /><strong>Liên hệ: </strong><span>Chủ sở hữu</span></li>
+                                </ul>
+                                @else
                                 <ul class="contact-infor mb-50">
                                     <li><img src="assets/imgs/theme/icons/icon-location.svg" alt="" /><strong>Địa chỉ: </strong> <span>{{$product['vendor']['address']}}</span></li>
                                     <li><img src="assets/imgs/theme/icons/icon-contact.svg" alt="" /><strong>Liên hệ: </strong><span>{{$product['vendor']['phone']}}</span></li>
                                 </ul>
+                                @endif
+                                @if($product->vendor_id == NULL)
+                                <p>Thông tin của chủ sở hữu</p>
+                                @else
                                 <p>{{$product['vendor']['vendor_short_info']}}</p>
+                                @endif
                             </div>
                             <div class="tab-pane fade" id="Reviews">
                                 <!--Comments-->
@@ -418,17 +430,21 @@
                 </div>
                 <div class="row mt-60">
                     <div class="col-12">
-                        <h2 class="section-title style-1 mb-30">Related products</h2>
+                        <h2 class="section-title style-1 mb-30">Những sảm phẩm tương tự</h2>
                     </div>
+                    
                     <div class="col-12">
                         <div class="row related-products">
+                            @foreach ($relatedProduct as $product)
+
                             <div class="col-lg-3 col-md-4 col-12 col-sm-6">
+                               
                                 <div class="product-cart-wrap hover-up">
                                     <div class="product-img-action-wrap">
                                         <div class="product-img product-img-zoom">
-                                            <a href="shop-product-right.html" tabindex="0">
-                                                <img class="default-img" src="assets/imgs/shop/product-2-1.jpg" alt="" />
-                                                <img class="hover-img" src="assets/imgs/shop/product-2-2.jpg" alt="" />
+                                            <a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug) }}" tabindex="0">
+                                                <a href="{{ url('product/details/'.$product->id.'/'.$product->product_slug) }}" tabindex="0">
+                                                <img class="default-img" src="{{ asset( $product->product_thambnail ) }}" alt="" />
                                             </a>
                                         </div>
                                         <div class="product-action-1">
@@ -436,112 +452,44 @@
                                             <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="shop-wishlist.html" tabindex="0"><i class="fi-rs-heart"></i></a>
                                             <a aria-label="Compare" class="action-btn small hover-up" href="shop-compare.html" tabindex="0"><i class="fi-rs-shuffle"></i></a>
                                         </div>
+                                        @php
+                                            $amount = $product->selling_price - $product->discount_price;
+                                            $discount = ($amount/$product->selling_price) * 100;
+                                        @endphp
                                         <div class="product-badges product-badges-position product-badges-mrg">
-                                            <span class="hot">Hot</span>
+                                            @if($product->discount_price == NULL)
+
+                                                <span class="new">New</span>
+                                            @else
+                                                <span class="hot"> {{ round($discount) }} %</span>
+
+                                            @endif
                                         </div>
                                     </div>
                                     <div class="product-content-wrap">
-                                        <h2><a href="shop-product-right.html" tabindex="0">Ulstra Bass Headphone</a></h2>
+                                        <h2><a href="shop-product-right.html" tabindex="0">{{$product->product_name}}</a></h2>
                                         <div class="rating-result" title="90%">
                                             <span> </span>
                                         </div>
                                         <div class="product-price">
-                                            <span>$238.85 </span>
-                                            <span class="old-price">$245.8</span>
+                                            
+                                            @if($product->discount_price == NULL)
+                                            <div class="product-price">
+                                                <span>{{ number_format($product->selling_price, 0, ',', '.') }}&#8363; </span>
+                                           </div>
+                       
+                                           @else
+                                           <div class="product-price">
+                                            <span>{{ number_format($product->selling_price, 0, ',', '.') }}&#8363; </span>
+                                               <span class="old-price">{{ number_format($product->discount_price, 0, ',', '.') }} &#8363;</span>
+                                           </div>
+                                           @endif
+
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-lg-3 col-md-4 col-12 col-sm-6">
-                                <div class="product-cart-wrap hover-up">
-                                    <div class="product-img-action-wrap">
-                                        <div class="product-img product-img-zoom">
-                                            <a href="shop-product-right.html" tabindex="0">
-                                                <img class="default-img" src="assets/imgs/shop/product-3-1.jpg" alt="" />
-                                                <img class="hover-img" src="assets/imgs/shop/product-4-2.jpg" alt="" />
-                                            </a>
-                                        </div>
-                                        <div class="product-action-1">
-                                            <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-search"></i></a>
-                                            <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="shop-wishlist.html" tabindex="0"><i class="fi-rs-heart"></i></a>
-                                            <a aria-label="Compare" class="action-btn small hover-up" href="shop-compare.html" tabindex="0"><i class="fi-rs-shuffle"></i></a>
-                                        </div>
-                                        <div class="product-badges product-badges-position product-badges-mrg">
-                                            <span class="sale">-12%</span>
-                                        </div>
-                                    </div>
-                                    <div class="product-content-wrap">
-                                        <h2><a href="shop-product-right.html" tabindex="0">Smart Bluetooth Speaker</a></h2>
-                                        <div class="rating-result" title="90%">
-                                            <span> </span>
-                                        </div>
-                                        <div class="product-price">
-                                            <span>$138.85 </span>
-                                            <span class="old-price">$145.8</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-4 col-12 col-sm-6">
-                                <div class="product-cart-wrap hover-up">
-                                    <div class="product-img-action-wrap">
-                                        <div class="product-img product-img-zoom">
-                                            <a href="shop-product-right.html" tabindex="0">
-                                                <img class="default-img" src="assets/imgs/shop/product-4-1.jpg" alt="" />
-                                                <img class="hover-img" src="assets/imgs/shop/product-4-2.jpg" alt="" />
-                                            </a>
-                                        </div>
-                                        <div class="product-action-1">
-                                            <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-search"></i></a>
-                                            <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="shop-wishlist.html" tabindex="0"><i class="fi-rs-heart"></i></a>
-                                            <a aria-label="Compare" class="action-btn small hover-up" href="shop-compare.html" tabindex="0"><i class="fi-rs-shuffle"></i></a>
-                                        </div>
-                                        <div class="product-badges product-badges-position product-badges-mrg">
-                                            <span class="new">New</span>
-                                        </div>
-                                    </div>
-                                    <div class="product-content-wrap">
-                                        <h2><a href="shop-product-right.html" tabindex="0">HomeSpeak 12UEA Goole</a></h2>
-                                        <div class="rating-result" title="90%">
-                                            <span> </span>
-                                        </div>
-                                        <div class="product-price">
-                                            <span>$738.85 </span>
-                                            <span class="old-price">$1245.8</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 col-md-4 col-12 col-sm-6 d-lg-block d-none">
-                                <div class="product-cart-wrap hover-up mb-0">
-                                    <div class="product-img-action-wrap">
-                                        <div class="product-img product-img-zoom">
-                                            <a href="shop-product-right.html" tabindex="0">
-                                                <img class="default-img" src="assets/imgs/shop/product-5-1.jpg" alt="" />
-                                                <img class="hover-img" src="assets/imgs/shop/product-3-2.jpg" alt="" />
-                                            </a>
-                                        </div>
-                                        <div class="product-action-1">
-                                            <a aria-label="Quick view" class="action-btn small hover-up" data-bs-toggle="modal" data-bs-target="#quickViewModal"><i class="fi-rs-search"></i></a>
-                                            <a aria-label="Add To Wishlist" class="action-btn small hover-up" href="shop-wishlist.html" tabindex="0"><i class="fi-rs-heart"></i></a>
-                                            <a aria-label="Compare" class="action-btn small hover-up" href="shop-compare.html" tabindex="0"><i class="fi-rs-shuffle"></i></a>
-                                        </div>
-                                        <div class="product-badges product-badges-position product-badges-mrg">
-                                            <span class="hot">Hot</span>
-                                        </div>
-                                    </div>
-                                    <div class="product-content-wrap">
-                                        <h2><a href="shop-product-right.html" tabindex="0">Dadua Camera 4K 2022EF</a></h2>
-                                        <div class="rating-result" title="90%">
-                                            <span> </span>
-                                        </div>
-                                        <div class="product-price">
-                                            <span>$89.8 </span>
-                                            <span class="old-price">$98.8</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            @endforeach
                         </div>
                     </div>
                 </div>
