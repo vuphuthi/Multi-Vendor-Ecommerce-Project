@@ -42,10 +42,10 @@
 
         <!--End nav-tabs-->
         <div class="tab-content" id="myTabContent">
+            
             <div class="tab-pane fade show active" id="tab-one" role="tabpanel" aria-labelledby="tab-one">
-                @foreach ($products as $item)
                     <div class="row product-grid-4">
-
+                        @foreach ($products as $item)
                         <div class="col-lg-1-5 col-md-4 col-12 col-sm-6 d-none d-xl-block">
                             <div class="product-cart-wrap wow animate__animated animate__fadeIn" data-wow-delay=".5s">
                                 <div class="product-img-action-wrap">
@@ -78,16 +78,10 @@
 
                                     </div>
                                 </div>
-                                @php
-                                    $categories = App\Models\Category::where('id', $item->category_id)->get();
-                                @endphp
                                 <div class="product-content-wrap">
-                                    @foreach ($categories as $cate)
                                         <div class="product-category">
-                                            <a href="shop-grid-right.html">{{ $cate->category_name }}</a>
+                                            <a href="shop-grid-right.html">{{ $item['category']['category_name'] }}</a>
                                         </div>
-                                    @endforeach
-
                                     <h2><a href="shop-product-right.html">{{ $item->product_name }}</a></h2>
                                     <div class="product-rate-cover">
                                         <div class="product-rate d-inline-block">
@@ -96,25 +90,37 @@
                                         <span class="font-small ml-5 text-muted"> (2.0)</span>
                                     </div>
                                     <div>
-                                        <span class="font-small text-muted">By <a
-                                                href="vendor-details-1.html">Tyson</a></span>
+                                        @if($item->vendor_id == NULL)
+                                        <span class="font-small text-muted">Của <a href="vendor-details-1.html">Người sở hữu</a></span>
+                                        @else
+                                        <span class="font-small text-muted">Của <a href="vendor-details-1.html">{{ $item['vendor']['name'] }}</a></span>
+                                        @endif
                                     </div>
                                     <div class="product-card-bottom">
+                                        @if ($item->discount_price == NULL)
                                         <div class="product-price">
-                                            <span>$22.85</span>
-                                            <span class="old-price">$24.8</span>
+                                            <span>{{ number_format($item->selling_price, 0, ',', '.') }}</span>
                                         </div>
+                                        @else
+
+                                        <div class="product-price">
+                                            <span>{{ number_format($item->selling_price, 0, ',', '.') }}đ</span>
+                                            <span class="old-price">{{ number_format($item->discount_price,0, ',', '.') }}đ</span>
+                                        </div>
+
+                                        @endif
+                                        
                                         <div class="add-cart">
                                             <a class="add" href="shop-cart.html"><i
-                                                    class="fi-rs-shopping-cart mr-5"></i>Add </a>
+                                                class="fi-rs-shopping-cart mr-5"></i>Thêm</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
                         <!--end product card-->
+                        @endforeach
                     </div>
-                @endforeach
                 <!--End product-grid-4-->
             </div>
             <!--En tab one-->
