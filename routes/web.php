@@ -11,7 +11,9 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\VendorProductController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\BannerController;
+use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Middleware\RedirectIfAuthenticated;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -165,4 +167,9 @@ route::controller(BannerController::class)->group(function(){
     Route::get('/banner/delete/{id}', 'BannerDelete')->name('delete.banner');
     
 });
-});     
+
+});// Admin End Middleware 
+
+// Frontend Product Details All Route 
+
+Route::get('/product/details/{id}/{slug}', [IndexController::class, 'ProductDetails']);
