@@ -3,8 +3,10 @@
 <div class="page-header breadcrumb-wrap">
     <div class="container">
         <div class="breadcrumb">
-            <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-            <span></span> <a href="shop-grid-right.html">Vegetables & tubers</a> <span></span> Seeds of Change Organic
+            <a href="/" rel="nofollow"><i class="fi-rs-home mr-5"></i>Trang chủ</a>
+            <span></span> <a href="shop-grid-right.html">{{$product['category']['category_name']}} </a> 
+            <span></span> <a href="shop-grid-right.html">{{$product['subcategory']['subcategory_name']}} </a>
+            <span></span> {{$product->product_name}} 
         </div>
     </div>
 </div>
@@ -18,18 +20,19 @@
                             <span class="zoom-icon"><i class="fi-rs-search"></i></span>
                             <!-- MAIN SLIDES -->
                             <div class="product-image-slider">
+                                @foreach ($multiImage as $image)
+                                
                                 <figure class="border-radius-10">
-                                    <img src="{{asset('frontend/assets/imgs/shop/product-16-2.jpg')}}" alt="product image" />
-                                </figure>
-                                <figure class="border-radius-10">
-                                    <img src="{{asset('frontend/assets/imgs/shop/product-16-1.jpg')}}" alt="product image" />
+                                    <img src="{{asset($image->photo_name)}}" alt="product image" />
                                 </figure>
 
+                                @endforeach
                             </div>
                             <!-- THUMBNAILS -->
                             <div class="slider-nav-thumbnails">
-                                <div><img src="{{asset('frontend/assets/imgs/shop/product-16-2.jpg')}}" alt="product image" /></div>
-                                <div><img src="{{asset('frontend/assets/imgs/shop/product-16-1.jpg')}}" alt="product image" /></div>
+                                @foreach ($multiImage as $image)
+                                <div><img src="{{asset($image->photo_name)}}" alt="product image" /></div>
+                                @endforeach
                             </div>
                         </div>
                         <!-- End Gallery -->
@@ -74,26 +77,22 @@
 
                             @else
                             <div class="attr-detail attr-size mb-30">
-                                <strong class="mr-10">Size: </strong>
-                                <select name="" id="">
-                                    <option selected="" value="" disabled="">Chọn Size</option>
-
-                                    @foreach ($product_size as $size)
-
-                                    <option value="{{ $size }}">{{ ucwords($size)  }}</option>        
-
-                                    @endforeach
-
-                                </select>
+                                <strong class="mr-10" style="width:50px;">Size: </strong>
+                                 <select class="form-control unicase-form-control" id="size">
+                                     <option selected="" disabled="">--Chọn Size--</option>
+                                     @foreach($product_size as $size)
+                                     <option value="{{ $size }}">{{ ucwords($size)  }}</option>
+                                     @endforeach
+                                 </select>
                             </div>
                             @endif
                             @if($product->product_color == NULL)
 
                             @else
                             <div class="attr-detail attr-size mb-30">
-                                <strong class="mr-10">Màu: </strong>
-                                <select name="" id="">
-                                    <option selected="" value="" disabled="">Chọn Màu</option>
+                                <strong class="mr-10" style="width:50px;">Màu: </strong>
+                                <select name="" class="form-control unicase-form-control" id="color">
+                                    <option selected="" value="" disabled="">--Chọn Màu--</option>
 
                                     @foreach ($product_color as $color)
 
@@ -111,23 +110,32 @@
                                     <a href="#" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
                                 </div>
                                 <div class="product-extra-link2">
-                                    <button type="submit" class="button button-add-to-cart"><i class="fi-rs-shopping-cart"></i>Add to cart</button>
+                                    <button type="submit" class="button button-add-to-cart"><i class="fi-rs-shopping-cart"></i>Thêm vào giỏ hàng</button>
                                     <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
                                     <a aria-label="Compare" class="action-btn hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>
                                 </div>
                             </div>
-<div class="font-xs">
-<ul class="mr-50 float-start">
-<li class="mb-5">Type: <span class="text-brand">Organic</span></li>
-<li class="mb-5">MFG:<span class="text-brand"> Jun 4.2022</span></li>
-<li>LIFE: <span class="text-brand">70 days</span></li>
-</ul>
-<ul class="float-start">
-<li class="mb-5">SKU: <a href="#">FWM15VKT</a></li>
-<li class="mb-5">Tags: <a href="#" rel="tag">Snack</a>, <a href="#" rel="tag">Organic</a>, <a href="#" rel="tag">Brown</a></li>
-<li>Stock:<span class="in-stock text-brand ml-5">8 Items In Stock</span></li>
-</ul>
-</div>
+                            @if($product->vendor_id == NULL)
+                            <h6> Được bán bởi <a href="#"> <span class="text-danger"> Người sở hữu </span> </a></h6>
+                            @else
+                            <h6> Được bán bởi <a href="#"> <span class="text-danger"> {{$product['vendor']['name']}} </span> </a></h6>
+                            @endif
+                            <hr>
+                        <div class="font-xs">
+                        <ul class="mr-50 float-start">
+                        <li class="mb-5">Thương hiệu: <span class="text-brand">{{ $product['brand']['brand_name'] }}</span></li>
+                        <li class="mb-5">Danh mục:<span class="text-brand">{{$product['category']['category_name']}}</span></li>
+                        <li>Danh mục con: <span class="text-brand">{{ $product['subcategory']['subcategory_name'] }}</span></li>
+                        </ul>
+                        <ul class="float-start">
+                        <li class="mb-5">Mã sản phẩm: <a href="#">{{$product->product_code}}</a></li>
+                        @if ($product->product_tags == NULL)
+                        @else
+                        <li class="mb-5">Thẻ sản phẩm: <a href="#" rel="tag">{{$product->product_tags}}</a>
+                        @endif
+                        <li>Kho hàng:<span class="in-stock text-brand ml-5">({{ $product->product_qty }})</span></li>
+                        </ul>
+                        </div>
                         </div>
                         <!-- Detail Info -->
                     </div>
