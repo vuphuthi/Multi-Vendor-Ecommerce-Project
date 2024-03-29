@@ -25,9 +25,7 @@ use App\Http\Middleware\RedirectIfAuthenticated;
 |
 */
 
-Route::get('', function () {
-    return view('frontend.index');
-});
+Route::get('/',[IndexController::class,'Index']);
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');

@@ -481,7 +481,7 @@
                                            @else
                                            <div class="product-price">
                                             <span>{{ number_format($product->selling_price, 0, ',', '.') }}&#8363; </span>
-                                               <span class="old-price">{{ number_format($product->discount_price, 0, ',', '.') }} &#8363;</span>
+                                            <span class="old-price">{{ number_format($product->discount_price, 0, ',', '.') }} &#8363;</span>
                                            </div>
                                            @endif
 
