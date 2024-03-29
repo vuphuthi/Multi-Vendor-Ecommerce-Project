@@ -273,13 +273,13 @@
                                 @endphp
                                 @foreach ($categories as $item)
                                 <li>
-                                    <a href="#">{{$item->category_name}} <i class="fi-rs-angle-down"></i></a>
+                                    <a href="{{ url('/product/category/'.$item->id.'/'.$item->category_slug) }}">{{$item->category_name}} <i class="fi-rs-angle-down"></i></a>
                                     @php
                                         $subcategory = App\Models\Subcategory::where('category_id',$item->id)->orderBy('subcategory_name','ASC')->get();
                                     @endphp
                                     <ul class="sub-menu">
                                         @foreach ($subcategory as $item)
-                                        <li><a href="vendors-grid.html">{{$item->subcategory_name}}</a></li>
+                                        <li><a href="{{ url('/product/subcategory/'.$item->id.'/'.$item->subcategory_slug) }}">{{$item->subcategory_name}}</a></li>
                                         @endforeach
                                     </ul>
                                 </li>
