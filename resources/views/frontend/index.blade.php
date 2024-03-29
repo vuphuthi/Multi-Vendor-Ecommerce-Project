@@ -516,7 +516,7 @@
   <!--Vendor List -->
 
 
-        @include('frontend.home.home_vender_list')
+        @include('frontend.home.home_vendor_list')
 
  <!--End Vendor List -->
 
