@@ -6,10 +6,10 @@
             <div class="archive-header">
                 <div class="row align-items-center">
                     <div class="col-xl-3">
-                        <h1 class="mb-15">{{ $breadcat->category_name }}</h1>
+                        <h1 class="mb-15">{{ $breadsubcat->subcategory_name }}</h1>
                         <div class="breadcrumb">
                             <a href="{{ url('/') }}" rel="nofollow"><i class="fi-rs-home mr-5"></i>Trang chủ</a>
-                             <span></span> {{ $breadcat->category_name }} 
+                            <span></span>{{ $breadsubcat->category->category_name }} <span></span>  {{ $breadsubcat->subcategory_name }} 
                         </div>
                     </div>
                    
@@ -162,14 +162,14 @@
                 <div class="sidebar-widget widget-category-2 mb-30">
                     <h5 class="section-title style-1 mb-30">Danh mục</h5>
                     <ul>
-                        @foreach ($categories as $category)
+                        @foreach ($subcategories as $subcategory)
 
                         @php
-                        $products = App\Models\Product::where('category_id',$category->id)->get()
+                        $products = App\Models\Product::where('subcategory_id',$subcategory->id)->get()
                         @endphp
 
                         <li>
-                            <a href="{{ url('/product/category/'.$category->id.'/'.$category->subcategory_slug) }}"> <img src="{{asset($category->category_image)}}" alt="" />{{$category->category_name}}</a><span class="count">{{ count($products) }}</span>
+                            <a href="{{ url('/product/subcategory/'.$subcategory->id.'/'.$subcategory->subcategory_slug) }}"> <img src="{{asset($subcategory->subcategory_image)}}" alt="" />{{$subcategory->subcategory_name}}</a><span class="count">{{ count($products) }}</span>
                         </li>
                         @endforeach
                     </ul>

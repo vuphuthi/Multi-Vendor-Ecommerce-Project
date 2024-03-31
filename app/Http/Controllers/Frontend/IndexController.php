@@ -55,7 +55,19 @@ class IndexController extends Controller
         $products = Product::where('status',1)->where('category_id',$id)->orderBy('id','DESC')->get();
         $categories = Category::orderBy('category_name','ASC')->get();
         $breadcat = Category::where('id',$id)->first();
+        // $new = Product::where('category_id',$breadcat->id)->orderBy('id','DESC')->limit(3)->get(); // sản phẩm mới theo ID danh mục
+        $new = Product::orderBy('id','DESC')->limit(3)->get(); // sản phẩm mới thêm thành công
 
-        return view('frontend.product.category_view',compact('products','categories','breadcat'));
+        return view('frontend.product.category_view',compact('products','categories','breadcat','new'));
+
+    }
+    public function SubCatWiseProduct(Request $request, $id, $slug){
+        $products = Product::where('subcategory_id',$id)->where('status',1)->get();
+        $subcategories = Subcategory::all();
+        $breadsubcat = Subcategory::where('id',$id)->first();
+        $new = Product::OrderBy('id','DESC')->limit(3)->get();
+        // $newSubCat = Product::where('subcategory_id',$breadsubcat->id)->limit(3)->get();
+
+        return view('frontend.product.subcategory_view',compact('products','subcategories','breadsubcat','new'));
     }
 }

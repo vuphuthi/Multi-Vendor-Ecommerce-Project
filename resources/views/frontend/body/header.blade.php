@@ -225,14 +225,14 @@
                                 <ul>
                                     @foreach ($categories as $item)
                                     <li>
-                                        <a href="shop-grid-right.html"> <img src="{{ asset($item->category_image) }}" alt="" />{{$item->category_name}}</a>
+                                        <a href="{{ url('product/category/'.$item->id.'/'.$item->category_slug) }}"> <img src="{{ asset($item->category_image) }}" alt="" />{{$item->category_name}}</a>
                                     </li>
                                     @endforeach
                                 </ul>
                                 <ul class="end">
                                     @foreach ($categories as $item)
                                     <li>
-                                        <a href="shop-grid-right.html"> <img src="{{ asset($item->category_image) }}" alt="" />{{$item->category_name}}</a>
+                                        <a href="{{ url('product/category/'.$item->id.'/'.$item->category_slug) }}"> <img src="{{ asset($item->category_image) }}" alt="" />{{$item->category_name}}</a>
                                     </li>
                                     @endforeach
                                 </ul>
@@ -265,7 +265,7 @@
                             <ul>
                                 
                                 <li>
-                                    <a class="active" href="index.html">Trang chủ  </a>
+                                    <a class="active" href="{{ url('/') }}">Trang chủ  </a>
                                     
                                 </li>
                                 @php
@@ -326,7 +326,7 @@
                     </div>
                     <div class="shopping-cart-title">
                         <h4><a href="shop-product-right.html">Plain Striola Shirts</a></h4>
-                        <h3><span>1 × </span>$800.00</h3>
+                        <h3><span>1  </span>$800.00</h3>
                     </div>
                     <div class="shopping-cart-delete">
                         <a href="#"><i class="fi-rs-cross-small"></i></a>
@@ -338,7 +338,7 @@
                     </div>
                     <div class="shopping-cart-title">
                         <h4><a href="shop-product-right.html">Macbook Pro 2022</a></h4>
-                        <h3><span>1 × </span>$3500.00</h3>
+                        <h3><span>1  </span>$3500.00</h3>
                     </div>
                     <div class="shopping-cart-delete">
                         <a href="#"><i class="fi-rs-cross-small"></i></a>

@@ -1,5 +1,6 @@
 @php
     $products = App\Models\Product::where('status', 1)->orderBy('id', 'ASC')->limit(10)->get();
+    
     $categories = App\Models\Category::orderBy('category_name','ASC')->limit(10)->get();
 @endphp
 <section class="product-tabs section-padding position-relative">
@@ -60,8 +61,9 @@
                                     </div>
                                 </div>
                                 <div class="product-content-wrap">
+                                        
                                         <div class="product-category">
-                                            <a href="shop-grid-right.html">{{ $item['category']['category_name'] }}</a>
+                                            <a href="#">{{ $item->category->category_name }}</a>
                                         </div>
                                     <h2><a href="{{url('product/details/'.$item->id.'/'.$item->product_slug)}}">{{ $item->product_name }}</a></h2>
                                     <div class="product-rate-cover">
