@@ -173,3 +173,4 @@ route::controller(BannerController::class)->group(function(){
 Route::get('/product/details/{id}/{slug}', [IndexController::class, 'ProductDetails']);
 Route::get('/product/category/{id}/{slug}', [IndexController::class, 'CatWiseProduct']);
 Route::get('/product/subcategory/{id}/{slug}', [IndexController::class, 'SubCatWiseProduct']);
+Route::get('/product/view/modal/{id}', [IndexController::class, 'ProductViewAjax']);
