@@ -261,7 +261,7 @@
     
     $.ajaxSetup({
         headers:{
-            'X-CSRF-TOKEN':$('meta[name=:"csrf-token"]').attr('content')
+            'X-CSRF-TOKEN':$('meta[name=:"csrf_token"]').attr('content')
         }
     })
     
@@ -272,7 +272,57 @@
             type:'GET',
             dataType: 'json',
             success:function(data){
-                console.log(data);
+                // console.log(data);
+                $('#pname').text(data.product.product_name);
+                $('#pprice').text(data.product.selling_price);
+                $('#pcode').text(data.product.product_code);
+                $('#pcategory').text(data.product.category.category_name);
+                $('#pbrand').text(data.product.brand.brand_name);
+                $('#pimage').attr('src','/'+data.product.product_thambnail );
+
+                if(data.product.discount_price == null){
+                $('#pprice').text('');
+                $('#psale').text('Mới');
+                $('#poldprice').text('');
+                $('#pprice').text(data.product.selling_price.toLocaleString('vi-VN') + ' đ');
+                }
+                else{
+                $('#psale').text('Giảm giá');
+                $('#oldprice').text(data.product.discount_price + 'đ'); 
+                $('#pprice').text(data.product.selling_price + 'đ');
+                }
+
+                if (data.product.product_qty > 0) {
+                $('#aviable').text('');
+                $('#stockout').text('');
+                $('#aviable').text('Có sẵn');
+                }else{
+                $('#aviable').text('');
+                $('#stockout').text('');
+                $('#stockout').text('Hết hàng');
+                } 
+
+                $('select[name="size"]').empty();
+                $.each(data.size,function(key,value){
+                $('select[name="size"]').append('<option value="'+value+' ">'+value+'  </option')
+                if (data.size == "") {
+                    $('#sizeArea').hide();
+                }else{
+                     $('#sizeArea').show();
+                }
+            }) // end size
+
+             $('select[name="color"]').empty();
+                $.each(data.color,function(key,value){
+                $('select[name="color"]').append('<option value="'+value+' ">'+value+'  </option')
+                if (data.size == "") {
+                    $('#colorArea').hide();
+                }else{
+                     $('#colorArea').show();
+                }
+             }) // end color
+
+
             }
         })
     }
