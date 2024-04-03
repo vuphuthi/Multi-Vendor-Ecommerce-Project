@@ -176,3 +176,4 @@ Route::get('/product/category/{id}/{slug}', [IndexController::class, 'CatWisePro
 Route::get('/product/subcategory/{id}/{slug}', [IndexController::class, 'SubCatWiseProduct']);
 Route::get('/product/view/modal/{id}', [IndexController::class, 'ProductViewAjax']);
 Route::post('/cart/data/store/{id}', [CartController::class, 'AddToCart']);
+Route::get('/product/mini/cart', [CartController::class, 'AddMiniCart']);
