@@ -290,12 +290,12 @@
                 $('#pprice').text('');
                 $('#psale').text('Mới');
                 $('#poldprice').text('');
-                $('#pprice').text(data.product.selling_price.toLocaleString('vi-VN') + ' đ');
+                $('#pprice').text(data.product.selling_price);
                 }
                 else{
                 $('#psale').text('Giảm giá');
-                $('#oldprice').text(data.product.discount_price + 'đ'); 
-                $('#pprice').text(data.product.selling_price + 'đ');
+                $('#oldprice').text(data.product.discount_price); 
+                $('#pprice').text(data.product.selling_price);
                 }
 
                 if (data.product.product_qty > 0) {
@@ -347,13 +347,14 @@
         },
         url: "/cart/data/store/"+id,
         success:function(data){
+            miniCart();
             $('#closeModal').click();
             // console.log(data)
             const Toast = Swal.mixin({
                   toast: true,
                   position: 'top-end',
                   icon: 'success', 
-                  showConfirmButton: true,
+                  showConfirmButton: false,
                   timer: 3000 
             })
             if ($.isEmptyObject(data.error)) {
@@ -373,6 +374,7 @@
      })
     }
 
+
     </script>
 
     <script type="text/javascript">
@@ -383,8 +385,11 @@
             url:'/product/mini/cart',
             dataType: 'json',
             success:function(data){
+
                 console.log(data);
 
+                $('#cartQty').text(data.cartQty);
+                $('span[id="cartSubTotal"]').text(data.cartTotal + 'đ');
 
                 var miniCart = "";
                 $.each(data.carts,function(key,value){
@@ -396,10 +401,10 @@
                             </div>
                             <div class="shopping-cart-title" style="margin: -73px 74px 14px; width" 146px;>
                                 <h4><a href="shop-product-right.html"> ${value.name} </a></h4>
-                                <h4><span>${value.qty} × </span>${value.price}</h4>
+                                <h4><span>${value.qty} × </span>${value.price}đ</h4>
                             </div>
                             <div class="shopping-cart-delete" style="margin: -85px 1px 0px;">
-                                <a href="#"><i class="fi-rs-cross-small"></i></a>
+                                <a type="submit" id="${value.rowId}" onclick="miniCartRemove(this.id)"  ><i class="fi-rs-cross-small"></i></a>
                             </div>
                         </li> 
                     </ul>
@@ -413,6 +418,82 @@
         })
     }
     miniCart();
+
+    function miniCartRemove(rowId){
+        $.ajax({
+            type: "GET",
+            url: "/product/minicart/remove/"+rowId,
+            dataType: 'json',
+            success: function(data){
+                miniCart();
+                const Toast = Swal.mixin({
+                  toast: true,
+                  position: 'top-end',
+                  icon: 'success', 
+                  showConfirmButton: false,
+                  timer: 3000 
+            })
+            if ($.isEmptyObject(data.error)) {
+                    
+                    Toast.fire({
+                    type: 'success',
+                    title: data.success, 
+                    })
+            }else{
+               
+           Toast.fire({
+                    type: 'error',
+                    title: data.error, 
+                    })
+                }
+
+            }
+        })
+    }
+
+    function AddToCartDetails(){
+     var product_name = $('#dname').text();  
+     var id = $('#dproduct_id').val();
+     var color = $('#dcolor option:selected').text();
+     var size = $('#dsize option:selected').text();
+     var quantity = $('#dqty').val(); 
+     $.ajax({
+        type: "POST",
+        dataType : 'json',
+        data:{
+            color:color, size:size, quantity:quantity,product_name:product_name
+        },
+        url: "/dcart/data/store/"+id,
+        success:function(data){
+            miniCart();
+            $('#closeModal').click();
+            // console.log(data)
+            const Toast = Swal.mixin({
+                  toast: true,
+                  position: 'top-end',
+                  icon: 'success', 
+                  showConfirmButton: false,
+                  timer: 3000 
+            })
+            if ($.isEmptyObject(data.error)) {
+                    
+                    Toast.fire({
+                    type: 'success',
+                    title: data.success, 
+                    })
+            }else{
+               
+           Toast.fire({
+                    type: 'error',
+                    title: data.error, 
+                    })
+                }
+        }
+     })
+    }
+
+
+
     </script>
 
 

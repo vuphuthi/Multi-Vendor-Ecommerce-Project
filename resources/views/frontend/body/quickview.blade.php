@@ -32,14 +32,17 @@
                                         </select>
                                     </div>
 
-                            <div class="clearfix product-price-cover">
-                                <div class="product-price primary-color float-left">
-                                    <span class="current-price text-brand" id="pprice"></span>
-                                    <span>
-                                        <span class="old-price font-md ml-15" id="oldprice"></span>
-                                    </span>
-                                </div>
-                            </div>
+                                    <div class="clearfix product-price-cover">
+                                        <div class="product-price primary-color float-left">
+                                            
+                                            <span class="current-price text-brand" id="pprice"> </span>
+                                            <span class="current-price text-brand">&#8363;</span>
+                            
+                                   <span class="old-price font-md ml-15" id="oldprice">  </span>
+                                  <span class="old-price font-md ml-15">&#8363; </span>
+
+                                        </div>
+                                    </div>
                             <div class="detail-extralink mb-30">
                                 <div class="detail-qty border radius">
                                     <a href="#" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
