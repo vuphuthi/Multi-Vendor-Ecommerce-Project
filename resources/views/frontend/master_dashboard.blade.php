@@ -502,6 +502,7 @@
             dataType: 'json',
             url: "/add-to-wishlist/"+product_id,
             success:function(data){
+                GetWishlistProduct();
                  // Start Message 
         const Toast = Swal.mixin({
               toast: true,
@@ -535,7 +536,9 @@
             dataType: 'json',
             url: "/get-wishlist-product",
             success: function(data){
-                console.log(data);
+                $('#wishQty').text(data.wishQty);
+                $('#wishQtymore').text(data.wishQty);
+                console.log(data);  
                 var rows = ""
                 $.each(data.wishlist,function(key,value){
                     rows += `<tr class="pt-30">
@@ -544,7 +547,7 @@
                         </td>
                         <td class="image product-thumbnail pt-40"><img src="/${value.product.product_thambnail}" alt="#" /></td>
                         <td class="product-des product-name">
-                            <h6><a class="product-name mb-10" href="shop-product-right.html">${value.product.product_name} </a></h6>
+                            <h6><a class="product-name mb-10" href="${value.product.product_link}">${value.product.product_name} </a></h6>
                             <div class="product-rate-cover">
                                 <div class="product-rate d-inline-block">
                                     <div class="product-rating" style="width: 90%"></div>
@@ -567,8 +570,8 @@
                            
                         </td>
                        
-                        <td class="action text-center" data-title="Remove">
-                            <a href="#" class="text-body"><i class="fi-rs-trash"></i></a>
+                        <td class="action text-center"  data-title="Remove">
+                            <a type="submit" id="${value.id}" onclick="wishRemove(this.id)" class="text-body"><i class="fi-rs-trash"></i></a>
                         </td>
                     </tr> ` 
        });
@@ -577,6 +580,39 @@
         });
     }
     GetWishlistProduct();
+
+    function wishRemove(id){
+        $.ajax({
+            type:"GET",
+            dataType: 'json',
+            url: "/wishlist-remove/" + id,
+            success: function(data){
+                GetWishlistProduct();
+            const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000 
+        })
+        if ($.isEmptyObject(data.error)) {
+                
+            Toast.fire({
+            type: 'success',
+            icon: 'success', 
+            title: data.success, 
+                })
+        }else{
+           
+       Toast.fire({
+            type: 'error',
+            icon: 'error', 
+            title: data.error, 
+            })
+        }
+    }
+        });
+    }
+
 </script>
 
 

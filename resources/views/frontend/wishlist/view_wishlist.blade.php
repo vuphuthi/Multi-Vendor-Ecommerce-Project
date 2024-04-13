@@ -13,8 +13,8 @@
     <div class="row">
         <div class="col-xl-10 col-lg-12 m-auto">
             <div class="mb-50">
-                <h1 class="heading-2 mb-10">Danh sách yêu thích của bạn</h1>
-                <h6 class="text-body">Có sản phẩm trong danh sách này</h6>
+                <h1 class="heading-2 mb-10">Danh sách sản phẩm yêu thích của bạn</h1>
+                <h6 class="text-body">Có <span class="text-brand" id="wishQtymore"></span> sản phẩm trong danh sách này</h6>
             </div>
             <div class="table-responsive shopping-summery">
                 <table class="table table-wishlist">
