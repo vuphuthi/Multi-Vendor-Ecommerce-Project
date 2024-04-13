@@ -98,6 +98,14 @@
             </div> --}}
            
             <div class="header-action-icon-2">
+                <a href="{{ route('compare') }}">
+                    <img class="svgInject" alt="Nest" src="{{ asset('frontend/assets/imgs/theme/icons/icon-compare.svg')}}" />
+                    <span class="pro-count blue" id="compareQtyheader"></span>
+                </a>
+                <a href="{{ route('compare') }}"><span class="lable ml-0">So sánh</span></a>
+            </div>
+
+            <div class="header-action-icon-2">
                 <a href="shop-wishlist.html">
                     <img class="svgInject" alt="Nest" src="{{ asset('frontend/assets/imgs/theme/icons/icon-heart.svg') }}" />
                     <span class="pro-count blue" id="wishQty"></span>

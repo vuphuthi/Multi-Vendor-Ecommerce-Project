@@ -570,7 +570,7 @@
                            
                         </td>
                        
-                        <td class="action text-center"  data-title="Remove">
+                        <td class="action text-center"  data-title="Xóa">
                             <a type="submit" id="${value.id}" onclick="wishRemove(this.id)" class="text-body"><i class="fi-rs-trash"></i></a>
                         </td>
                     </tr> ` 
@@ -614,7 +614,149 @@
     }
 
 </script>
+<script type="text/javascript">
 
+    function addToCompare(product_id){
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            url: "/add-to-compare/" + product_id,
+            success: function(data){
+            compare()
+            const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000 
+        })
+        if ($.isEmptyObject(data.error)) {
+                
+            Toast.fire({
+            type: 'success',
+            icon: 'success', 
+            title: data.success, 
+                })
+        }else{
+           
+       Toast.fire({
+            type: 'error',
+            icon: 'error', 
+            title: data.error, 
+            })
+        }
+
+            }
+        })
+    }
+
+    function compare(){
+        $.ajax({
+            type:'GET',
+            dataType: 'json',
+            url: "/get-compare-product/",
+            success: function(data){
+                // console.log(data);
+                $('#compareQty').text(data.compareQty);
+                $('#compareQtyheader').text(data.compareQty);
+                var rows = ""
+                if(data.compare.length === 0){
+                    rows = `<td class="font-xl text-danger fw-600 font-heading">Chưa có sản phẩm nào</td>`;
+                }
+                else{
+                    $.each(data.compare, function(key,value){
+                    rows+= `
+                    <tr class="pr_image">
+                                    <td class="text-muted font-sm fw-600 font-heading mw-200">Xem trước</td>
+                                    <td class="row_img"><img src="/${value.product.product_thambnail}" style="width:300px; height:300px;" alt="compare-img" /></td>
+
+                                </tr>
+                                <tr class="pr_title">
+                                    <td class="text-muted font-sm fw-600 font-heading">Tên sản phẩm</td>
+                                    <td class="product_name">
+                                        <h6><a href="${value.product.product_link}" class="text-heading">${value.product.product_name}</a></h6>
+                                    </td>
+
+                                </tr>
+                                <tr class="pr_price">
+                                    <td class="text-muted font-sm fw-600 font-heading">Giá</td>
+                                    <td class="product_price">
+                        ${value.product.discount_price == null
+                        ? `<h4 class="price text-brand">${value.product.selling_price}đ</h4>`
+                        :`<h4 class="price text-brand">${value.product.discount_price}đ</h4>`
+                        } 
+                                    </td>
+
+                                </tr>
+
+                                <tr class="description">
+                                    <td class="text-muted font-sm fw-600 font-heading">Mô tả</td>
+                                    <td class="row_text font-xs">
+                                        <p class="font-sm text-muted"> ${value.product.short_descp}</p>
+                                    </td>
+
+                                </tr>
+                                <tr class="pr_stock">
+                                    <td class="text-muted font-sm fw-600 font-heading">Tình trạng tồn kho</td>
+                                    <td class="row_stock">
+                                ${value.product.product_qty > 0 
+                                ? `<span class="stock-status in-stock mb-0"> Còn hàng </span>`
+                                :`<span class="stock-status out-stock mb-0"> Hết hàng </span>`
+                                } 
+                                </td>
+
+                                <tr class="pr_remove text-muted">
+                                    <td class="text-muted font-md fw-600">Xóa</td>
+                                    <td class="row_remove">
+                                        <a type="submit" onclick="compareRemove(this.id)" id="${value.id}" class="text-muted"><i class="fi-rs-trash mr-5"></i><span>Xóa</span> </a>
+                                    </td>
+
+                                </tr>
+
+                    `
+                });
+                }
+                $('#compare').html(rows); 
+
+            }
+
+        });
+
+    }
+compare()
+
+    function compareRemove(id){
+        $.ajax({
+            type:"GET",
+            dataType:'json',
+            url: "/compare-remove/" + id,
+            success: function(data){
+            compare()
+            const Toast = Swal.mixin({
+            toast: true,
+            position: 'top-end',
+            showConfirmButton: false,
+            timer: 3000 
+            })
+            if ($.isEmptyObject(data.error)) {
+                
+            Toast.fire({
+            type: 'success',
+            icon: 'success', 
+            title: data.success, 
+                })
+            }else{
+
+            Toast.fire({
+            type: 'error',
+            icon: 'error', 
+            title: data.error, 
+            })
+            }
+
+            }
+        })
+    }
+</script>
 
 </body>
 
