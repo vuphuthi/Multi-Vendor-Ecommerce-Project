@@ -31,4 +31,12 @@ class WishlistController extends Controller
             return response()->json(['error' => 'Cần đăng nhập để sử dụng tính năng này' ]);
         }
     }
+    public function AllWishlist(){
+        return view('frontend.wishlist.view_wishlist');
+    }
+    public function GetWishlistProduct(){
+        $wishlist = Wishlist::with('product')->where('user_id',Auth::id())->latest()->get();
+        $wishQty = wishlist::count();
+        return response()->json(['wishlist' => $wishlist, 'wishQty' => $wishQty]);
+    }
 }
