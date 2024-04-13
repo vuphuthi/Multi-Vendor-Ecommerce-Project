@@ -13,6 +13,7 @@ use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\CartController;
+use App\Http\Controllers\User\WishlistController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 
 /*
@@ -179,3 +180,7 @@ Route::post('/cart/data/store/{id}', [CartController::class, 'AddToCart']);
 Route::get('/product/mini/cart', [CartController::class, 'AddMiniCart']);
 Route::get('/product/minicart/remove/{rowId}', [CartController::class, 'RemoveMiniCart']);
 Route::post('/dcart/data/store/{id}', [CartController::class, 'AddToCartDetails']);
+
+// Frontend Add to Wishlist 
+
+Route::post('/add-to-wishlist/{product_id}', [WishlistController::class, 'AddToWishList']);
