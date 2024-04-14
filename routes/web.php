@@ -205,5 +205,11 @@ Route::controller(CompareController::class)->group(function(){
     Route::get('/get-compare-product' , 'GetCompareProduct');
     Route::get('/compare-remove/{id}' , 'CompareRemove');
 });
+/// card All Route
+Route::controller(CartController::class)->group(function(){
+    Route::get('/mycart', 'MyCart')->name('mycart');
+    // Route::get('/get-compare-product' , 'GetCompareProduct');
+    // Route::get('/compare-remove/{id}' , 'CompareRemove');
+});
 });
 
