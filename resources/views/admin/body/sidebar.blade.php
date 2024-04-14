@@ -120,6 +120,24 @@
             </ul>
         </li>
 
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class="bx bx-category"></i>
+                </div>
+                <div class="menu-title">Khu vực vận chuyển </div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('all.division') }}"><i class="bx bx-right-arrow-alt"></i>Danh sách khu vực</a>
+                </li>
+                <li> <a href="{{ route('add.coupon') }}"><i class="bx bx-right-arrow-alt"></i>Danh sách quận huyện</a>
+                </li>
+
+                <li> <a href="{{ route('add.coupon') }}"><i class="bx bx-right-arrow-alt"></i>Danh sách tỉnh/Thành phố</a>
+                </li>
+
+            </ul>
+        </li>
+
 
         <li class="menu-label">UI Elements</li>
         <li>

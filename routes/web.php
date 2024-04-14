@@ -12,6 +12,7 @@ use App\Http\Controllers\Backend\VendorProductController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\Backend\CouponController;
+use App\Http\Controllers\Backend\ShippingAreaController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\User\WishlistController;
@@ -178,6 +179,16 @@ route::controller(CouponController::class)->group(function(){
     Route::get('/edit/coupon/{id}','EditCoupon')->name('edit.coupon');
     Route::post('/update/coupon','UpdateCoupon')->name('update.coupon');
     Route::get('/coupon/delete/{id}', 'CouponRemove')->name('delete.coupon');
+    
+});
+// Division
+route::controller(ShippingAreaController::class)->group(function(){
+    Route::get('/all/division','AllDivision')->name('all.division');
+    // Route::get('/add/coupon','AddCoupon')->name('add.coupon');
+    // Route::post('/store/coupon','StoreCoupon')->name('store.coupon');
+    // Route::get('/edit/coupon/{id}','EditCoupon')->name('edit.coupon');
+    // Route::post('/update/coupon','UpdateCoupon')->name('update.coupon');
+    // Route::get('/coupon/delete/{id}', 'CouponRemove')->name('delete.coupon');
     
 });
 });// Admin End Middleware 
