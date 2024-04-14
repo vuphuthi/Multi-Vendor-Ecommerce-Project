@@ -25,10 +25,10 @@ class ShippingAreaController extends Controller
             'division_name' => $request->division_name,
             'created_at' => Carbon::now()
         ]);
-        $notification = ([
+        $notification = array(
             'message' => 'Khu vực đã thêm thành công',
-            'aler-type' => 'success'  
-        ]);
+            'alert-type' => 'success'  
+        );
         return redirect()->route('all.division')->with($notification);
     }
     public function EditDivision($id){
@@ -44,8 +44,8 @@ class ShippingAreaController extends Controller
             'updated_at' => Carbon::now()
         ]);
         $notification =  ([
-            'message' => 'Khu vực đã thêm thành công',
-            'aler-type' => 'success' 
+            'message' => 'Khu vực đã cập nhật thành công',
+            'alert-type' => 'success' 
         ]);
         return redirect()->route('all.division')->with($notification);
     }
@@ -54,7 +54,7 @@ class ShippingAreaController extends Controller
         ShipDivision::findOrFail($id)->delete();
         $notification =  ([
             'message' => 'Xóa thành công',
-            'aler-type' => 'success' 
+            'alert-type' => 'success' 
         ]);
 
         return redirect()->back()->with($notification);
