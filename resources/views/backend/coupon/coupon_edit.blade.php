@@ -10,7 +10,7 @@
                 <ol class="breadcrumb mb-0 p-0">
                     <li class="breadcrumb-item"><a href="javascript:;"><i class="bx bx-home-alt"></i></a>
                     </li>
-                    <li class="breadcrumb-item active" aria-current="page">Thêm phiếu giảm giá</li>
+                    <li class="breadcrumb-item active" aria-current="page">Sửa phiếu giảm giá</li>
                 </ol>
             </nav>
         </div>
@@ -25,14 +25,15 @@
                 <div class="col-lg-8">
                     <div class="card">
                         <div class="card-body">
-                            <form id="myForm" method="post" action="{{ route('store.coupon') }}">
+                            <form id="myForm" method="post" action="{{ route('update.coupon') }}">
                                 @csrf
+                                <input type="hidden" name="id" value="{{ $coupon->id }}">
                             <div class="row mb-3">
                                 <div class="foe col-sm-3">
                                     <h6 class="mb-0">Tên phiếu giảm</h6>
                                 </div>
                                 <div class="form-group col-sm-9 text-secondary">
-                                    <input type="text" placeholder="Thêm phiếu giảm giá" name="coupon_name" class="form-control" />
+                                    <input type="text" placeholder="Thêm phiếu giảm giá" name="coupon_name" value="{{ $coupon->coupon_name }}" class="form-control" />
                                 </div>
                             </div>
                            
@@ -41,7 +42,7 @@
                                     <h6 class="mb-0">Phiếu giảm giá(%)</h6>
                                 </div>
                                 <div class="form-group col-sm-9 text-secondary">
-                                    <input type="text" name="coupon_discount" class="form-control"/>
+                                    <input type="text" name="coupon_discount" value="{{ $coupon->coupon_discount }}" class="form-control"/>
                                 </div>
                             </div>
 
@@ -50,7 +51,7 @@
                                     <h6 class="mb-0">Hiệu lực</h6>
                                 </div>
                                 <div class="form-group col-sm-9 text-secondary">
-                                    <input type="date" name="coupon_validity" class="form-control" min="{{ Carbon\Carbon::now()->format('Y-m-d') }}"  />
+                                    <input type="date" name="coupon_validity" value="{{ $coupon->coupon_validity }}" class="form-control" min="{{ Carbon\Carbon::now()->format('Y-m-d') }}"  />
                                 </div>
                             </div>
 

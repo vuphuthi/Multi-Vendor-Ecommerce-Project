@@ -16,7 +16,7 @@
         </div>
         <div class="ms-auto">
             <div class="btn-group">
-                <a class="btn btn-primary" href="{{route('add.category')}}">Thêm Mã giảm giá</a>
+                <a class="btn btn-primary" href="{{route('add.coupon')}}">Thêm Mã giảm giá</a>
             </div>
         </div>
     </div>
@@ -31,9 +31,9 @@
                         <tr>
                             <th>STT</th>
                             <th>Tên mã giảm giá</th>
-                            <th>Giá</th>
-                            <th>hiệu lực</th>
-                            <th>hiệu lực</th>
+                            <th>Phiếu giảm giá</th>
+                            <th>Hiệu lực</th>
+                            <th>Trạng thái</th>
                             <th>Hành động</th>
                         </tr>
                     </thead>
@@ -58,7 +58,7 @@
                             </td>
 
                             <td>
-                                <a href="{{route('edit.category',$item->id)}}" class="btn btn-info">Sửa</a>
+                                <a href="{{route('edit.coupon',$item->id)}}" class="btn btn-info">Sửa</a>
                                 <a href="{{route('delete.category',$item->id)}}" class="btn btn-danger" id="delete">Xóa</a>
                             </td>
 
