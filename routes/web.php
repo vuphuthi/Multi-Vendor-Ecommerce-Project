@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\VendorProductController;
 use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\BannerController;
+use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\User\WishlistController;
@@ -158,7 +159,7 @@ route::controller(SliderController::class)->group(function(){
     Route::post('/update/slider','UpdateSlider')->name('update.slider');
     Route::get('/slider/delete/{id}', 'SliderDelete')->name('slider.delete');
 });
-// Slider
+// banner
 route::controller(BannerController::class)->group(function(){
     Route::get('/all/banner','AllBanner')->name('all.banner');
     Route::get('/add/banner','AddBanner')->name('add.banner');
@@ -169,6 +170,16 @@ route::controller(BannerController::class)->group(function(){
     
 });
 
+// Coupon
+route::controller(CouponController::class)->group(function(){
+    Route::get('/all/coupon','AllCoupon')->name('all.coupon');
+    // Route::get('/add/banner','AddBanner')->name('add.banner');
+    // Route::post('/store/banner','StoreBanner')->name('store.banner');
+    // Route::get('/edit/banner/{id}','EditBanner')->name('edit.banner');
+    // Route::post('/update/banner','UpdateBanner')->name('update.banner');
+    // Route::get('/banner/delete/{id}', 'BannerDelete')->name('delete.banner');
+    
+});
 });// Admin End Middleware 
 
 // Frontend Product Details All Route 

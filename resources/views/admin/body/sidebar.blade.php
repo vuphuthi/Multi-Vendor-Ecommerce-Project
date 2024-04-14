@@ -105,6 +105,22 @@
             </ul>
         </li>
 
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class="bx bx-category"></i>
+                </div>
+                <div class="menu-title">Phiếu giảm giá</div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('all.coupon') }}"><i class="bx bx-right-arrow-alt"></i>Danh sách phiếu giảm giá</a>
+                </li>
+                <li> <a href=""><i class="bx bx-right-arrow-alt"></i>Thêm phiếu giảm giá</a>
+                </li>
+
+            </ul>
+        </li>
+
+
         <li class="menu-label">UI Elements</li>
         <li>
             <a href="javascript:;" class="has-arrow">
