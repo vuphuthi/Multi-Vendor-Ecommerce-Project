@@ -49,4 +49,14 @@ class ShippingAreaController extends Controller
         ]);
         return redirect()->route('all.division')->with($notification);
     }
+
+    public function DivisionRemove($id){
+        ShipDivision::findOrFail($id)->delete();
+        $notification =  ([
+            'message' => 'Xóa thành công',
+            'aler-type' => 'success' 
+        ]);
+
+        return redirect()->back()->with($notification);
+    }
 }

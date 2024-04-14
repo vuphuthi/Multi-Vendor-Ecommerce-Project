@@ -188,7 +188,7 @@ route::controller(ShippingAreaController::class)->group(function(){
     Route::post('/store/division','StoreDivision')->name('store.division');
     Route::get('/edit/division/{id}','EditDivision')->name('edit.division');
     Route::post('/update/division','UpdateDivision')->name('update.division');
-    // Route::get('/coupon/delete/{id}', 'CouponRemove')->name('delete.coupon');
+    Route::get('/coupon/division/{id}', 'DivisionRemove')->name('delete.division');
     
 });
 });// Admin End Middleware 

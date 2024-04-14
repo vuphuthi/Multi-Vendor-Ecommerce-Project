@@ -40,7 +40,7 @@
                                     <td> {{ $item->division_name }}</td>
                                     <td>
                                         <a href="{{ route('edit.division', $item->id) }}" class="btn btn-info">Chỉnh sửa</a>
-                                        <a href="{{ route('delete.coupon', $item->id) }}" class="btn btn-danger"
+                                        <a href="{{ route('delete.division', $item->id) }}" class="btn btn-danger"
                                             id="delete">Xóa</a>
 
                                     </td>
