@@ -128,5 +128,12 @@ class CartController extends Controller
         ]);
 
     }
-    
+
+    public function CartRemove($rowId){
+
+        Cart::remove($rowId);
+        return response(['success' => 'Xóa sản phẩm khỏi giỏ hàng thành công']);
+
+    }
+
     }

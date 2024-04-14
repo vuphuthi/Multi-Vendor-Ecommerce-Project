@@ -771,7 +771,7 @@ compare()
                 var rows = ""
 
                 $.each(data.carts,function(key,value){
-                    
+
                     rows+= `
                             <tr class="pt-30">
                     <td class="custome-checkbox pl-30">
@@ -812,7 +812,7 @@ compare()
                     <td class="price" data-title="Price">
                         <h4 class="text-brand">${value.subtotal}đ</h4>
                     </td>
-                    <td class="action text-center" data-title="Xóa"><a href="#" class="text-body"><i class="fi-rs-trash"></i></a></td>
+                    <td class="action text-center" data-title="Xóa"><a type="submit" id="${value.rowId}" onclick="cartRemove(this.id)" class="text-body"><i class="fi-rs-trash"></i></a></td>
                 </tr>
  
                     `
@@ -823,6 +823,37 @@ compare()
         })
     }
 mycart()
+
+    function cartRemove(rowId){
+        $.ajax({
+            type: "GET",
+            dataType: 'json',
+            url: '/cart-remove/' + rowId,
+            success: function(data){
+                mycart()
+                const Toast = Swal.mixin({
+                  toast: true,
+                  position: 'top-end',
+                  icon: 'success', 
+                  showConfirmButton: false,
+                  timer: 3000 
+            })
+            if ($.isEmptyObject(data.error)) {
+                    
+                    Toast.fire({
+                    type: 'success',
+                    title: data.success, 
+                    })
+            }else{
+               
+           Toast.fire({
+                    type: 'error',
+                    title: data.error, 
+                    })
+                }
+            }
+        })
+    }
 </script>
 
 </body>
