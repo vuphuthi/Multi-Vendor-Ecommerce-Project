@@ -31,4 +31,22 @@ class ShippingAreaController extends Controller
         ]);
         return redirect()->route('all.division')->with($notification);
     }
+    public function EditDivision($id){
+        $division = ShipDivision::findOrFail($id);
+        return view('backend.ship.division.division_edit',compact('division'));
+    }
+
+    public function UpdateDivision(Request $request){
+        $id = $request->id;
+        $division = ShipDivision::findOrFail($id);
+        $division->update([
+            'division_name' => $request->division_name,
+            'updated_at' => Carbon::now()
+        ]);
+        $notification =  ([
+            'message' => 'Khu vực đã thêm thành công',
+            'aler-type' => 'success' 
+        ]);
+        return redirect()->route('all.division')->with($notification);
+    }
 }

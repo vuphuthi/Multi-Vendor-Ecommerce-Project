@@ -114,7 +114,7 @@
             <ul>
                 <li> <a href="{{ route('all.coupon') }}"><i class="bx bx-right-arrow-alt"></i>Danh sách phiếu giảm giá</a>
                 </li>
-                <li> <a href=""><i class="bx bx-right-arrow-alt"></i>Thêm phiếu giảm giá</a>
+                <li> <a href="{{ route('add.coupon') }}"><i class="bx bx-right-arrow-alt"></i>Thêm phiếu giảm giá</a>
                 </li>
 
             </ul>
