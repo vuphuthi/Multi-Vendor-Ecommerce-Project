@@ -33,6 +33,7 @@
                             <th>Tên mã giảm giá</th>
                             <th>Giá</th>
                             <th>hiệu lực</th>
+                            <th>hiệu lực</th>
                             <th>Hành động</th>
                         </tr>
                     </thead>
@@ -40,14 +41,13 @@
                         @foreach($coupons as $key => $item )
                         <tr>
                             <td>{{$key+1}}</td>
-                            <td>{{$item->counpon_name}}</td>
-                            <td>{{$item->coupon_discount}}</td>
-                            <td> {{ Carbon\Carbon::parse($item->coupon_validity)->format('D, d F Y') }}  </td>
-
-                            <td>
-                                <a href="{{route('edit.category',$item->id)}}" class="btn btn-info">Sửa</a>
-                                <a href="{{route('delete.category',$item->id)}}" class="btn btn-danger" id="delete">Xóa</a>
+                            <td>{{$item->coupon_name}}</td>
+                            <td>{{$item->coupon_discount}}%</td>
+                            <td> 
+                                {{ Carbon\Carbon::parse($item->coupon_validity)->locale('vi')->isoFormat('dddd, DD [tháng] MM [năm] YYYY') }}
                             </td>
+
+                            
 
                             <td> 
                                 @if($item->coupon_validity >= Carbon\Carbon::now()->format('Y-m-d'))
@@ -55,6 +55,12 @@
                                 @else
                                 <span class="badge rounded-pill bg-danger">Không hợp lệ</span>
                                 @endif
+                            </td>
+
+                            <td>
+                                <a href="{{route('edit.category',$item->id)}}" class="btn btn-info">Sửa</a>
+                                <a href="{{route('delete.category',$item->id)}}" class="btn btn-danger" id="delete">Xóa</a>
+                            </td>
 
                         </tr>
                         @endforeach
