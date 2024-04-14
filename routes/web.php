@@ -177,7 +177,7 @@ route::controller(CouponController::class)->group(function(){
     Route::post('/store/coupon','StoreCoupon')->name('store.coupon');
     Route::get('/edit/coupon/{id}','EditCoupon')->name('edit.coupon');
     Route::post('/update/coupon','UpdateCoupon')->name('update.coupon');
-    // Route::get('/banner/delete/{id}', 'BannerDelete')->name('delete.banner');
+    Route::get('/coupon/delete/{id}', 'CouponRemove')->name('delete.coupon');
     
 });
 });// Admin End Middleware 

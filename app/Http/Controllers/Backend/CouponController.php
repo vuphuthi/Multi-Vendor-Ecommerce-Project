@@ -58,7 +58,16 @@ class CouponController extends Controller
 
         return redirect()->route('all.coupon')->with($notification); 
 
+    }
+    public function CouponRemove($id){
+        
+        Coupon::findOrFail($id)->delete();
 
+        $notification = array(
+            'message' => 'Phiếu giảm giá được xóa thành công',
+            'alert-type' => 'success'
+        );
+        return redirect()->back()->with($notification); 
     }
 
 }

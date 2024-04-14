@@ -59,7 +59,7 @@
 
                             <td>
                                 <a href="{{route('edit.coupon',$item->id)}}" class="btn btn-info">Sửa</a>
-                                <a href="{{route('delete.category',$item->id)}}" class="btn btn-danger" id="delete">Xóa</a>
+                                <a href="{{route('delete.coupon',$item->id)}}" class="btn btn-danger" id="delete">Xóa</a>
                             </td>
 
                         </tr>
