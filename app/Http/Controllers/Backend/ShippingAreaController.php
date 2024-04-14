@@ -14,4 +14,21 @@ class ShippingAreaController extends Controller
         $division = ShipDivision::latest()->get();
         return view('backend.ship.division.division_all',compact('division'));
     }
+
+    public function AddDivision(){
+        return view('backend.ship.division.division_add');
+    }
+
+    public function StoreDivision(Request $request){
+
+        ShipDivision::insert([
+            'division_name' => $request->division_name,
+            'created_at' => Carbon::now()
+        ]);
+        $notification = ([
+            'message' => 'Khu vực đã thêm thành công',
+            'aler-type' => 'success'  
+        ]);
+        return redirect()->route('all.division')->with($notification);
+    }
 }

@@ -15,7 +15,7 @@
             </div>
             <div class="ms-auto">
                 <div class="btn-group">
-                    <a href="{{ route('add.coupon') }}" class="btn btn-primary">Thêm khu vực</a>
+                    <a href="{{ route('add.division') }}" class="btn btn-primary">Thêm khu vực</a>
                 </div>
             </div>
         </div>
