@@ -112,7 +112,21 @@ class CartController extends Controller
         }
 
     }
+
     public function MyCart(){
         return view('frontend.mycart.view_mycart');
     }
+
+    public function GetCartProduct(){
+        $carts = cart::content();
+        $cartQty = cart::count();
+        $cartTotal = cart::total();
+        return response([
+            'carts' => $carts,
+            'cartQty' => $cartQty,
+            'cartTotal' => $cartTotal
+        ]);
+
+    }
+    
     }

@@ -208,7 +208,7 @@ Route::controller(CompareController::class)->group(function(){
 /// card All Route
 Route::controller(CartController::class)->group(function(){
     Route::get('/mycart', 'MyCart')->name('mycart');
-    // Route::get('/get-compare-product' , 'GetCompareProduct');
+    Route::get('/get-cart-product' , 'GetCartProduct');
     // Route::get('/compare-remove/{id}' , 'CompareRemove');
 });
 });
