@@ -79,7 +79,6 @@
                             <div class="attr-detail attr-size mb-30">
                                 <strong class="mr-10" style="width:50px;">Size: </strong>
                                  <select class="form-control unicase-form-control" id="dsize">
-                                     <option selected="" disabled="">--Chọn Size--</option>
                                      @foreach($product_size as $size)
                                      <option value="{{ $size }}">{{ ucwords($size)  }}</option>
                                      @endforeach
@@ -92,8 +91,6 @@
                             <div class="attr-detail attr-size mb-30">
                                 <strong class="mr-10" style="width:50px;">Màu: </strong>
                                 <select name="" class="form-control unicase-form-control" id="dcolor">
-                                    <option selected="" value="" disabled="">--Chọn Màu--</option>
-
                                     @foreach ($product_color as $color)
 
                                     <option value="{{ $color }}">{{ $color  }}</option>        
