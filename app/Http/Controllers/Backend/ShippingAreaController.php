@@ -63,5 +63,21 @@ class ShippingAreaController extends Controller
         $district = ShipDistricts::latest()->get();
         return view('backend.ship.district.district_all',compact('district'));
     }
+    public function AddDistrict(){
+        $district = ShipDivision::latest()->get();
+        return view('backend.ship.district.district_add',compact('district'));
+    }
+    public function StoreDistrict(Request $request){
+        ShipDistricts::insert([
+            'division_id' => $request->division_id,
+            'district_name' => $request->district_name,
+            'created_at' => Carbon::now()
+        ]);
+        $notification = ([
+            'message' => 'Thêm Quận huyền thành công',
+            'alert-type' => 'success',
+        ]);
 
+        return redirect()->route('all.district')->with($notification);         
+    }
 }

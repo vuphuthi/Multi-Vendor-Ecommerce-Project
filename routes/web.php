@@ -194,8 +194,8 @@ route::controller(ShippingAreaController::class)->group(function(){
 // District
 route::controller(ShippingAreaController::class)->group(function(){
     Route::get('/all/district','AllDistrict')->name('all.district');
-    Route::get('/add/division','AddDivision')->name('add.division');
-    Route::post('/store/division','StoreDivision')->name('store.division');
+    Route::get('/add/district','AddDistrict')->name('add.district');
+    Route::post('/store/district','StoreDistrict')->name('store.district');
     Route::get('/edit/division/{id}','EditDivision')->name('edit.division');
     Route::post('/update/division','UpdateDivision')->name('update.division');
     Route::get('/coupon/division/{id}', 'DivisionRemove')->name('delete.division');
