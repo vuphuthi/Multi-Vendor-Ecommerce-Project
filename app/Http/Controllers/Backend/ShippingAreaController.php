@@ -102,9 +102,9 @@ class ShippingAreaController extends Controller
     }
     public function DistrictRemove($id){
         $division = ShipDistricts::findOrFail($id)->delete();
-        
+
         $notification = ([
-            'message' => 'Cập nhật Quận huyền thành công',
+            'message' => 'Xóa huyền thành công',
             'alert-type' => 'success',
         ]);
         return redirect()->back()->with($notification);         
