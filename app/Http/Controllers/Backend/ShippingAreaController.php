@@ -64,7 +64,7 @@ class ShippingAreaController extends Controller
         return view('backend.ship.district.district_all',compact('district'));
     }
     public function AddDistrict(){
-        $division = ShipDivision::orderBy('division_name','ASC')->get();
+        $district = ShipDivision::orderBy('division_name','ASC')->get();
         return view('backend.ship.district.district_add',compact('district'));
     }
     public function StoreDistrict(Request $request){
@@ -99,5 +99,14 @@ class ShippingAreaController extends Controller
             'alert-type' => 'success',
         ]);
         return redirect()->route('all.district')->with($notification);         
+    }
+    public function DistrictRemove($id){
+        $division = ShipDistricts::findOrFail($id)->delete();
+        
+        $notification = ([
+            'message' => 'Cập nhật Quận huyền thành công',
+            'alert-type' => 'success',
+        ]);
+        return redirect()->back()->with($notification);         
     }
 }
