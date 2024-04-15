@@ -64,7 +64,7 @@ class ShippingAreaController extends Controller
         return view('backend.ship.district.district_all',compact('district'));
     }
     public function AddDistrict(){
-        $district = ShipDivision::latest()->get();
+        $division = ShipDivision::orderBy('division_name','ASC')->get();
         return view('backend.ship.district.district_add',compact('district'));
     }
     public function StoreDistrict(Request $request){
@@ -78,6 +78,26 @@ class ShippingAreaController extends Controller
             'alert-type' => 'success',
         ]);
 
+        return redirect()->route('all.district')->with($notification);         
+    }
+
+    public function EditDistrict($id){
+        $district = ShipDistricts::findOrFail($id);
+        $division = ShipDivision::orderBy('division_name','ASC')->get();
+        return view('backend.ship.district.district_edit',compact('district','division'));
+    }
+
+    public function UpdateDistrict(Request $request){
+        $id = $request->id;
+        ShipDistricts::findOrFail($id)->update([
+            'division_id' => $request->division_id,
+            'district_name' => $request->district_name,
+            'updated_at' => Carbon::now()
+        ]);
+        $notification = ([
+            'message' => 'Cập nhật Quận huyền thành công',
+            'alert-type' => 'success',
+        ]);
         return redirect()->route('all.district')->with($notification);         
     }
 }

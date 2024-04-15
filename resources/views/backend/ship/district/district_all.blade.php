@@ -41,10 +41,9 @@
                                     <td> {{ $item['division']['division_name'] }}</td>
                                     <td> {{ $item->district_name }}</td>
                                     <td>
-                                        <a href="{{ route('edit.division', $item->id) }}" class="btn btn-info">Chỉnh sửa</a>
+                                        <a href="{{ route('edit.district', $item->id) }}" class="btn btn-info">Chỉnh sửa</a>
                                         <a href="{{ route('delete.division', $item->id) }}" class="btn btn-danger"
                                             id="delete">Xóa</a>
-
                                     </td>
                                 </tr>
                             @endforeach
