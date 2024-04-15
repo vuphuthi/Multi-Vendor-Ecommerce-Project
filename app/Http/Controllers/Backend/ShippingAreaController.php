@@ -59,4 +59,9 @@ class ShippingAreaController extends Controller
 
         return redirect()->back()->with($notification);
     }
+    public function AllDistrict(){
+        $district = ShipDistricts::latest()->get();
+        return view('backend.ship.district.district_all',compact('district'));
+    }
+
 }
