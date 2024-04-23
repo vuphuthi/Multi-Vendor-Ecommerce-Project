@@ -830,6 +830,7 @@ mycart()
             url: '/cart-remove/' + rowId,
             success: function(data){
                 mycart()
+                miniCart()
                 const Toast = Swal.mixin({
                   toast: true,
                   position: 'top-end',
@@ -877,7 +878,61 @@ mycart()
             }
         })
     }
+
+// end increment
+
 </script>
+  <!--  ////////////// Start Apply Coupon ////////////// -->
+
+<script type="text/javascript">
+    
+    function applyCoupon(){
+        var coupon_name = $('#coupon_name').val();
+        $.ajax({
+            type: "POST",
+            dataType: 'json',
+            data: {coupon_name:coupon_name},
+            url: '/coupon-apply',
+
+            success: function(data){
+
+                if (data.validity == true) {
+                        $('#couponField').hide();
+                    }
+
+                const Toast = Swal.mixin({
+                  toast: true,
+                  position: 'top-end',
+                  icon: 'success', 
+                  showConfirmButton: false,
+                  timer: 3000 
+            })
+            if ($.isEmptyObject(data.error)) {
+                    
+                    Toast.fire({
+                    type: 'success',
+                    icon: 'success',
+                    title: data.success, 
+                    })
+            }else{
+               
+           Toast.fire({
+                    type: 'error',
+                    icon: 'error',
+                    title: data.error, 
+                    })
+                }
+            }
+        })
+    }
+
+
+</script>
+
+
+  <!--  ////////////// End Apply Coupon ////////////// -->
+
+
 
 </body>
 

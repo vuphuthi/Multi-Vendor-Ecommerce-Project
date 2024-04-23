@@ -49,20 +49,25 @@
 
 
                     <div class="row mt-50">
+                        <div class="col-lg-5">
 
-                            <div class="col-lg-5">
-                            <div class="p-40">
+                        @if(Session::has('coupon'))
+                            
+                        @else
+                        
+                            <div class="p-40" id="couponField">
                                 <h4 class="mb-10">Áp dụng phiếu giảm giá</h4>
                                 <p class="mb-30"><span class="font-lg text-muted">Sử dụng mã khuyến mãi?</p>
                                 <form action="#">
                                     <div class="d-flex justify-content-between">
-                                        <input class="font-medium mr-15 coupon" name="Coupon" placeholder="Nhập phiếu giảm giá của bạn">
-                                        <button class="btn"><i class="fi-rs-label mr-10"></i>Áp dụng</button>
+                                        <input class="font-medium mr-15 coupon" id="coupon_name" placeholder="Nhập phiếu giảm giá của bạn">
+                                        <a type="submit" onclick="applyCoupon()" class="btn btn-success"><i class="fi-rs-label mr-10"></i>Áp dụng</a>
                                     </div>
                                 </form>
                             </div>
-                        </div>
-
+                        
+                        @endif
+                    </div> 
 
                         <div class="col-lg-7">
                              <div class="divider-2 mb-30"></div>

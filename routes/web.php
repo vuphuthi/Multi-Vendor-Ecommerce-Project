@@ -235,6 +235,9 @@ Route::post('/add-to-wishlist/{product_id}', [WishlistController::class, 'AddToW
 
 Route::post('/add-to-compare/{product_id}', [CompareController::class, 'AddToCompare']);
 
+/// Frontend Coupon Option
+
+Route::post('/coupon-apply', [CartController::class, 'CouponApply']);
 
 /// User All Route
 Route::middleware(['auth','role:user'])->group(function() {
@@ -260,7 +263,6 @@ Route::controller(CartController::class)->group(function(){
     Route::get('/cart-increment/{rowId}' , 'CartIncrement');
 
 });
-
 
 });
 
