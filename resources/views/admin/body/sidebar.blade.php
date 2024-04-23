@@ -132,7 +132,7 @@
                 <li> <a href="{{ route('all.district') }}"><i class="bx bx-right-arrow-alt"></i>Danh sách quận huyện</a>
                 </li>
 
-                <li> <a href="{{ route('add.coupon') }}"><i class="bx bx-right-arrow-alt"></i>Danh sách tỉnh/Thành phố</a>
+                <li> <a href="{{ route('all.state') }}"><i class="bx bx-right-arrow-alt"></i>Danh sách tỉnh/Thành phố</a>
                 </li>
 
             </ul>
