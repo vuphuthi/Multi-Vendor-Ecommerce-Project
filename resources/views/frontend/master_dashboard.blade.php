@@ -1,5 +1,3 @@
-
-
 <!DOCTYPE html>
 <html class="no-js" lang="en">
 
@@ -19,7 +17,7 @@
 
 
 
-    <!-- Favicon -->  
+    <!-- Favicon -->
     <link rel="shortcut icon" type="image/x-icon" href="{{ asset('frontend/assets/imgs/theme/favicon.svg') }}" />
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/plugins/animate.min.css') }}" />
@@ -28,23 +26,23 @@
 
 <body>
     <!-- Modal -->
- 
+
     <!-- Quick view -->
     @include('frontend.body.quickview')
     <!-- Header  -->
-    
+
     @include('frontend.body.header')
 
-   <!-- End Header  -->
+    <!-- End Header  -->
 
-
-
+    So sánh sản phẩm
 
     <div class="mobile-header-active mobile-header-wrapper-style">
         <div class="mobile-header-wrapper-inner">
             <div class="mobile-header-top">
                 <div class="mobile-header-logo">
-                    <a href="index.html"><img src="{{ asset('frontend/assets/imgs/theme/logo.svg') }}" alt="logo" /></a>
+                    <a href="index.html"><img src="{{ asset('frontend/assets/imgs/theme/logo.svg') }}"
+                            alt="logo" /></a>
                 </div>
                 <div class="mobile-menu-close close-style-wrap close-style-position-inherit">
                     <button class="close-style search-close">
@@ -66,7 +64,7 @@
                         <ul class="mobile-menu font-heading">
                             <li class="menu-item-has-children">
                                 <a href="index.html">Home</a>
-                                 
+
                             </li>
                             <li class="menu-item-has-children">
                                 <a href="shop-grid-right.html">shop</a>
@@ -103,7 +101,7 @@
                                     </li>
                                 </ul>
                             </li>
-                            
+
                             <li class="menu-item-has-children">
                                 <a href="#">Mega menu</a>
                                 <ul class="dropdown">
@@ -195,11 +193,21 @@
                 </div>
                 <div class="mobile-social-icon mb-50">
                     <h6 class="mb-15">Follow Us</h6>
-                    <a href="#"><img src="{{ asset('frontend/assets/imgs/theme/icons/icon-facebook-white.svg') }}" alt="" /></a>
-                    <a href="#"><img src="{{ asset('frontend/assets/imgs/theme/icons/icon-twitter-white.svg') }}" alt="" /></a>
-                    <a href="#"><img src="{{ asset('frontend/assets/imgs/theme/icons/icon-instagram-white.svg') }}" alt="" /></a>
-                    <a href="#"><img src="{{ asset('frontend/assets/imgs/theme/icons/icon-pinterest-white.svg') }}" alt="" /></a>
-                    <a href="#"><img src="{{ asset('frontend/assets/imgs/theme/icons/icon-youtube-white.svg') }}" alt="" /></a>
+                    <a href="#"><img
+                            src="{{ asset('frontend/assets/imgs/theme/icons/icon-facebook-white.svg') }}"
+                            alt="" /></a>
+                    <a href="#"><img
+                            src="{{ asset('frontend/assets/imgs/theme/icons/icon-twitter-white.svg') }}"
+                            alt="" /></a>
+                    <a href="#"><img
+                            src="{{ asset('frontend/assets/imgs/theme/icons/icon-instagram-white.svg') }}"
+                            alt="" /></a>
+                    <a href="#"><img
+                            src="{{ asset('frontend/assets/imgs/theme/icons/icon-pinterest-white.svg') }}"
+                            alt="" /></a>
+                    <a href="#"><img
+                            src="{{ asset('frontend/assets/imgs/theme/icons/icon-youtube-white.svg') }}"
+                            alt="" /></a>
                 </div>
                 <div class="site-copyright">Copyright 2022 © Nest. All rights reserved. Powered by AliThemes.</div>
             </div>
@@ -261,139 +269,136 @@
     {{-- sweetalert2 --}}
 
     <script type="text/javascript">
-    
-    $.ajaxSetup({
-        headers:{
-            'X-CSRF-TOKEN':$('meta[name="csrf-token"]').attr('content')
-        }
-    })
-
-    function productView(id){
-        // alert(id)
-        $.ajax({
-            url: '/product/view/modal/'+id,
-            type:'GET',
-            dataType: 'json',
-            success:function(data){
-                // console.log(data);
-                $('#pname').text(data.product.product_name);
-                $('#pprice').text(data.product.selling_price);
-                $('#pcode').text(data.product.product_code);
-                $('#pcategory').text(data.product.category.category_name);
-                $('#pbrand').text(data.product.brand.brand_name);
-                $('#pimage').attr('src','/'+data.product.product_thambnail );
-
-                $('#product_id').val(id);
-                $('#qty').val(1);
-
-                if(data.product.discount_price == null){
-                $('#pprice').text('');
-                $('#psale').text('Mới');
-                $('#poldprice').text('');
-                $('#pprice').text(data.product.selling_price);
-                }
-                else{
-                $('#psale').text('Giảm giá');
-                $('#oldprice').text(data.product.discount_price); 
-                $('#pprice').text(data.product.selling_price);
-                }
-
-                if (data.product.product_qty > 0) {
-                $('#aviable').text('');
-                $('#stockout').text('');
-                $('#aviable').text('Có sẵn');
-                }else{
-                $('#aviable').text('');
-                $('#stockout').text('');
-                $('#stockout').text('Hết hàng');
-                } 
-
-                $('select[name="size"]').empty();
-                $.each(data.size,function(key,value){
-                $('select[name="size"]').append('<option value="'+value+' ">'+value+'  </option')
-                if (data.size == "") {
-                    $('#sizeArea').hide();
-                }else{
-                     $('#sizeArea').show();
-                }
-            }) // end size
-
-             $('select[name="color"]').empty();
-                $.each(data.color,function(key,value){
-                $('select[name="color"]').append('<option value="'+value+' ">'+value+'  </option')
-                if (data.size == "") {
-                    $('#colorArea').hide();
-                }else{
-                     $('#colorArea').show();
-                }
-             }) // end color
-
-
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         })
-    }
 
-    function addToCart(){
-     var product_name = $('#pname').text();  
-     var id = $('#product_id').val();
-     var color = $('#color option:selected').text();
-     var size = $('#size option:selected').text();
-     var quantity = $('#qty').val(); 
-     $.ajax({
-        type: "POST",
-        dataType : 'json',
-        data:{
-            color:color, size:size, quantity:quantity,product_name:product_name
-        },
-        url: "/cart/data/store/"+id,
-        success:function(data){
-            miniCart();
-            $('#closeModal').click();
-            // console.log(data)
-            const Toast = Swal.mixin({
-                  toast: true,
-                  position: 'top-end',
-                  icon: 'success', 
-                  showConfirmButton: false,
-                  timer: 3000 
-            })
-            if ($.isEmptyObject(data.error)) {
-                    
-                    Toast.fire({
-                    type: 'success',
-                    title: data.success, 
-                    })
-            }else{
-               
-           Toast.fire({
-                    type: 'error',
-                    title: data.error, 
-                    })
+        function productView(id) {
+            // alert(id)
+            $.ajax({
+                url: '/product/view/modal/' + id,
+                type: 'GET',
+                dataType: 'json',
+                success: function(data) {
+                    console.log(data);
+                    $('#pname').text(data.product.product_name);
+                    $('#pprice').text(data.product.selling_price);
+                    $('#pcode').text(data.product.product_code);
+                    $('#pcategory').text(data.product.category.category_name);
+                    $('#pbrand').text(data.product.brand.brand_name);
+                    $('#pimage').attr('src', '/' + data.product.product_thambnail);
+
+                    $('#product_id').val(id);
+                    $('#qty').val(1);
+
+                    if (data.product.discount_price == null) {
+                        $('#pprice').text('');
+                        $('#psale').text('Mới');
+                        $('#poldprice').text('');
+                        $('#pprice').text(data.product.selling_price);
+                    } else {
+                        $('#psale').text('Giảm giá');
+                        $('#oldprice').text(data.product.discount_price);
+                        $('#pprice').text(data.product.selling_price);
+                    }
+
+                    if (data.product.product_qty > 0) {
+                        $('#aviable').text('');
+                        $('#stockout').text('');
+                        $('#aviable').text('Có sẵn');
+                    } else {
+                        $('#aviable').text('');
+                        $('#stockout').text('');
+                        $('#stockout').text('Hết hàng');
+                    }
+
+                    $('select[name="size"]').empty();
+                    $.each(data.size, function(key, value) {
+                        $('select[name="size"]').append('<option value="' + value + ' ">' + value +
+                            '  </option')
+                        if (data.size == "") {
+                            $('#sizeArea').hide();
+                        } else {
+                            $('#sizeArea').show();
+                        }
+                    }) // end size
+
+                    $('select[name="color"]').empty();
+                    $.each(data.color, function(key, value) {
+                        $('select[name="color"]').append('<option value="' + value + ' ">' + value +
+                            '  </option')
+                        if (data.size == "") {
+                            $('#colorArea').hide();
+                        } else {
+                            $('#colorArea').show();
+                        }
+                    }) // end color
+
+
                 }
+            })
         }
-     })
-    }
 
+        function addToCart() {
+            var product_name = $('#pname').text();
+            var id = $('#product_id').val();
+            var color = $('#color option:selected').text();
+            var size = $('#size option:selected').text();
+            var quantity = $('#qty').val();
+            $.ajax({
+                type: "POST",
+                dataType: 'json',
+                data: {
+                    color: color,
+                    size: size,
+                    quantity: quantity,
+                    product_name: product_name
+                },
+                url: "/cart/data/store/" + id,
+                success: function(data) {
+                    miniCart();
+                    $('#closeModal').click();
+                    // console.log(data)
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    if ($.isEmptyObject(data.error)) {
 
+                        Toast.fire({
+                            type: 'success',
+                            title: data.success,
+                        })
+                    } else {
+
+                        Toast.fire({
+                            type: 'error',
+                            title: data.error,
+                        })
+                    }
+                }
+            })
+        }
     </script>
 
     <script type="text/javascript">
-    
-    function miniCart(){
-        $.ajax({
-            type:"GET",
-            url:'/product/mini/cart',
-            dataType: 'json',
-            success:function(data){
+        function miniCart() {
+            $.ajax({
+                type: "GET",
+                url: '/product/mini/cart',
+                dataType: 'json',
+                success: function(data) {
+                    $('#cartQty').text(data.cartQty);
+                    $('span[id="cartSubTotal"]').text(numberFormat(data.cartTotal));
 
-                // console.log(data);
-
-                $('#cartQty').text(data.cartQty);
-                $('span[id="cartSubTotal"]').text(data.cartTotal + 'đ');
-
-                var miniCart = "";
-                $.each(data.carts,function(key,value){
-                    miniCart+= `
+                    var miniCart = "";
+                    $.each(data.carts, function(key, value) {
+                        miniCart += `
                     <ul>
                         <li>
                             <div class="shopping-cart-img">
@@ -401,270 +406,267 @@
                             </div>
                             <div class="shopping-cart-title" style="margin: -73px 74px 14px; width" 146px;>
                                 <h4><a href="shop-product-right.html"> ${value.name} </a></h4>
-                                <h4><span>${value.qty} × </span>${value.price}đ</h4>
+                                <h4><span>${value.qty} × </span>${numberFormat(value.price)}</h4>
                             </div>
                             <div class="shopping-cart-delete" style="margin: -85px 1px 0px;">
                                 <a type="submit" id="${value.rowId}" onclick="miniCartRemove(this.id)"  ><i class="fi-rs-cross-small"></i></a>
                             </div>
                         </li> 
                     </ul>
-                        <hr><br> 
-                    `
-                });
-                $('#miniCart').html(miniCart);
-            }
-            
-
-        })
-    }
-    miniCart();
-
-    function miniCartRemove(rowId){
-        $.ajax({
-            type: "GET",
-            url: "/product/minicart/remove/"+rowId,
-            dataType: 'json',
-            success: function(data){
-                miniCart();
-                const Toast = Swal.mixin({
-                  toast: true,
-                  position: 'top-end',
-                  icon: 'success', 
-                  showConfirmButton: false,
-                  timer: 3000 
-            })
-            if ($.isEmptyObject(data.error)) {
-                    
-                    Toast.fire({
-                    type: 'success',
-                    title: data.success, 
-                    })
-            }else{
-               
-           Toast.fire({
-                    type: 'error',
-                    title: data.error, 
-                    })
+                    <hr><br> 
+                `;
+                    });
+                    $('#miniCart').html(miniCart);
                 }
-
-            }
-        })
-    }
-
-    function AddToCartDetails(){
-     var product_name = $('#dname').text();  
-     var id = $('#dproduct_id').val();
-     var color = $('#dcolor option:selected').text();
-     var size = $('#dsize option:selected').text();
-     var quantity = $('#dqty').val(); 
-     $.ajax({
-        type: "POST",
-        dataType : 'json',
-        data:{
-            color:color, size:size, quantity:quantity,product_name:product_name
-        },
-        url: "/dcart/data/store/"+id,
-        success:function(data){
-            miniCart();
-            $('#closeModal').click();
-            // console.log(data)
-            const Toast = Swal.mixin({
-                  toast: true,
-                  position: 'top-end',
-                  icon: 'success', 
-                  showConfirmButton: false,
-                  timer: 3000 
-            })
-            if ($.isEmptyObject(data.error)) {
-                    
-                    Toast.fire({
-                    type: 'success',
-                    title: data.success, 
-                    })
-            }else{
-               
-           Toast.fire({
-                    type: 'error',
-                    title: data.error, 
-                    })
-                }
+            });
         }
-     })
-    }
 
+        function numberFormat(number) {
+            return new Intl.NumberFormat('vi-VN').format(number);
+        }
+
+        miniCart();
+
+
+        function miniCartRemove(rowId) {
+            $.ajax({
+                type: "GET",
+                url: "/product/minicart/remove/" + rowId,
+                dataType: 'json',
+                success: function(data) {
+                    miniCart();
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    if ($.isEmptyObject(data.error)) {
+
+                        Toast.fire({
+                            type: 'success',
+                            title: data.success,
+                        })
+                    } else {
+
+                        Toast.fire({
+                            type: 'error',
+                            title: data.error,
+                        })
+                    }
+
+                }
+            })
+        }
+
+        function AddToCartDetails() {
+            var product_name = $('#dname').text();
+            var id = $('#dproduct_id').val();
+            var color = $('#dcolor option:selected').text();
+            var size = $('#dsize option:selected').text();
+            var quantity = $('#dqty').val();
+            $.ajax({
+                type: "POST",
+                dataType: 'json',
+                data: {
+                    color: color,
+                    size: size,
+                    quantity: quantity,
+                    product_name: product_name
+                },
+                url: "/dcart/data/store/" + id,
+                success: function(data) {
+                    miniCart();
+                    $('#closeModal').click();
+                    // console.log(data)
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    if ($.isEmptyObject(data.error)) {
+
+                        Toast.fire({
+                            type: 'success',
+                            title: data.success,
+                        })
+                    } else {
+
+                        Toast.fire({
+                            type: 'error',
+                            title: data.error,
+                        })
+                    }
+                }
+            })
+        }
     </script>
 
-<script type="text/javascript">
-        
-    function addToWishList(product_id){
-        $.ajax({
-            type: "POST",
-            dataType: 'json',
-            url: "/add-to-wishlist/"+product_id,
-            success:function(data){
-                GetWishlistProduct();
-                 // Start Message 
-        const Toast = Swal.mixin({
-              toast: true,
-              position: 'top-end',
-              showConfirmButton: false,
-              timer: 3000 
-        })
-        if ($.isEmptyObject(data.error)) {
-                
-                Toast.fire({
-                type: 'success',
-                icon: 'success', 
-                title: data.success, 
-                })
-        }else{
-           
-       Toast.fire({
-                type: 'error',
-                icon: 'error', 
-                title: data.error, 
-                })
-            }
-          // End Message  
-            }
-        })
-    }
+    <script type="text/javascript">
+        function addToWishList(product_id) {
+            $.ajax({
+                type: "POST",
+                dataType: 'json',
+                url: "/add-to-wishlist/" + product_id,
+                success: function(data) {
+                    GetWishlistProduct();
+                    // Start Message 
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    if ($.isEmptyObject(data.error)) {
 
-    function GetWishlistProduct(){
-        $.ajax({
-            type:"GET",
-            dataType: 'json',
-            url: "/get-wishlist-product",
-            success: function(data){
-                $('#wishQty').text(data.wishQty);
-                $('#wishQtymore').text(data.wishQty);
-                // console.log(data);  
-                var rows = ""
-                $.each(data.wishlist,function(key,value){
-                    rows += `<tr class="pt-30">
-                        <td class="custome-checkbox pl-30">
-                            
-                        </td>
-                        <td class="image product-thumbnail pt-40"><img src="/${value.product.product_thambnail}" alt="#" /></td>
-                        <td class="product-des product-name">
-                            <h6><a class="product-name mb-10" href="${value.product.product_link}">${value.product.product_name} </a></h6>
-                            <div class="product-rate-cover">
-                                <div class="product-rate d-inline-block">
-                                    <div class="product-rating" style="width: 90%"></div>
-                                </div>
-                                <span class="font-small ml-5 text-muted"> (4.0)</span>
-                            </div>
-                        </td>
-                        <td class="price" data-title="Price">
-                        ${value.product.discount_price == null
-                        ? `<h3 class="text-brand">$${value.product.selling_price}</h3>`
-                        :`<h3 class="text-brand">$${value.product.discount_price}</h3>`
-                        }
-                            
-                        </td>
-                        <td class="text-center detail-info" data-title="Stock">
-                            ${value.product.product_qty > 0 
-                                ? `<span class="stock-status in-stock mb-0"> Còn hàng</span>`
-                                :`<span class="stock-status out-stock mb-0"> Hết hàng </span>`
-                            } 
-                           
-                        </td>
-                       
-                        <td class="action text-center"  data-title="Xóa">
-                            <a type="submit" id="${value.id}" onclick="wishRemove(this.id)" class="text-body"><i class="fi-rs-trash"></i></a>
-                        </td>
-                    </tr> ` 
-       });
-                $('#wishlist').html(rows)                
-            }
-        });
-    }
-    GetWishlistProduct();
+                        Toast.fire({
+                            type: 'success',
+                            icon: 'success',
+                            title: data.success,
+                        })
+                    } else {
 
-    function wishRemove(id){
-        $.ajax({
-            type:"GET",
-            dataType: 'json',
-            url: "/wishlist-remove/" + id,
-            success: function(data){
-                GetWishlistProduct();
-            const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000 
-        })
-        if ($.isEmptyObject(data.error)) {
-                
-            Toast.fire({
-            type: 'success',
-            icon: 'success', 
-            title: data.success, 
-                })
-        }else{
-           
-       Toast.fire({
-            type: 'error',
-            icon: 'error', 
-            title: data.error, 
-            })
-        }
-    }
-        });
-    }
-
-</script>
-<script type="text/javascript">
-
-    function addToCompare(product_id){
-        $.ajax({
-            type: "POST",
-            dataType: 'json',
-            url: "/add-to-compare/" + product_id,
-            success: function(data){
-            compare()
-            const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000 
-        })
-        if ($.isEmptyObject(data.error)) {
-                
-            Toast.fire({
-            type: 'success',
-            icon: 'success', 
-            title: data.success, 
-                })
-        }else{
-           
-       Toast.fire({
-            type: 'error',
-            icon: 'error', 
-            title: data.error, 
-            })
-        }
-
-            }
-        })
-    }
-
-    function compare(){
-        $.ajax({
-            type:'GET',
-            dataType: 'json',
-            url: "/get-compare-product/",
-            success: function(data){
-                // console.log(data);
-                $('#compareQty').text(data.compareQty);
-                $('#compareQtyheader').text(data.compareQty);
-                var rows = ""
-                if(data.compare.length === 0){
-                    rows = `<td class="font-xl text-danger fw-600 font-heading">Chưa có sản phẩm nào</td>`;
+                        Toast.fire({
+                            type: 'error',
+                            icon: 'error',
+                            title: data.error,
+                        })
+                    }
+                    // End Message  
                 }
-                else{
-                    $.each(data.compare, function(key,value){
-                    rows+= `
+            })
+        }
+
+        function GetWishlistProduct() {
+            $.ajax({
+                type: "GET",
+                dataType: 'json',
+                url: "/get-wishlist-product",
+                success: function(data) {
+                    $('#wishQty').text(data.wishQty);
+                    $('#wishQtymore').text(data.wishQty);
+                    var rows = "";
+                    $.each(data.wishlist, function(key, value) {
+                        rows += `<tr class="pt-30">
+                    <td class="custome-checkbox pl-30"></td>
+                    <td class="image product-thumbnail pt-40"><img src="/${value.product.product_thambnail}" alt="#" /></td>
+                    <td class="product-des product-name">
+                        <h6><a class="product-name mb-10" href="${value.product.product_link}">${value.product.product_name}</a></h6>
+                        <div class="product-rate-cover">
+                            <div class="product-rate d-inline-block">
+                                <div class="product-rating" style="width: 90%"></div>
+                            </div>
+                            <span class="font-small ml-5 text-muted"> (4.0)</span>
+                        </div>
+                    </td>
+                    <td class="price" data-title="Price">
+                        ${value.product.discount_price == null
+                            ? `<h3 class="text-brand">${numberFormat(value.product.selling_price)}</h3>`
+                            : `<h3 class="text-brand">${numberFormat(value.product.discount_price)}</h3>`
+                        }
+                    </td>
+                    <td class="text-center detail-info" data-title="Stock">
+                        ${value.product.product_qty > 0 
+                            ? `<span class="stock-status in-stock mb-0">Còn hàng</span>`
+                            : `<span class="stock-status out-stock mb-0">Hết hàng</span>`
+                        } 
+                    </td>
+                    <td class="action text-center" data-title="Xóa">
+                        <a type="submit" id="${value.id}" onclick="wishRemove(this.id)" class="text-body"><i class="fi-rs-trash"></i></a>
+                    </td>
+                </tr>`;
+                    });
+                    $('#wishlist').html(rows);
+                }
+            });
+        }
+
+        GetWishlistProduct();
+
+        function wishRemove(id) {
+            $.ajax({
+                type: "GET",
+                dataType: 'json',
+                url: "/wishlist-remove/" + id,
+                success: function(data) {
+                    GetWishlistProduct();
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    if ($.isEmptyObject(data.error)) {
+
+                        Toast.fire({
+                            type: 'success',
+                            icon: 'success',
+                            title: data.success,
+                        })
+                    } else {
+
+                        Toast.fire({
+                            type: 'error',
+                            icon: 'error',
+                            title: data.error,
+                        })
+                    }
+                }
+            });
+        }
+    </script>
+    <script type="text/javascript">
+        function addToCompare(product_id) {
+            $.ajax({
+                type: "POST",
+                dataType: 'json',
+                url: "/add-to-compare/" + product_id,
+                success: function(data) {
+                    compare()
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    if ($.isEmptyObject(data.error)) {
+
+                        Toast.fire({
+                            type: 'success',
+                            icon: 'success',
+                            title: data.success,
+                        })
+                    } else {
+
+                        Toast.fire({
+                            type: 'error',
+                            icon: 'error',
+                            title: data.error,
+                        })
+                    }
+
+                }
+            })
+        }
+
+        function compare() {
+            $.ajax({
+                type: 'GET',
+                dataType: 'json',
+                url: "/get-compare-product/",
+                success: function(data) {
+                    // console.log(data);
+                    $('#compareQty').text(data.compareQty);
+                    $('#compareQtyheader').text(data.compareQty);
+                    var rows = ""
+                    if (data.compare.length === 0) {
+                        rows = `<td class="font-xl text-danger fw-600 font-heading">Chưa có sản phẩm nào</td>`;
+                    } else {
+                        $.each(data.compare, function(key, value) {
+                            rows += `
                     <tr class="pr_image">
                                     <td class="text-muted font-sm fw-600 font-heading mw-200">Xem trước</td>
                                     <td class="row_img"><img src="/${value.product.product_thambnail}" style="width:300px; height:300px;" alt="compare-img" /></td>
@@ -681,8 +683,8 @@
                                     <td class="text-muted font-sm fw-600 font-heading">Giá</td>
                                     <td class="product_price">
                         ${value.product.discount_price == null
-                        ? `<h4 class="price text-brand">${value.product.selling_price}đ</h4>`
-                        :`<h4 class="price text-brand">${value.product.discount_price}đ</h4>`
+                            ? `<h4 class="price text-brand">${numberFormat(value.product.selling_price)}</h4>`
+                            : `<h4 class="price text-brand">${numberFormat(value.product.discount_price)}</h4>`
                         } 
                                     </td>
 
@@ -713,224 +715,347 @@
                                 </tr>
 
                     `
-                });
+                        });
+                    }
+                    $('#compare').html(rows);
+
                 }
-                $('#compare').html(rows); 
 
-            }
+            });
 
-        });
+        }
+        compare()
 
-    }
-compare()
+        function compareRemove(id) {
+            $.ajax({
+                type: "GET",
+                dataType: 'json',
+                url: "/compare-remove/" + id,
+                success: function(data) {
+                    compare()
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    if ($.isEmptyObject(data.error)) {
 
-    function compareRemove(id){
-        $.ajax({
-            type:"GET",
-            dataType:'json',
-            url: "/compare-remove/" + id,
-            success: function(data){
-            compare()
-            const Toast = Swal.mixin({
-            toast: true,
-            position: 'top-end',
-            showConfirmButton: false,
-            timer: 3000 
+                        Toast.fire({
+                            type: 'success',
+                            icon: 'success',
+                            title: data.success,
+                        })
+                    } else {
+
+                        Toast.fire({
+                            type: 'error',
+                            icon: 'error',
+                            title: data.error,
+                        })
+                    }
+
+                }
             })
-            if ($.isEmptyObject(data.error)) {
-                
-            Toast.fire({
-            type: 'success',
-            icon: 'success', 
-            title: data.success, 
-                })
-            }else{
-
-            Toast.fire({
-            type: 'error',
-            icon: 'error', 
-            title: data.error, 
-            })
-            }
-
-            }
-        })
-    }
-</script>
+        }
+    </script>
 
 
-<script type="text/javascript">
+    <script type="text/javascript">
+        function mycart() {
+            $.ajax({
+                type: "GET",
+                dataType: 'json',
+                url: "/get-cart-product",
+                success: function(data) {
+                    // console.log(data);
+                    var rows = "";
 
-    function mycart(){
-        $.ajax({
-            type: "GET",
-            dataType: 'json',
-            url: "/get-cart-product",
-            success: function(data){
-                console.log(data);
-                var rows = ""
+                    $.each(data.carts, function(key, value) {
+                        // Định dạng giá tiền thành tiền Việt Nam
+                        var formattedPrice = new Intl.NumberFormat('vi-VN', {
+                            style: 'currency',
+                            currency: 'VND'
+                        }).format(value.price);
+                        var formattedSubtotal = new Intl.NumberFormat('vi-VN', {
+                            style: 'currency',
+                            currency: 'VND'
+                        }).format(value.subtotal);
 
-                $.each(data.carts,function(key,value){
-
-                    rows+= `
-                            <tr class="pt-30">
-                    <td class="custome-checkbox pl-30">
-
-                    </td>
-                    <td class="image product-thumbnail pt-40"><img src="/${value.options.image}" alt="#"></td>
-                    <td class="product-des product-name">
-                        <h6 class="mb-5"><a class="product-name mb-10 text-heading" href="shop-product-right.html">${value.name}</a></h6>
-                        <div class="product-rate-cover">
-                            <div class="product-rate d-inline-block">
-                                <div class="product-rating" style="width:90%">
+                        rows += `
+                    <tr class="pt-30">
+                        <td class="custome-checkbox pl-30"></td>
+                        <td class="image product-thumbnail pt-40"><img src="/${value.options.image}" alt="#"></td>
+                        <td class="product-des product-name">
+                            <h6 class="mb-5"><a class="product-name mb-10 text-heading" href="shop-product-right.html">${value.name}</a></h6>
+                            <div class="product-rate-cover">
+                                <div class="product-rate d-inline-block">
+                                    <div class="product-rating" style="width:90%"></div>
+                                </div>
+                                <span class="font-small ml-5 text-muted"> (4.0)</span>
+                            </div>
+                        </td>
+                        <td class="price" data-title="Price">
+                            <h4 class="text-body">${formattedPrice}</h4>
+                        </td>
+                        <td class="price" data-title="Price">
+                            ${value.options.color == null ? `<span>.... </span>` : `<h6 class="text-body">${value.options.color}</h6>`}
+                        </td>
+                        <td class="price" data-title="Price">
+                            ${value.options.size == null ? `<span>.... </span>` : `<h6 class="text-body">${value.options.size}</h6>`}
+                        </td>
+                        <td class="text-center detail-info" data-title="Stock">
+                            <div class="detail-extralink mr-15">
+                                <div class="detail-qty border radius">
+                                    <a type="submit" id="${value.rowId}" onclick="cartDecrement(this.id)" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
+                                    <input type="text" name="quantity" class="qty-val" value="${value.qty}" min="1">
+                                    <a type="submit" id="${value.rowId}" onclick="cartIncrement(this.id)" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
                                 </div>
                             </div>
-                            <span class="font-small ml-5 text-muted"> (4.0)</span>
-                        </div>
-                    </td>
-                    <td class="price" data-title="Price">
-                <h4 class="text-body">${value.price}đ</h4>
-                    </td>
+                        </td>
+                        <td class="price" data-title="Price">
+                            <h4 class="text-brand">${formattedSubtotal}</h4>
+                        </td>
+                        <td class="action text-center" data-title="Xóa"><a type="submit" id="${value.rowId}" onclick="cartRemove(this.id)" class="text-body"><i class="fi-rs-trash"></i></a></td>
+                    </tr>`;
+                    });
 
-                    <td class="price" data-title="Price">
-                        ${value.options.color == null ? `<span>.... </span>` : `<h6 class="text-body">${value.options.color}</h6>`}
-                    </td>
-
-                    <td class="price" data-title="Price">
-                        ${value.options.size == null ? `<span>.... </span>` : `<h6 class="text-body">${value.options.size}</h6>`}
-                    </td>
-                    <td class="text-center detail-info" data-title="Stock">
-                        <div class="detail-extralink mr-15">
-                            <div class="detail-qty border radius">
-                                <a type="submit" id="${value.rowId}" onclick="cartDecrement(this.id)" class="qty-down"><i class="fi-rs-angle-small-down"></i></a>
-                                <input type="text" name="quantity" class="qty-val" value="${value.qty}" min="1">
-                                <a type="submit" id="${value.rowId}" onclick="cartIncrement(this.id)" class="qty-up"><i class="fi-rs-angle-small-up"></i></a>
-                            </div>
-                        </div>
-                    </td>
-                    <td class="price" data-title="Price">
-                        <h4 class="text-brand">${value.subtotal}đ</h4>
-                    </td>
-                    <td class="action text-center" data-title="Xóa"><a type="submit" id="${value.rowId}" onclick="cartRemove(this.id)" class="text-body"><i class="fi-rs-trash"></i></a></td>
-                </tr>
- 
-                    `
-
-                });
-                $('#mycart').html(rows);
-            }
-        })
-    }
-mycart()
-
-    function cartRemove(rowId){
-        $.ajax({
-            type: "GET",
-            dataType: 'json',
-            url: '/cart-remove/' + rowId,
-            success: function(data){
-                mycart()
-                miniCart()
-                const Toast = Swal.mixin({
-                  toast: true,
-                  position: 'top-end',
-                  icon: 'success', 
-                  showConfirmButton: false,
-                  timer: 3000 
-            })
-            if ($.isEmptyObject(data.error)) {
-                    
-                    Toast.fire({
-                    type: 'success',
-                    title: data.success, 
-                    })
-            }else{
-               
-           Toast.fire({
-                    type: 'error',
-                    title: data.error, 
-                    })
+                    $('#mycart').html(rows);
                 }
-            }
-        })
-    }
+            });
+        }
+        mycart();
 
-    function cartDecrement(rowId){
-        $.ajax({
-            type: "GET",
-            dataType: 'json',
-            url: '/cart-decrement/' + rowId,
-            success: function(data){
-                mycart()
-                miniCart();
-            }
-        })
-    }
+        function cartRemove(rowId) {
+            $.ajax({
+                type: "GET",
+                dataType: 'json',
+                url: '/cart-remove/' + rowId,
+                success: function(data) {
+                    mycart()
+                    couponCalculation();
+                    miniCart()
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    if ($.isEmptyObject(data.error)) {
 
-    function cartIncrement(rowId){
-        $.ajax({
-            type: "GET",
-            dataType: 'json',
-            url: '/cart-increment/' + rowId,
-            success: function(data){
-                mycart()
-                miniCart();
-            }
-        })
-    }
+                        Toast.fire({
+                            type: 'success',
+                            title: data.success,
+                        })
+                    } else {
 
-// end increment
+                        Toast.fire({
+                            type: 'error',
+                            title: data.error,
+                        })
+                    }
+                }
+            })
+        }
 
-</script>
-  <!--  ////////////// Start Apply Coupon ////////////// -->
+        function cartDecrement(rowId) {
+            $.ajax({
+                type: "GET",
+                dataType: 'json',
+                url: '/cart-decrement/' + rowId,
+                success: function(data) {
+                    couponCalculation();
+                    mycart()
+                    miniCart();
+                }
+            })
+        }
 
-<script type="text/javascript">
-    
-    function applyCoupon(){
-        var coupon_name = $('#coupon_name').val();
-        $.ajax({
-            type: "POST",
-            dataType: 'json',
-            data: {coupon_name:coupon_name},
-            url: '/coupon-apply',
+        function cartIncrement(rowId) {
+            $.ajax({
+                type: "GET",
+                dataType: 'json',
+                url: '/cart-increment/' + rowId,
+                success: function(data) {
+                    couponCalculation();
+                    mycart()
+                    miniCart();
+                }
+            })
+        }
 
-            success: function(data){
+        // end increment
+    </script>
+    <!--  ////////////// Start Apply Coupon ////////////// -->
 
-                if (data.validity == true) {
+    <script type="text/javascript">
+        function applyCoupon() {
+            var coupon_name = $('#coupon_name').val();
+            $.ajax({
+                type: "POST",
+                dataType: 'json',
+                data: {
+                    coupon_name: coupon_name
+                },
+                url: '/coupon-apply',
+
+                success: function(data) {
+                    couponCalculation();
+                    if (data.validity == true) {
                         $('#couponField').hide();
                     }
 
-                const Toast = Swal.mixin({
-                  toast: true,
-                  position: 'top-end',
-                  icon: 'success', 
-                  showConfirmButton: false,
-                  timer: 3000 
-            })
-            if ($.isEmptyObject(data.error)) {
-                    
-                    Toast.fire({
-                    type: 'success',
-                    icon: 'success',
-                    title: data.success, 
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+                        icon: 'success',
+                        showConfirmButton: false,
+                        timer: 3000
                     })
-            }else{
-               
-           Toast.fire({
-                    type: 'error',
-                    icon: 'error',
-                    title: data.error, 
-                    })
+                    if ($.isEmptyObject(data.error)) {
+
+                        Toast.fire({
+                            type: 'success',
+                            icon: 'success',
+                            title: data.success,
+                        })
+                    } else {
+
+                        Toast.fire({
+                            type: 'error',
+                            icon: 'error',
+                            title: data.error,
+                        })
+                    }
                 }
-            }
-        })
-    }
+            })
+        }
+
+        // Start CouponCalculation Method
+
+        function couponCalculation() {
+            $.ajax({
+                type: "GET",
+                url: '/coupon-calculation',
+                dataType: 'json',
+                success: function(data) {
+                    // console.log(data);
+                    if (data.total) {
+                        $('#couponCalField').html(
+                            ` <tr>
+                        <td class="cart_total_label">
+                            <h6 class="text-muted">Tổng phụ</h6>
+                        </td>
+                        <td class="cart_total_amount">
+                            <h4 class="text-brand text-end">${numberFormat(data.total)}</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cart_total_label">
+                            <h6 class="text-muted">Tổng cộng</h6>
+                        </td>
+                        <td class="cart_total_amount">
+                            <h4 class="text-brand text-end">${numberFormat(data.total)}</h4>
+                        </td>
+                    </tr>`
+                        )
+                    } else {
+                        $('#couponCalField').html(
+                            `<tr>
+                        <td class="cart_total_label">
+                            <h6 class="text-muted">Tổng phụ</h6>
+                        </td>
+                        <td class="cart_total_amount">
+                            <h4 class="text-brand text-end">${numberFormat(data.subtotal)}</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cart_total_label">
+                            <h6 class="text-muted">Mã giảm giá </h6>
+                        </td>
+                        <td class="cart_total_amount">
+                            <h6 class="text-brand text-end">${data.coupon_name} <a type="submit" onclick="couponRemove()"><i class="fi-rs-trash"></i> </a> </h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cart_total_label">
+                            <h6 class="text-muted">Số tiền được giảm  </h6>
+                        </td>
+                        <td class="cart_total_amount">
+                            <h4 class="text-brand text-end">${numberFormat(data.discount_amount)}</h4>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="cart_total_label">
+                            <h6 class="text-muted">Tổng cộng </h6>
+                        </td>
+                        <td class="cart_total_amount">
+                            <h4 class="text-brand text-end">${numberFormat(data.total_amount)}</h4>
+                        </td>
+                    </tr>`
+                        )
+                    }
+                }
+            });
+        }
+
+        function numberFormat(number) {
+            return new Intl.NumberFormat('vi-VN', {
+                style: 'currency',
+                currency: 'VND'
+            }).format(number);
+
+        }
+
+        couponCalculation();
 
 
-</script>
+        // End CouponCalculation Method
+
+        // Start couponRemove Method
+        function couponRemove() {
+            $.ajax({
+                type: "GET",
+                dataType: 'json',
+                url: "/coupon-remove",
+                success: function(data) {
+                    couponCalculation();
+                    $('#couponField').show();
+                    // Start Message 
+                    const Toast = Swal.mixin({
+                        toast: true,
+                        position: 'top-end',
+
+                        showConfirmButton: false,
+                        timer: 3000
+                    })
+                    if ($.isEmptyObject(data.error)) {
+
+                        Toast.fire({
+                            type: 'success',
+                            icon: 'success',
+                            title: data.success,
+                        })
+                    } else {
+
+                        Toast.fire({
+                            type: 'error',
+                            icon: 'error',
+                            title: data.error,
+                        })
+                    }
+                    // End Message  
+                }
+            })
+        }
+        // End couponRemove Method
+    </script>
 
 
-  <!--  ////////////// End Apply Coupon ////////////// -->
+    <!--  ////////////// End Apply Coupon ////////////// -->
+
+
 
 
 

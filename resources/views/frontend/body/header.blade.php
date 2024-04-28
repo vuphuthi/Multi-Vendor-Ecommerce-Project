@@ -130,10 +130,10 @@
 
                     <div class="shopping-cart-footer">
                         <div class="shopping-cart-total">
-                            <h4>Total <span id="cartSubTotal"></span></h4>
+                            <h4>Tổng <span id="cartSubTotal"></span></h4>
                         </div>
                         <div class="shopping-cart-button">
-                            <a href="shop-cart.html" class="outline">View cart</a>
+                            <a href="{{route('mycart')}}" class="outline">Xem giỏ hàng</a>
                             <a href="shop-checkout.html">Checkout</a>
                         </div>
                                     </div>
@@ -341,7 +341,7 @@
                     <h4>Total <span>$383.00</span></h4>
                 </div>
                 <div class="shopping-cart-button">
-                    <a href="shop-cart.html">View cart</a>
+                    <a href="{{route('mycart')}}">Xem giỏ hàng</a>
                     <a href="shop-checkout.html">Checkout</a>
                 </div>
             </div>

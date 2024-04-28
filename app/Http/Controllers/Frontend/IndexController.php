@@ -75,18 +75,19 @@ class IndexController extends Controller
         $product = Product::with('category','brand')->findOrFail($id);
         $color = $product->product_color;
         $product_color = explode(',', $color);
-
+    
         $size = $product->product_size;
         $product_size = explode(',', $size);
-
+    
+        // Thêm trường selling_price và discount_price vào mảng dữ liệu sản phẩm
+        $product->selling_price = number_format($product->selling_price, 0, ',', '.');
+        $product->discount_price = ($product->discount_price) ? number_format($product->discount_price, 0, ',', '.') : null;
+    
         return response()->json(array(
-
-         'product' => $product,
-         'color' => $product_color,
-         'size' => $product_size,
-
+            'product' => $product,
+            'color' => $product_color,
+            'size' => $product_size,
         ));
-
-     }
+    }
      
 }

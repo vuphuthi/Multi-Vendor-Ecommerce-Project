@@ -76,45 +76,8 @@
 
                             <div class="border p-md-4 cart-totals ml-30">
                         <div class="table-responsive">
-                            <table class="table no-border">
-                                <tbody>
-                                    <tr>
-                                        <td class="cart_total_label">
-                                            <h6 class="text-muted">Tổng phụ</h6>
-                                        </td>
-                                        <td class="cart_total_amount">
-                                            <h4 class="text-brand text-end">$12.31</h4>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td scope="col" colspan="2">
-                                            <div class="divider-2 mt-10 mb-10"></div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="cart_total_label">
-                                            <h6 class="text-muted">Đang chuyển hàng</h6>
-                                        </td>
-                                        <td class="cart_total_amount">
-                                            <h5 class="text-heading text-end">Miễn phí</h4</td> </tr> <tr>
-                                        <td class="cart_total_label">
-                                            <h6 class="text-muted">Ước tính cho</h6>
-                                        </td>
-                                        <td class="cart_total_amount">
-                                            <h5 class="text-heading text-end">Vương quốc Anh</h4</td> </tr> <tr>
-                                        <td scope="col" colspan="2">
-                                            <div class="divider-2 mt-10 mb-10"></div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td class="cart_total_label">
-                                            <h6 class="text-muted">Total</h6>
-                                        </td>
-                                        <td class="cart_total_amount">
-                                            <h4 class="text-brand text-end">$12.31</h4>
-                                        </td>
-                                    </tr>
-                                </tbody>
+                            <table class="table no-border" id="couponCalField">
+                                
                             </table>
                         </div>
                         <a href="#" class="btn mb-20 w-100">Proceed To CheckOut<i class="fi-rs-sign-out ml-15"></i></a>
