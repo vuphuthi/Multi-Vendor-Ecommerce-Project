@@ -134,7 +134,7 @@
                         </div>
                         <div class="shopping-cart-button">
                             <a href="{{route('mycart')}}" class="outline">Xem giỏ hàng</a>
-                            <a href="shop-checkout.html">Checkout</a>
+                            <a href="{{route('checkout')}}">Thủ tục thanh toán</a>
                         </div>
                                     </div>
                                 </div>
