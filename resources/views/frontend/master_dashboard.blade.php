@@ -22,6 +22,13 @@
     <!-- Template CSS -->
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/plugins/animate.min.css') }}" />
     <link rel="stylesheet" href="{{ asset('frontend/assets/css/main.css?v=5.3') }}" />
+
+    {{-- --------------------------------------------------- toastr ---------------------------------- --}}
+    <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.css">
+    {{-- --------------------------------------------------- toastr ---------------------------------- --}}
+
+
+
 </head>
 
 <body>
@@ -34,8 +41,6 @@
     @include('frontend.body.header')
 
     <!-- End Header  -->
-
-    So sánh sản phẩm
 
     <div class="mobile-header-active mobile-header-wrapper-style">
         <div class="mobile-header-wrapper-inner">
@@ -267,6 +272,35 @@
     {{-- sweetalert2 --}}
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     {{-- sweetalert2 --}}
+
+
+        {{----------------------------------------------------- toastr ------------------------------------}}
+
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/toastr.min.js"></script>
+
+    <script>
+        @if (Session::has('message'))
+            var type = "{{ Session::get('alert-type', 'info') }}"
+            switch (type) {
+                case 'info':
+                    toastr.info(" {{ Session::get('message') }} ");
+                    break;
+                case 'success':
+                    toastr.success(" {{ Session::get('message') }} ");
+                    break;
+                case 'warning':
+                    toastr.warning(" {{ Session::get('message') }} ");
+                    break;
+                case 'error':
+                    toastr.error(" {{ Session::get('message') }} ");
+                    break;
+            }
+        @endif
+    </script>
+
+
+        {{----------------------------------------------------- toastr ---------------------------------------------}}
+
 
     <script type="text/javascript">
         $.ajaxSetup({

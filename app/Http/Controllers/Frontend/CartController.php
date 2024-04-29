@@ -9,6 +9,7 @@ use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Session;
 use App\Models\Coupon;
 use Carbon\Carbon;
+use Auth;
 class CartController extends Controller
 {
     public function AddToCart(Request $request, $id){
@@ -195,4 +196,34 @@ class CartController extends Controller
         return response()->json(['success' => 'Xóa mã giảm giá thành công']);
 
     }// End Method
+
+    public function CheckoutCreate(){
+        if(Auth::check()){
+
+            if(Cart::total() > 0){
+
+                $carts = Cart::content();
+                $cartQty = Cart::count();
+                $cartTotal = Cart::total();
+
+            }else{
+                    $notification = array(
+                    'message' => 'Cần ít nhất 1 sản phẩm trong giỏ hàng',
+                    'alert-type' => 'error'
+                );
+        
+                return redirect()->to('/')->with($notification); 
+            }
+            
+            return view('frontend.checkout.checkout_view',compact('carts','cartQty','cartTotal'));
+
+        }else{
+                $notification = array(
+                'message' => 'Bạn cần phải đăng nhập trước',
+                'alert-type' => 'error'
+            );
+    
+            return redirect()->route('login')->with($notification); 
+        }
+    }
     }

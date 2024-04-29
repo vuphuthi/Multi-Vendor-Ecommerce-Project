@@ -13,7 +13,7 @@
         <div class="container mb-80 mt-50">
             <div class="row">
                 <div class="col-xl-10 col-lg-12 m-auto">
-                    <h1 class="heading-2 mb-10">So sánh sản phẩm</h1>
+                    <h1 class="heading-2 mb-10">tr5</h1>
                     <h6 class="text-body mb-3">Có <span class="text-brand" id="compareQty"></span> sản phẩm trong danh sách này</h6>
                     <div class="table-responsive">
                         <table class="table text-center table-compare">
