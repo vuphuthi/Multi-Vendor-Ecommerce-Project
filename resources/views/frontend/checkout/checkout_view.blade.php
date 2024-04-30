@@ -1,17 +1,20 @@
 @extends('frontend.master_dashboard')
 @section('main')
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+
     <div class="page-header breadcrumb-wrap">
         <div class="container">
             <div class="breadcrumb">
-                <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
-                <span></span> Checkout
+                <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Trang chủ</a>
+                <span></span> Thủ tục thanh toán
             </div>
         </div>
     </div>
     <div class="container mb-80 mt-50">
         <div class="row">
             <div class="col-lg-8 mb-40">
-                <h3 class="heading-2 mb-10">Checkout</h3>
+                <h3 class="heading-2 mb-10">Thủ tục thanh toán</h3>
                 <div class="d-flex justify-content-between">
                     <h6 class="text-body">There are products in your cart</h6>
                 </div>
@@ -21,16 +24,16 @@
             <div class="col-lg-7">
 
                 <div class="row">
-                    <h4 class="mb-30">Billing Details</h4>
+                    <h4 class="mb-30">Chi tiết thanh toán</h4>
                     <form method="post">
 
 
                         <div class="row">
                             <div class="form-group col-lg-6">
-                                <input type="text" required="" name="fname" placeholder="User Name *">
+                                <input type="text" required="" name="shipping_name" value="{{Auth::user()->name}}" placeholder="Nhập tên của bạn">
                             </div>
                             <div class="form-group col-lg-6">
-                                <input type="email" required="" name="lname" placeholder="Email *">
+                                <input type="email" required="" name="shipping_email" value="{{Auth::user()->email}}" placeholder="Nhập chịa chỉ Email của bạn">
                             </div>
                         </div>
 
@@ -39,38 +42,30 @@
                         <div class="row shipping_calculator">
                             <div class="form-group col-lg-6">
                                 <div class="custom_select">
-                                    <select class="form-control select-active">
-                                        <option value="">Select an option...</option>
-                                        <option value="AX">Aland Islands</option>
-                                        <option value="AF">Afghanistan</option>
-                                        <option value="AL">Albania</option>
-                                        <option value="DZ">Algeria</option>
-                                        <option value="AD">Andorra</option>
-
+                                    <select name="division_id" class="form-control select-active">
+                                        <option value="" disabled selected style="display:none;">Chọn thành phố</option>
+                                        @foreach ($divisions as $item)
+                                            <option value="{{ $item->id }}">{{ $item->division_name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group col-lg-6">
-                                <input required="" type="text" name="city" placeholder="Phone*">
+                                <input required="" type="text" name="shipping_phone" value="{{Auth::user()->phone}}" placeholder="Nhập số điện thoại của bạn">
                             </div>
                         </div>
+                        
 
                         <div class="row shipping_calculator">
                             <div class="form-group col-lg-6">
                                 <div class="custom_select">
-                                    <select class="form-control select-active">
-                                        <option value="">Select an option...</option>
-                                        <option value="AX">Aland Islands</option>
-                                        <option value="AF">Afghanistan</option>
-                                        <option value="AL">Albania</option>
-                                        <option value="DZ">Algeria</option>
-                                        <option value="AD">Andorra</option>
-
+                                    <select name="district_id"  class="form-control select-active">
+                                        <option value="" disabled selected style="display:none;">Chọn Quận/Huyện</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group col-lg-6">
-                                <input required="" type="text" name="city" placeholder="Post Code *">
+                                <input required="" type="text" name="post_code" placeholder="Mã bưu điện (Không bắt buộc)">
                             </div>
                         </div>
 
@@ -78,19 +73,13 @@
                         <div class="row shipping_calculator">
                             <div class="form-group col-lg-6">
                                 <div class="custom_select">
-                                    <select class="form-control select-active">
-                                        <option value="">Select an option...</option>
-                                        <option value="AX">Aland Islands</option>
-                                        <option value="AF">Afghanistan</option>
-                                        <option value="AL">Albania</option>
-                                        <option value="DZ">Algeria</option>
-                                        <option value="AD">Andorra</option>
-
+                                    <select name="state_id" class="form-control select-active">
+                                        <option value="" disabled selected style="display:none;">Chọn Phường/Xã</option>
                                     </select>
                                 </div>
                             </div>
                             <div class="form-group col-lg-6">
-                                <input required="" type="text" name="city" placeholder="Address *">
+                                <input required="" type="text" name="shipping_address" placeholder="Nhập đại chỉ của bạn" value="{{ Auth::user()->address }}">
                             </div>
                         </div>
 
@@ -99,7 +88,7 @@
 
 
                         <div class="form-group mb-30">
-                            <textarea rows="5" placeholder="Additional information"></textarea>
+                            <textarea rows="5" placeholder="Thông tin thêm lưu ý (Không bắt buộc)" name="notes"></textarea>
                         </div>
 
 
@@ -250,4 +239,62 @@
 
         </div>
     </div>
+
+
+    <script type="text/javascript">
+  		
+          $(document).ready(function(){
+    // Xử lý sự kiện khi chọn tỉnh/huyện
+    $('select[name="division_id"]').on('change', function(){
+        var division_id = $(this).val();
+        if (division_id) {
+            // Gửi yêu cầu AJAX để lấy dữ liệu các huyện/quận
+            $.ajax({
+                url: "{{ url('/district-get/ajax') }}/"+division_id,
+                type: "GET",
+                dataType:"json",
+                success:function(data){
+                    // Xóa tất cả các tùy chọn cũ của huyện/quận
+                    $('select[name="district_id"]').empty();
+                    // Thêm các tùy chọn mới
+                    $.each(data, function(key, value){
+                        $('select[name="district_id"]').append('<option value="'+ value.id + '">' + value.district_name + '</option>');
+                    });
+                },
+            });
+        } else {
+            alert('danger');
+        }
+    });
+
+    // Xử lý sự kiện khi chọn huyện
+    $('select[name="district_id"]').on('change', function(){
+        var district_id = $(this).val();
+        if (district_id) {
+            // Gửi yêu cầu AJAX để lấy dữ liệu các xã/phường
+            $.ajax({
+                url: "{{ url('/state-get/ajax') }}/"+district_id,
+                type: "GET",
+                dataType:"json",
+                success:function(data){
+                    // Xóa tất cả các tùy chọn cũ của xã/phường
+                    $('select[name="state_id"]').empty();
+                    // Thêm các tùy chọn mới
+                    $.each(data, function(key, value){
+                        $('select[name="state_id"]').append('<option value="'+ value.id + '">' + value.state_name + '</option>');
+                    });
+                },
+            });
+        } else {
+            alert('danger');
+        }
+    });
+});
+
+    </script>
+
 @endsection
+
+
+
+

@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Frontend;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Models\Product;
+use App\Models\ShipDivision;
 use Gloudemans\Shoppingcart\Facades\Cart;
 use Illuminate\Support\Facades\Session;
 use App\Models\Coupon;
@@ -206,6 +207,11 @@ class CartController extends Controller
                 $cartQty = Cart::count();
                 $cartTotal = Cart::total();
 
+
+                $divisions = ShipDivision::orderBy('division_name','ASC')->get();
+
+                return view('frontend.checkout.checkout_view',compact('carts','cartQty','cartTotal','divisions'));
+
             }else{
                     $notification = array(
                     'message' => 'Cần ít nhất 1 sản phẩm trong giỏ hàng',
@@ -215,7 +221,6 @@ class CartController extends Controller
                 return redirect()->to('/')->with($notification); 
             }
             
-            return view('frontend.checkout.checkout_view',compact('carts','cartQty','cartTotal'));
 
         }else{
                 $notification = array(
