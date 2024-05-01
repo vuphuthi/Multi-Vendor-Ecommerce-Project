@@ -5,7 +5,7 @@
 <div class="page-header breadcrumb-wrap">
     <div class="container">
         <div class="breadcrumb">
-            <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Home</a>
+            <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>trang chủ</a>
             <span></span> Stripe Payment
         </div>
     </div>
@@ -25,7 +25,7 @@
 
             <div class="border p-40 cart-totals ml-30 mb-50">
                 <div class="d-flex align-items-end justify-content-between mb-30">
-                    <h4>Your Order</h4>
+                    <h4>Chi tiết đơn hàng của bạn</h4>
 
                 </div>
                 <div class="divider-2 mb-30"></div>
@@ -34,40 +34,54 @@
                     <table class="table no-border">
                         <tbody>
                             <tr>
+                                @if(Session::has('coupon'))
+                                
                                 <td class="cart_total_label">
-                                    <h6 class="text-muted">Subtotal</h6>
+                                    <h6 class="text-muted">Tổng phụ</h6>
                                 </td>
                                 <td class="cart_total_amount">
-                                    <h4 class="text-brand text-end">$12.31</h4>
+                                    <h4 class="text-brand text-end">{{ number_format($cartTotal,0,',','.') }}&#8363;</h4>
                                 </td>
                             </tr>
 
                             <tr>
                                 <td class="cart_total_label">
-                                    <h6 class="text-muted">Coupn Name</h6>
+                                    <h6 class="text-muted">Mã giảm giá</h6>
                                 </td>
                                 <td class="cart_total_amount">
-                                    <h6 class="text-brand text-end">EASYLEA</h6>
+                                    <h6 class="text-brand text-end">{{ session()->get('coupon')['coupon_name'] }} ( {{ session()->get('coupon')['coupon_discount'] }}% )</h6>
                                 </td>
                             </tr>
 
                             <tr>
                                 <td class="cart_total_label">
-                                    <h6 class="text-muted">Coupon Discount</h6>
+                                    <h6 class="text-muted">Voucher giảm giá được</h6>
                                 </td>
                                 <td class="cart_total_amount">
-                                    <h4 class="text-brand text-end">$12.31</h4>
+                                    <h4 class="text-brand text-end">{{ number_format(session()->get('coupon')['discount_amount'],0,',','.') }}&#8363;</h4>
                                 </td>
                             </tr>
 
                             <tr>
                                 <td class="cart_total_label">
-                                    <h6 class="text-muted">Grand Total</h6>
+                                    <h6 class="text-muted">Tổng cộng</h6>
                                 </td>
                                 <td class="cart_total_amount">
-                                    <h4 class="text-brand text-end">$12.31</h4>
+                                    <h4 class="text-brand text-end">{{ number_format(session()->get('coupon')['total_amount'],0,',','.') }}&#8363;</h4>
                                 </td>
                             </tr>
+                            @else
+
+                            <tr>
+                                <td class="cart_total_label">
+                                    <h6 class="text-muted">Tổng cộng</h6>
+                                </td>
+                                <td class="cart_total_amount">
+                                    <h4 class="text-brand text-end">${{ number_format($cartTotal,0,',','.') }}&#8363;</h4>
+                                </td>
+                            </tr>
+                        @endif
+
                         </tbody>
                     </table>
 
