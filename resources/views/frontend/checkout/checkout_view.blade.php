@@ -25,8 +25,8 @@
 
                 <div class="row">
                     <h4 class="mb-30">Chi tiết thanh toán</h4>
-                    <form method="post">
-
+                    <form method="post" action="{{route('checkout.store')}}">
+                        @csrf
 
                         <div class="row">
                             <div class="form-group col-lg-6">
@@ -93,7 +93,7 @@
 
 
 
-                    </form>
+                    
                 </div>
             </div>
 
@@ -207,40 +207,39 @@
                     <h4 class="mb-30">Thanh toán</h4>
                     <div class="payment_option">
                         <div class="custome-radio">
-                            <input class="form-check-input" required="" type="radio" name="payment_option"
+                            <input class="form-check-input" value="stripe" required="" type="radio" name="payment_option"
                                 id="exampleRadios3" checked="">
                             <label class="form-check-label" for="exampleRadios3" data-bs-toggle="collapse"
                                 data-target="#bankTranfer" aria-controls="bankTranfer">Chuyển khoản ngân hàng trực
                                 tiếp</label>
                         </div>
                         <div class="custome-radio">
-                            <input class="form-check-input" required="" type="radio" name="payment_option"
+                            <input class="form-check-input" value="cash" required="" type="radio" name="payment_option"
                                 id="exampleRadios4" checked="">
                             <label class="form-check-label" for="exampleRadios4" data-bs-toggle="collapse"
                                 data-target="#checkPayment" aria-controls="checkPayment">Thanh toán khi nhận hàng</label>
                         </div>
                         <div class="custome-radio">
-                            <input class="form-check-input" required="" type="radio" name="payment_option"
+                            <input class="form-check-input" required="" value="card" type="radio" name="payment_option"
                                 id="exampleRadios5" checked="">
                             <label class="form-check-label" for="exampleRadios5" data-bs-toggle="collapse"
                                 data-target="#paypal" aria-controls="paypal">Cổng thanh toán trực tuyến</label>
                         </div>
                     </div>
                     <div class="payment-logo d-flex">
-                        <img class="mr-15" src="assets/imgs/theme/icons/payment-paypal.svg" alt="">
-                        <img class="mr-15" src="assets/imgs/theme/icons/payment-visa.svg" alt="">
-                        <img class="mr-15" src="assets/imgs/theme/icons/payment-master.svg" alt="">
+                        <img class="mr-15" src="{{asset('frontend/assets/imgs/theme/icons/payment-paypal.svg')}}" alt="">
+                        <img class="mr-15" src="{{asset('frontend/assets/imgs/theme/icons/payment-visa.svg')}}" alt="">
+                        <img class="mr-15" src="{{asset('frontend/assets/imgs/theme/icons/payment-master.svg')}}" alt="">
                         <img src="assets/imgs/theme/icons/payment-zapper.svg" alt="">
                     </div>
-                    <a href="#" class="btn btn-fill-out btn-block mt-30">Đặt hàng<i
-                            class="fi-rs-sign-out ml-15"></i></a>
+                    <button type="submit" class="btn btn-fill-out btn-block mt-30">Đặt hàng<i
+                            class="fi-rs-sign-out ml-15"></i></button>
                 </div>
             </div>
 
         </div>
     </div>
-
-
+</form>
     <script type="text/javascript">
   		
           $(document).ready(function(){
