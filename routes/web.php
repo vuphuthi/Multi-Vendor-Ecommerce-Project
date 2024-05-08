@@ -19,6 +19,7 @@ use App\Http\Controllers\User\WishlistController;
 use App\Http\Controllers\User\CompareController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\StripeController;
+use App\Http\Controllers\User\VnpayController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 
 /*
@@ -291,8 +292,11 @@ Route::controller(CheckoutController::class)->group(function(){
  // Stripe All Route 
  Route::controller(StripeController::class)->group(function(){
     Route::post('/stripe/order' , 'StripeOrder')->name('stripe.order');
-
+    Route::post('/cash/order' , 'CashOrder')->name('cash.order');
 });
-
+ // VNPAY All Route 
+ Route::controller(VnpayController::class)->group(function(){
+    Route::post('/vnpay/payment' , 'VnpayPayment')->name('vnpay.payment');
+});
 });
 

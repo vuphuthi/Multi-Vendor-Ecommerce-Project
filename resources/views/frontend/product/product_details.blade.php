@@ -108,6 +108,9 @@
                                 </div>
                                 <div class="product-extra-link2">
                                     <input type="hidden" name="" id="dproduct_id" value="{{$product->id}}">
+
+                                    <input type="hidden" id="vproduct_id" value="{{ $product->vendor_id }}">
+                                    
                                     <button type="submit" onclick="AddToCartDetails()" class="button button-add-to-cart"><i class="fi-rs-shopping-cart"></i>Thêm vào giỏ hàng</button>
                                     <a aria-label="Add To Wishlist" class="action-btn hover-up" href="shop-wishlist.html"><i class="fi-rs-heart"></i></a>
                                     <a aria-label="Compare" class="action-btn hover-up" href="shop-compare.html"><i class="fi-rs-shuffle"></i></a>

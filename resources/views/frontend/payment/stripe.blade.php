@@ -137,6 +137,17 @@
                     <div class="form-row">
                         <label for="card-element">
                             Thẻ tín dụng hoặc thẻ ghi nợ
+
+                            <input type="hidden" name="name" value="{{ $data['shipping_name'] }}">
+                            <input type="hidden" name="email" value="{{ $data['shipping_email'] }}">
+                            <input type="hidden" name="phone" value="{{ $data['shipping_phone'] }}">
+                            <input type="hidden" name="post_code" value="{{ $data['post_code'] }}">
+                            <input type="hidden" name="division_id" value="{{ $data['division_id'] }}">
+                            <input type="hidden" name="district_id" value="{{ $data['district_id'] }}">
+                            <input type="hidden" name="state_id" value="{{ $data['state_id'] }}">
+                            <input type="hidden" name="address" value="{{ $data['shipping_address'] }}">
+                            <input type="hidden" name="notes" value="{{ $data['notes'] }}">
+
                         </label>
                 
                         <div id="card-element">
@@ -146,7 +157,7 @@
                         <div id="card-errors" role="alert"></div>
                     </div>
                     <br>
-                    <button class="btn btn-primary">Submit Payment</button>
+                    <button class="btn btn-primary">Thanh toán</button>
                     </form>
 
 
@@ -163,7 +174,7 @@
 
 <script type="text/javascript">
     // Create a Stripe client.
-var stripe = Stripe('pk_test_zuURZYgtzc5QCrAq3ITN7h2M007nb4GJy9');
+var stripe = Stripe('pk_test_51PBgZY2LOrXi5qJFcTeCkKKDYAg1z2Iekm0Af7O9L0GwyXPgMhwBZabq4dRvMydRXcDRYG0c3ROES3WnZUf6cIYJ00ZCCzS6aZ');
 // Create an instance of Elements.
 var elements = stripe.elements();
 // Custom styling can be passed to options when creating an Element.

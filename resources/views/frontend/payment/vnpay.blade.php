@@ -6,14 +6,14 @@
             <div class="container">
                 <div class="breadcrumb">
                     <a href="index.html" rel="nofollow"><i class="fi-rs-home mr-5"></i>Trang chủ</a> 
-                    <span></span> Thanh toán khi nhận hàng
+                    <span></span> Thanh toán VNPAY
                 </div>
             </div>
         </div>
         <div class="container mb-80 mt-50">
             <div class="row">
                 <div class="col-lg-8 mb-40">
-                    <h3 class="heading-2 mb-10">Thanh toán khi nhận hàng</h3>
+                    <h3 class="heading-2 mb-10">Thanh toán VNPAY</h3>
                     <div class="d-flex justify-content-between">
 
                     </div>
@@ -99,14 +99,15 @@
 <div class="col-lg-6">
 <div class="border p-40 cart-totals ml-30 mb-50">
     <div class="d-flex align-items-end justify-content-between mb-30">
-        <h4>Thanh toán bằng tiền mặt </h4>
+        <h4>Thanh toán VNPAY </h4>
 
     </div>
     <div class="divider-2 mb-30"></div>
     <div class="table-responsive order_table checkout">
 
-        <form action="{{ route('cash.order') }}" method="post" >
+        <form action="{{ route('vnpay.payment') }}" method="POST" >
             @csrf
+
         <div class="form-row">
             <label for="card-element">
     
@@ -128,7 +129,7 @@
     
         </div>
         <br>
-        <button class="btn btn-primary">Thanh toán</button>
+        <button type="submit" name="redirect" class="btn btn-primary">Thanh toán</button>
         </form>
 
     </div>

@@ -62,6 +62,7 @@
                                 <ul>
                                     <li class="mb-5">Thương hiệu: <span class="text-brand" id="pbrand"></span></li>
                                     <li class="mb-5">Danh mục:<span class="text-brand" id="pcategory"></span></li>
+                                    <li class="mb-5">Người cung cấp:<span class="text-brand" id="pvendor_id"> </span></li>
                                 </ul>
                             </div>
                     
