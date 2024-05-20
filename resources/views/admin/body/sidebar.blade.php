@@ -138,6 +138,20 @@
             </ul>
         </li>
 
+        <li>
+            <a href="javascript:;" class="has-arrow">
+                <div class="parent-icon"><i class='bx bx-cart'></i>
+                </div>
+                <div class="menu-title">Quản lý đơn hàng </div>
+            </a>
+            <ul>
+                <li> <a href="{{ route('pending.order') }}"><i class="bx bx-right-arrow-alt"></i>Danh sách hàng chờ</a>
+                </li>
+
+
+            </ul>
+        </li>
+
 
         <li class="menu-label">UI Elements</li>
         <li>

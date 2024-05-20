@@ -13,6 +13,8 @@ use App\Http\Controllers\Backend\SliderController;
 use App\Http\Controllers\Backend\BannerController;
 use App\Http\Controllers\Backend\CouponController;
 use App\Http\Controllers\Backend\ShippingAreaController;
+use App\Http\Controllers\Backend\OrderController;
+use App\Http\Controllers\Backend\VendorOrderController;
 use App\Http\Controllers\Frontend\IndexController;
 use App\Http\Controllers\Frontend\CartController;
 use App\Http\Controllers\User\WishlistController;
@@ -20,6 +22,7 @@ use App\Http\Controllers\User\CompareController;
 use App\Http\Controllers\User\CheckoutController;
 use App\Http\Controllers\User\StripeController;
 use App\Http\Controllers\User\VnpayController;
+use App\Http\Controllers\User\AllUserController;
 use App\Http\Middleware\RedirectIfAuthenticated;
 
 /*
@@ -86,7 +89,13 @@ Route::middleware(['auth','role:vendor'])->group(function(){
     
     });
 
-});
+    Route::controller(VendorOrderController::class)->group(function(){
+        Route::get('/vendor/order' , 'VendorOrder')->name('vendor.order');
+    
+    
+    });
+
+});// end Vendor Group middleware
 Route::get('/admin/login',[AdminController::class,'AdminLogin'])->middleware(RedirectIfAuthenticated::class);;;
 Route::get('/vendor/login',[VendorController::class,'VendorLogin'])->name('vendor.login')->middleware(RedirectIfAuthenticated::class);;;
 Route::get('/becom/vendor',[VendorController::class,'BecomeVendor'])->name('becom.vendor');
@@ -218,6 +227,11 @@ route::controller(ShippingAreaController::class)->group(function(){
 
 });
 
+Route::controller(OrderController::class)->group(function(){
+    Route::get('/pending/order' , 'PendingOrder')->name('pending.order');
+
+});
+
 });// Admin End Middleware 
 
 // Frontend Product Details All Route 
@@ -298,5 +312,14 @@ Route::controller(CheckoutController::class)->group(function(){
  Route::controller(VnpayController::class)->group(function(){
     Route::post('/vnpay/payment' , 'VnpayPayment')->name('vnpay.payment');
 });
+
+ // User Dashboard All Route 
+ Route::controller(AllUserController::class)->group(function(){
+    Route::get('/user/account/page' , 'UserAccount')->name('user.account.page');
+    Route::get('/user/change/password' , 'UserChangePassword')->name('user.change.password');
+    Route::get('/user/order/page' , 'UserOrderPage')->name('user.order.page');
+    Route::get('/user/order_details/{order_id}','UserOrderDetails');
+}); 
+
 });
 

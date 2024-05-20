@@ -62,14 +62,17 @@ class UserController extends Controller
             'new_password_confirmation.required' => 'Vui lòng xác nhận lại mật khẩu mới.',
 
         ]);
-        // Khớp với mật khẩu cũ
-        if(!Hash::check($request->old_password,auth::user()->password)){
-            return back()->with('error','Mật khẩu cũ không khớp!');
+
+        if (Hash::check($request->old_password, auth::user()->password)) {
+
+            User::whereId(auth()->user()->id)->update([
+                'password' => Hash::make($request->new_password)
+            ]);
+
+            return back()->with('status', "Thay đổi mật khẩu thành công");
         }
-        // cập nhật password
-        User::whereId(auth()->user()->id)->update([
-            'password' => Hash::make($request->new_password)
-        ]);
-        return back()->with('status',"Thay đổi mật khẩu thành công");
+        
+        return back()->with('error', 'Mật khẩu cũ không khớp!');
+
     }
 }
